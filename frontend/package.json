@@ -4,7 +4,8 @@
   "description": "tinderkiller",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline"
+    "start": "npx webpack-dev-server --hot --inline",
+    "dev": "npm install && npm start"
   },
   "author": "",
   "license": "ISC",
