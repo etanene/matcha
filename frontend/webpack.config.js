@@ -11,6 +11,16 @@ module.exports = {
     module: {
         rules: [
             {
+                enforce: 'pre',
+                test: /\.(t|j)s(x?)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    failOnError: true,
+                    failOnWarning: true
+                }
+            },
+            {
                 test: /\.ts(x?)$/,
                 exclude: /node_modules/,
                 use: [
