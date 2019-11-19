@@ -7,13 +7,15 @@ services:
       - '8000:8080'
     volumes:
       - ./backend:/app
+    depends_on:
+      - postgres
   frontend:
     build: ./frontend
     ports:
       - '3000:3000'
     volumes:
       - ./frontend:/app
-  db:
+  postgres:
     image: postgres
     restart: always
     environment:
