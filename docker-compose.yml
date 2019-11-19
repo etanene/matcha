@@ -7,6 +7,8 @@ services:
       - '8000:8000'
     volumes:
       - ./backend:/app
+    depends_on:
+      - postgres
   frontend:
     build: ./frontend
     ports:
@@ -22,3 +24,12 @@ services:
     links:
       - frontend:frontend
       - backend:backend
+  postgres:
+    image: postgres:12.1
+    restart: always
+    environment:
+      - POSTGRES_USER=matcha
+      - POSTGRES_PASSWORD=Matcha12345
+      - POSTGRES_DB=matchadb
+    ports:
+      - "5432:5432"
