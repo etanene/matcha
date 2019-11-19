@@ -1,9 +1,9 @@
 import React from 'react';
 
-function App(): React.ReactElement {
+function App() {
   return (
     <div>
-        Hu
+        Hus
     </div>
   );
 }
