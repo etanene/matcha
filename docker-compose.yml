@@ -4,7 +4,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - '8000:8080'
+      - '8000:8000'
     volumes:
       - ./backend:/app
   frontend:
@@ -17,3 +17,6 @@ services:
     build: ./proxy
     ports:
       - '8080:8080'
+    links:
+      - frontend:frontend
+      - backend:backend
