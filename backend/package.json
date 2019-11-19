@@ -4,8 +4,9 @@
   "description": "tinderkiller",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon src/index.js",
-    "dev": "npm install && npm start"
+    "start": "npx nodemon src/index.js --exec 'npm run lint && node'",
+    "dev": "npm install && npm start",
+    "lint": "npx eslint src"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,9 @@
     "pg": "^7.12.1"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.4"
   }
 }
