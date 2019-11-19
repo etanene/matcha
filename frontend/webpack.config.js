@@ -11,19 +11,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts(x?)$/,
+                enforce: 'pre',
+                test: /\.js(x?)$/,
                 exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env', '@babel/preset-react']
-                        }
-                    },
-                    {
-                        loader: 'ts-loader',
-                    }
-                ]
+                loader: 'eslint-loader',
+                options: {
+                    failOnError: true                }
             },
             {
                 test: /\.js(x?)$/,
@@ -43,7 +36,7 @@ module.exports = {
         })
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.jsx']
     },
     devServer: {
         host: '0.0.0.0',
