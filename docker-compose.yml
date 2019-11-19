@@ -7,9 +7,20 @@ services:
       - '8000:8080'
     volumes:
       - ./backend:/app
+    depends_on:
+      - postgres
   frontend:
     build: ./frontend
     ports:
       - '3000:3000'
     volumes:
       - ./frontend:/app
+  postgres:
+    image: postgres:12.1
+    restart: always
+    environment:
+      - POSTGRES_USER=matcha
+      - POSTGRES_PASSWORD=Matcha12345
+      - POSTGRES_DB=matchadb
+    ports:
+      - "5432:5432"
