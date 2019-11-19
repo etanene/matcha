@@ -4,7 +4,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - '8000:8080'
+      - '8000:8000'
     volumes:
       - ./backend:/app
     depends_on:
@@ -15,6 +15,15 @@ services:
       - '3000:3000'
     volumes:
       - ./frontend:/app
+    depends_on:
+      - proxy
+  proxy:
+    build: ./proxy
+    ports:
+      - '8080:8080'
+    links:
+      - frontend:frontend
+      - backend:backend
   postgres:
     image: postgres:12.1
     restart: always
