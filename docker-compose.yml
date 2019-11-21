@@ -24,12 +24,14 @@ services:
       - backend:backend
   postgres:
     image: postgres:12.1
-    restart: always
     environment:
       - POSTGRES_USER=matcha
       - POSTGRES_PASSWORD=Matcha12345
       - POSTGRES_DB=matchadb
+      - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
-      - ./data/pgdata:/var/lib/postgresql/data/pgdata
+      - pgdata:/var/lib/postgresql/data/pgdata
+volumes:
+  pgdata:
