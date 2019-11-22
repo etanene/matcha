@@ -1,0 +1,44 @@
+:root {
+  /* --------- */
+  /* КОНСТАНТЫ */
+  /* --------- */
+
+  /* размеры шрифтов */
+  --font-size-s: 15px;
+  --font-size-m: 20px;
+  --font-size-l: 25px;
+
+  /* цвета */
+  --grey-50: #fafafa;
+  --grey-100: #eeeeee;
+  --grey-200: #dddddd;
+
+  /* цвета поверхностей */
+  --surface-color-grey: var(--grey-50);
+
+  /* ------------------------ */
+  /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
+  /* ------------------------ */
+
+  /* цвета границ */
+  --border-color: var(--grey-200);
+
+  /* цвета блоков */
+  --header-color: var(--surface-color-grey);
+
+  /* размер шрифта для логотипа */
+  --logo-font-size: var(--font-size-l);
+
+  /* размеры кнопок */
+  --button-size-s: 20px;
+  --button-size-m: 25px;
+  --button-size-l: 30px;
+
+  /* цвета кнопок */
+  --button-color-light: var(--grey-100);
+  --button-color-dark: var(--grey-200);
+}
+
+body {
+  margin: 0;
+}
