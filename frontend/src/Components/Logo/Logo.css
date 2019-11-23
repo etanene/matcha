@@ -1,0 +1,6 @@
+@import url('../../App.css');
+
+.logo {
+  font-size: var(--logo-font-size);
+  text-decoration: none;
+}

@@ -1,0 +1,19 @@
+@import url('../../App.css');
+
+.header {
+  height: 70px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* элементы */
+.header-button {
+  margin: 5px;
+}
