@@ -36,7 +36,7 @@ Button.propTypes = {
 Button.defaultProps = {
   type: 'button',
   size: 'm',
-  color: 'dark',
+  color: 'light',
   cls: null,
 };
 

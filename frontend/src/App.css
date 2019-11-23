@@ -11,20 +11,21 @@
   /* цвета */
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
-  --grey-200: #dddddd;
+  --grey-500: #6b6b6b;
 
   /* цвета поверхностей */
-  --surface-color-grey: var(--grey-50);
+  --surface-color: var(--grey-50);
+  
 
   /* ------------------------ */
   /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
   /* ------------------------ */
 
   /* цвета границ */
-  --border-color: var(--grey-200);
+  --border-color: var(--grey-500);
 
   /* цвета блоков */
-  --header-color: var(--surface-color-grey);
+  --header-color: var(--surface-color);
 
   /* размер шрифта для логотипа */
   --logo-font-size: var(--font-size-l);
@@ -35,10 +36,11 @@
   --button-size-l: 30px;
 
   /* цвета кнопок */
-  --button-color-light: var(--grey-100);
-  --button-color-dark: var(--grey-200);
+  --button-color: var(--grey-500);
 }
 
 body {
   margin: 0;
+  color: var(--grey-500);
+  background: var(--grey-50);
 }

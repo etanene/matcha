@@ -4,6 +4,7 @@
   border: none;
   outline: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 /* размеры кнопок */
@@ -18,9 +19,21 @@
 }
 
 /* цвета кнопок */
-.button_color_dark {
-  background: var(--button-color-dark);
-}
 .button_color_light {
-  background: var(--button-color-light);
+  background: inherit;
+  color: var(--button-color);
+  border: 1px solid var(--button-color);
+}
+.button_color_light:hover {
+  background: var(--button-color);
+  color: var(--surface-color);
+}
+.button_color_dark {
+  background: var(--button-color);
+  color: var(--surface-color);
+}
+.button_color_dark:hover {
+  background: inherit;
+  color: var(--button-color);
+  border: 1px solid var(--button-color);
 }

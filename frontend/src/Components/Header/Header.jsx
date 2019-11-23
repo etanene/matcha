@@ -20,10 +20,10 @@ function Header() {
       </Link>
       <NavBar>
         <Link to="/login">
-          <Button size="m" cls={buttonCss}>Log in</Button>
+          <Button size="l" cls={buttonCss}>Log in</Button>
         </Link>
         <Link to="/signup">
-          <Button size="m" cls={buttonCss}>Sign up</Button>
+          <Button size="l" cls={buttonCss}>Sign up</Button>
         </Link>
       </NavBar>
     </header>

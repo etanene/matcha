@@ -2,11 +2,15 @@
 
 .header {
   height: 70px;
-  background: var(--header-color);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* элементы */
