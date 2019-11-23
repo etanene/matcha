@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
+
 import './Logo.css';
 
 const logoCss = cn('logo');

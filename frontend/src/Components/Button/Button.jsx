@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
+
 import './Button.css';
 
 const buttonCss = cn('button');
 
 function Button(props) {
   const {
-    text,
+    children,
     type,
     size,
     color,
@@ -19,13 +20,13 @@ function Button(props) {
       type={type}
       className={buttonCss({ size, color }, [cls])}
     >
-      {text}
+      {children}
     </button>
   );
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['button', 'submit', 'reset', null]),
   size: PropTypes.oneOf(['s', 'm', 'l', null]),
   color: PropTypes.string,
