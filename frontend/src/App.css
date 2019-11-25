@@ -16,6 +16,7 @@
   /* цвета */
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
+  --grey-200: #dddddd;
   --grey-500: #6b6b6b;
 
   /* цвета поверхностей */
@@ -26,26 +27,30 @@
   /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
   /* ------------------------ */
 
-  /* цвета границ */
-  --border-color: var(--grey-500);
-  --surface-border-color: var(--grey-100);
+  /* общие поверхности */
+  --surface-border-color: var(--grey-200);
 
-  /* цвета блоков */
+  /* header */
   --header-color: var(--surface-color);
 
-  /* размер шрифта для логотипа */
+  /* логотип */
   --logo-font-size: var(--font-size-l);
 
-  /* размеры кнопок */
+  /* input */
+  --input-font-size-s: var(--font-size-s);
+  --input-font-size-m: var(--font-size-m);
+  --input-font-size-l: var(--font-size-l);
+  --input-border-radius: var(--border-radius-size-m);
+  --input-border-color: var(--grey-200);
+
+  /* кнопки */
   --button-size-s: 20px;
   --button-size-m: 25px;
   --button-size-l: 30px;
-
-  /* цвета кнопок */
   --button-color: var(--grey-500);
-
-  /* закругления углов блоков */
   --button-border-radius: var(--border-radius-size-s);
+
+  /* формы */
   --form-border-radius: var(--border-radius-size-m);
 }
 

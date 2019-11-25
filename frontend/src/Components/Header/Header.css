@@ -2,7 +2,7 @@
 
 .header {
   height: 70px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--surface-border-color);
   display: flex;
   justify-content: space-around;
   align-items: center;
