@@ -13,6 +13,7 @@ function Input(props) {
     placeholder,
     children,
     cls,
+    handleChange,
   } = props;
 
   return (
@@ -21,6 +22,7 @@ function Input(props) {
         type={type}
         placeholder={placeholder}
         className={inputCss('input-tag', { size })}
+        onChange={handleChange}
       />
       { children && <span>{children}</span> }
     </div>
@@ -33,6 +35,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   children: PropTypes.string,
   cls: PropTypes.string,
+  handleChange: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -41,6 +44,7 @@ Input.defaultProps = {
   placeholder: null,
   children: null,
   cls: null,
+  handleChange: null,
 };
 
 export default Input;
