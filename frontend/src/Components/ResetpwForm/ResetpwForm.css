@@ -1,22 +1,16 @@
 @import url('../../App.css');
 
-.login-form {
+.resetpw-form {
   display: flex;
   flex-direction: column;
   width: 300px;
-  /* align-items: center; */
 }
 
 /* элементы */
-.login-form-form-name {
+.resetpw-form-form-name {
   margin: 10px auto;
 }
 
-.login-form-input {
+.resetpw-form-input {
   margin: 10px 0;
-}
-
-.login-form-link-reset {
-  margin: 10px auto;
-  color: inherit;
 }
