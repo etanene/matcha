@@ -3,6 +3,15 @@
 .reg-form {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--surface-border-color);
+  /* border: 1px solid var(--surface-border-color); */
   width: 300px;
+}
+
+/* элементы */
+.reg-form-form-name {
+  margin: 10px auto;
+}
+
+.reg-form-input {
+  margin: 3px 0;
 }

@@ -17,6 +17,8 @@
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
   --grey-200: #dddddd;
+  --grey-300: #cccccc;
+  --grey-400: #bbbbbb;
   --grey-500: #6b6b6b;
 
   /* цвета поверхностей */
@@ -42,6 +44,7 @@
   --input-font-size-l: var(--font-size-l);
   --input-border-radius: var(--border-radius-size-m);
   --input-border-color: var(--grey-200);
+  --input-placeholder-color: var(--grey-400);
 
   /* кнопки */
   --button-size-s: 20px;
