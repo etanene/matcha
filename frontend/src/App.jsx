@@ -7,6 +7,7 @@ import {
 import Header from './Components/Header/Header';
 import PageContent from './Components/PageContent/PageContent';
 import RegForm from './Components/RegForm/RegForm';
+import LoginForm from './Components/LoginForm/LoginForm';
 import './App.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
             home
           </Route>
           <Route path="/login">
-            login
+            <LoginForm />
           </Route>
           <Route path="/signup">
             <RegForm />
