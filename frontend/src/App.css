@@ -20,6 +20,7 @@
   --grey-300: #cccccc;
   --grey-400: #bbbbbb;
   --grey-500: #6b6b6b;
+  --red-300: #ff6666;
 
   /* цвета поверхностей */
   --surface-color: var(--grey-50);
@@ -45,6 +46,7 @@
   --input-border-radius: var(--border-radius-size-m);
   --input-border-color: var(--grey-200);
   --input-placeholder-color: var(--grey-400);
+  --input-color-error: var(--red-300);
 
   /* кнопки */
   --button-size-s: 20px;

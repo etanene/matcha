@@ -11,7 +11,9 @@
 .reg-form-form-name {
   margin: 10px auto;
 }
-
 .reg-form-input {
-  margin: 3px 0;
+  margin: 5px 0;
+}
+.reg-form-submit {
+  margin: 5px 0;
 }

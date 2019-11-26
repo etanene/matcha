@@ -10,41 +10,48 @@ function Input(props) {
   const {
     size,
     type,
+    name,
     placeholder,
     children,
+    error,
     cls,
-    handleChange,
+    onChange,
   } = props;
 
   return (
     <div className={inputCss({}, [cls])}>
       <input
         type={type}
+        name={name}
         placeholder={placeholder}
-        className={inputCss('input-tag', { size })}
-        onChange={handleChange}
+        className={inputCss('input-tag', { size, error })}
+        onChange={onChange}
       />
-      { children && <span>{children}</span> }
+      { error && <span className={inputCss('message')}>{children}</span> }
     </div>
   );
 }
 
 Input.propTypes = {
   size: PropTypes.string,
+  name: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   children: PropTypes.string,
+  error: PropTypes.bool,
   cls: PropTypes.string,
-  handleChange: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 Input.defaultProps = {
   size: 's',
+  name: null,
   type: 'text',
   placeholder: null,
   children: null,
+  error: false,
   cls: null,
-  handleChange: null,
+  onChange: null,
 };
 
 export default Input;
