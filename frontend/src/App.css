@@ -8,10 +8,19 @@
   --font-size-m: 20px;
   --font-size-l: 25px;
 
+  /* размеры закругления углов */
+  --border-radius-size-s: 4px;
+  --border-radius-size-m: 8px;
+  --border-radius-size-l: 12px;
+
   /* цвета */
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
+  --grey-200: #dddddd;
+  --grey-300: #cccccc;
+  --grey-400: #bbbbbb;
   --grey-500: #6b6b6b;
+  --red-300: #ff6666;
 
   /* цвета поверхностей */
   --surface-color: var(--grey-50);
@@ -21,26 +30,39 @@
   /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
   /* ------------------------ */
 
-  /* цвета границ */
-  --border-color: var(--grey-500);
+  /* общие поверхности */
+  --surface-border-color: var(--grey-200);
 
-  /* цвета блоков */
+  /* header */
   --header-color: var(--surface-color);
 
-  /* размер шрифта для логотипа */
+  /* логотип */
   --logo-font-size: var(--font-size-l);
 
-  /* размеры кнопок */
+  /* input */
+  --input-font-size-s: var(--font-size-s);
+  --input-font-size-m: var(--font-size-m);
+  --input-font-size-l: var(--font-size-l);
+  --input-border-radius: var(--border-radius-size-m);
+  --input-border-color: var(--grey-200);
+  --input-placeholder-color: var(--grey-400);
+  --input-color-error: var(--red-300);
+
+  /* кнопки */
   --button-size-s: 20px;
   --button-size-m: 25px;
   --button-size-l: 30px;
-
-  /* цвета кнопок */
   --button-color: var(--grey-500);
+  --button-border-radius: var(--border-radius-size-s);
+
+  /* формы */
+  --form-border-radius: var(--border-radius-size-m);
 }
 
 body {
   margin: 0;
   color: var(--grey-500);
   background: var(--grey-50);
+  width: 100%;
+  height: 100vh;
 }

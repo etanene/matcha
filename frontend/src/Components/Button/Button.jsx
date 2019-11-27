@@ -12,12 +12,14 @@ function Button(props) {
     type,
     size,
     color,
+    onClick,
     cls,
   } = props;
 
   return (
     <button
       type={type}
+      onClick={onClick}
       className={buttonCss({ size, color }, [cls])}
     >
       {children}
@@ -30,6 +32,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset', null]),
   size: PropTypes.oneOf(['s', 'm', 'l', null]),
   color: PropTypes.string,
+  onClick: PropTypes.func,
   cls: PropTypes.string,
 };
 
@@ -37,6 +40,7 @@ Button.defaultProps = {
   type: 'button',
   size: 'm',
   color: 'light',
+  onClick: null,
   cls: null,
 };
 

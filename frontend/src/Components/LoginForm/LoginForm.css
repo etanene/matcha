@@ -1,0 +1,22 @@
+@import url('../../App.css');
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+/* элементы */
+.login-form-form-name {
+  margin: 10px auto;
+}
+.login-form-input {
+  margin: 5px 0;
+}
+.login-form-submit {
+  margin: 5px 0;
+}
+.login-form-link-reset {
+  margin: 10px auto;
+  color: inherit;
+}

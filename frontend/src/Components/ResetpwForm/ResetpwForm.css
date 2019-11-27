@@ -1,0 +1,16 @@
+@import url('../../App.css');
+
+.resetpw-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+/* элементы */
+.resetpw-form-form-name {
+  margin: 10px auto;
+}
+
+.resetpw-form-input {
+  margin: 10px 0;
+}
