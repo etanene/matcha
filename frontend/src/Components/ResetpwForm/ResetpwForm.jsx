@@ -20,11 +20,7 @@ function ResetpwForm(props) {
         placeholder="Email"
         cls={inputCss}
       />
-      <Button
-        type="submit"
-      >
-        Reset
-      </Button>
+      <Button type="submit">Reset</Button>
     </div>
   );
 }

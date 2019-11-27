@@ -26,11 +26,7 @@ function LoginForm(props) {
         placeholder="Password"
         cls={inputCss}
       />
-      <Button
-        type="submit"
-      >
-        Log In
-      </Button>
+      <Button type="submit" cls={loginFormCss('submit')}>Log In</Button>
       <Link to="/reset" className={loginFormCss('link-reset')}>
         Reset password
       </Link>
