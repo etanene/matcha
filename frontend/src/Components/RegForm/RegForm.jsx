@@ -56,13 +56,25 @@ function useForm(formSchema) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    console.log(event.target);
+    console.log(event.target.username.value);
+    // const formData = new FormData(event.target);
     if (validateForm()) {
-      console.log('OK');
+      fetch('/api/auth/signup', {
+        method: 'POST',
+        body: event.target,
+      })
+        .then(() => {
+          console.log('ok');
+        })
+        .catch(() => {
+          console.log('error');
+        });
     } else {
       console.log('Error');
     }
   };
-  console.log(state);
+  // console.log(state);
   return { state, handleChange, handleSubmit };
 }
 
@@ -93,7 +105,7 @@ function RegForm(props) {
   const { state, handleChange, handleSubmit } = useForm(formSchema);
 
   return (
-    <form className={regFormCss({}, [cls])}>
+    <form onSubmit={handleSubmit} className={regFormCss({}, [cls])}>
       <span className={regFormCss('form-name')}>Sign Up</span>
       <Input
         type="text"
@@ -151,7 +163,7 @@ function RegForm(props) {
       >
         Passwords do not match.
       </Input>
-      <Button onClick={handleSubmit} cls={regFormCss('submit')}>Sign up</Button>
+      <Button type="submit" cls={regFormCss('submit')}>Sign up</Button>
     </form>
   );
 }
