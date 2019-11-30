@@ -1,9 +1,14 @@
 const db = require('../db');
 
+const { validateService } = require('../services');
+
 const signupUser = async (req, res) => {
-  console.log(req.body);
-  console.log(req.body.username);
-  res.send('test');
+  try {
+    validateService.validateUserSignup(req.body);
+    res.send('Ok!');
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
 const loginUser = () => {

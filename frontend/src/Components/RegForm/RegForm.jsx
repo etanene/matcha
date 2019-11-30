@@ -67,16 +67,19 @@ function useForm(formSchema) {
 
     if (validateForm()) {
       try {
-        const res = await fetch('/api/auth/signup', {
+        const response = await fetch('/api/auth/signup', {
           method: 'POST',
           headers: {
             'Content-type': 'application/json',
           },
           body: JSON.stringify(data),
         });
-        console.log(res);
+        if (!response.ok) {
+          const error = await response.json();
+          throw Error(error.message);
+        }
       } catch (e) {
-        console.log(e);
+        console.log(e.message);
       }
     }
   };
