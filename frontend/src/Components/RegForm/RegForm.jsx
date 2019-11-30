@@ -53,25 +53,31 @@ function useForm(formSchema) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(event.target);
-    console.log(event.target.username.value);
-    // const formData = new FormData(event.target);
+    const data = Object.values(event.target).reduce((obj, current) => {
+      let mergeObj = {};
+
+      if (current.nodeName === 'INPUT') {
+        mergeObj = { [current.name]: current.value };
+      }
+      return (Object.assign(obj, mergeObj));
+    }, {});
+
     if (validateForm()) {
-      fetch('/api/auth/signup', {
-        method: 'POST',
-        body: event.target,
-      })
-        .then(() => {
-          console.log('ok');
-        })
-        .catch(() => {
-          console.log('error');
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify(data),
         });
-    } else {
-      console.log('Error');
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   // console.log(state);

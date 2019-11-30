@@ -1,12 +1,11 @@
-'use strict'
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.jsx',
   output: {
-    path: __dirname + '/build',
-    filename: 'build.js'
+    path: path.join(__dirname, '/build'),
+    filename: 'build.js',
   },
   module: {
     rules: [
@@ -16,8 +15,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
-          failOnError: true                
-        }
+          failOnError: true,
+        },
       },
       {
         test: /\.js(x?)$/,
@@ -25,31 +24,32 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-transform-runtime'],
+          },
+        },
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
-          'css-loader'
-        ]
-      }
-    ]
+          'css-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: __dirname + '/public/index.html'
-    })
+      template: path.join(__dirname, '/public/index.html'),
+    }),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     host: '0.0.0.0',
     port: '3000',
     historyApiFallback: true,
-  }
-}
+  },
+};
