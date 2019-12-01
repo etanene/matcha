@@ -6,18 +6,15 @@ const path = require('path');
 const client = new Client();
 
 const users = fs.readFileSync(path.join(__dirname, '/migrates/users.sql')).toString();
-const db = fs.readFileSync(path.join(__dirname, '/migrates/db.sql')).toString();
 const root = fs.readFileSync(path.join(__dirname, '/migrates/root.sql')).toString();
 client.connect();
 
-// Создание БД, если нет
-client.query(db);
-console.log('DB matchadb created');
-
-// Создани tables users
+// Созданаем tables users
 client.query(users);
 console.log('Tables users created');
 
-// Создаем рута
+// Создаем в users рута
 client.query(root);
 console.log('Root created');
+
+client.end();
