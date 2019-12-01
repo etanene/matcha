@@ -1,12 +1,22 @@
-CREATE TYPE sex AS ENUM ('male', 'female');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'sex') THEN
+    CREATE TYPE sex AS ENUM ('male', 'female');
+  END IF;
+END$$;
 
-CREATE TYPE orientation AS ENUM ('homo', 'hetero', 'bi');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'orientation') THEN
+    CREATE TYPE orientation AS ENUM ('homo', 'hetero', 'bi');
+  END IF;
+END$$;
 
 CREATE TABLE IF NOT EXISTS users
 (
   user_id SERIAL PRIMARY KEY NOT NULL,
-  email varchar(255) NOT NULL,
-  login varchar(255) NOT NULL,
+  email varchar(255) UNIQUE NOT NULL,
+  login varchar(255) UNIQUE NOT NULL,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   birthday TIMESTAMP,

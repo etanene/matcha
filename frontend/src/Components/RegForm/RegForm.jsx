@@ -78,6 +78,7 @@ function useForm(formSchema) {
           const error = await response.json();
           throw Error(error.message);
         }
+        console.log('signup');
       } catch (e) {
         console.log(e.message);
       }
