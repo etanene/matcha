@@ -1,16 +1,25 @@
+const bcrypt = require('bcrypt');
+
 const { userModel } = require('../models');
+const { AuthException } = require('../errors');
 
-function AuthException(message) {
-  this.message = message;
-  this.name = 'Auth';
-}
-
-const signup = async (user) => {
+const signup = async (data) => {
   try {
+    const user = data;
+
+    const checkLogin = await userModel.getUser({ login: user.username });
+    if (checkLogin.length) {
+      throw new AuthException('Login already exists!');
+    }
+    const checkEmail = await userModel.getUser({ email: user.email });
+    if (checkEmail.length) {
+      throw new AuthException('Email already exists!');
+    }
+    user.password = await bcrypt.hash(user.password, 1);
     await userModel.addUser(user);
   } catch (e) {
     console.log(e.message);
-    throw new AuthException('Error signup user!');
+    throw e;
   }
 };
 

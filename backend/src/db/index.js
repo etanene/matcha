@@ -1,8 +1,7 @@
-const { Client } = require('pg');
+const db = require('./connect');
+const dbUtils = require('./utils');
 
-const client = new Client();
-
-client.connect();
-console.log('db client connected!');
-
-module.exports = client;
+module.exports = {
+  db,
+  dbUtils,
+};

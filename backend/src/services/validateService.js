@@ -1,7 +1,4 @@
-function ValidateException(message) {
-  this.message = message;
-  this.name = 'Validate';
-}
+const { ValidateException } = require('../errors');
 
 const validateUserSignup = (user) => {
   if (!(user.username && /^[A-Za-z\d]{4,12}$/.test(user.username))) {

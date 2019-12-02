@@ -6,11 +6,11 @@ const {
 const signupUser = async (req, res) => {
   try {
     validateService.validateUserSignup(req.body);
-    authService.signup(req.body);
+    await authService.signup(req.body);
     res.send('Ok!');
   } catch (e) {
     console.log(e);
-    res.status(500).send(e);
+    res.status(e.status || 500).send(e);
   }
 };
 
