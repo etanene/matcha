@@ -6,7 +6,6 @@ const getUser = async (params) => {
     const user = await userModel.getUser(params);
     return (user);
   } catch (e) {
-    console.log(e);
     throw e;
   }
 };

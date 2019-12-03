@@ -10,7 +10,6 @@ const addUser = async (user) => {
         ($1, $2, $3, $4, $5)
     `, [user.email, user.username, user.first_name, user.last_name, user.password]);
   } catch (e) {
-    console.log(e);
     throw new DbException('Cant insert user data!');
   }
 };
@@ -27,7 +26,6 @@ const getUser = async (data) => {
 
     return (res.rows);
   } catch (e) {
-    console.log(e);
     throw new DbException('Cant select user data');
   }
 };

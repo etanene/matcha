@@ -18,7 +18,6 @@ const signup = async (data) => {
     user.password = await bcrypt.hash(user.password, 1);
     await userModel.addUser(user);
   } catch (e) {
-    console.log(e.message);
     throw e;
   }
 };
