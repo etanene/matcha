@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
+import { useSelector } from 'react-redux/';
 import { cn } from '@bem-react/classname';
 
 import Header from './Components/Header/Header';
@@ -12,16 +14,19 @@ import LoginForm from './Components/LoginForm/LoginForm';
 import ResetpwForm from './Components/ResetpwForm/ResetpwForm';
 import './App.css';
 
+
 const pageContentCss = cn('page-content');
 
 function App() {
+  const user = useSelector((state) => state.user);
+
   return (
     <div>
       <Header />
       <PageContent>
         <Switch>
           <Route exact path="/">
-            home
+            {user ? 'home' : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
             <LoginForm cls={pageContentCss('login-form')} />
