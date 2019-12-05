@@ -167,6 +167,7 @@ function RegForm(props) {
         type="text"
         name="username"
         placeholder="Username"
+        value={state.username.value}
         error={state.username.error}
         onChange={handleChange}
         cls={inputCss}
@@ -177,6 +178,7 @@ function RegForm(props) {
         type="text"
         name="email"
         placeholder="Email"
+        value={state.email.value}
         error={state.email.error}
         onChange={handleChange}
         cls={inputCss}
@@ -187,6 +189,7 @@ function RegForm(props) {
         type="text"
         name="first_name"
         placeholder="First name"
+        value={state.first_name.value}
         error={state.first_name.error}
         onChange={handleChange}
         cls={inputCss}
@@ -195,6 +198,7 @@ function RegForm(props) {
         type="text"
         name="last_name"
         placeholder="Last name"
+        value={state.last_name.value}
         error={state.last_name.error}
         onChange={handleChange}
         cls={inputCss}
@@ -203,6 +207,7 @@ function RegForm(props) {
         type="password"
         name="password"
         placeholder="Password"
+        value={state.password.value}
         error={state.password.error}
         onChange={handleChange}
         cls={inputCss}
@@ -213,6 +218,7 @@ function RegForm(props) {
         type="password"
         name="confirm_password"
         placeholder="Confirm password"
+        value={state.confirm_password.value}
         error={state.confirm_password.error}
         onChange={handleChange}
         cls={inputCss}

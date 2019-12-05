@@ -22,9 +22,9 @@ function Header() {
     </NavBar>
   ) : (
     <NavBar>
-      {/* <Link to="/login"> */}
-      <Button size="l" onClick={() => dispatch({ type: 'USER_LOGIN' })} cls={buttonCss}>Log in</Button>
-      {/* </Link> */}
+      <Link to="/login">
+        <Button size="l" cls={buttonCss}>Log in</Button>
+      </Link>
       <Link to="/signup">
         <Button size="l" cls={buttonCss}>Sign up</Button>
       </Link>
