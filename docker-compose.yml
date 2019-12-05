@@ -3,6 +3,12 @@ version: '3'
 services:
   backend:
     build: ./backend
+    environment:
+      - PGUSER=matcha
+      - PGHOST=postgres
+      - PGPASSWORD=Matcha12345
+      - PGDATABASE=matchadb
+      - PGPORT=5432
     ports:
       - '8000:8000'
     volumes:
