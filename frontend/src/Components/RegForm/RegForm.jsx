@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 
+import { apiService } from '../../Services';
+
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import './RegForm.css';
@@ -17,18 +19,21 @@ function useForm(formSchema) {
       return;
     }
 
-    const res = await fetch(`/api/user/get?${params.name}=${params.value}`);
-    const data = await res.json();
+    try {
+      const data = await apiService.getJson(`/api/user/get?${params.name}=${params.value}`);
 
-    if (data.length) {
-      setState((prevState) => ({
-        ...prevState,
-        [params.key]: {
-          ...[params.key],
-          error: true,
-          message: params.message,
-        },
-      }));
+      if (data.length) {
+        setState((prevState) => ({
+          ...prevState,
+          [params.key]: {
+            ...prevState[params.key],
+            error: true,
+            message: params.message,
+          },
+        }));
+      }
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -108,18 +113,8 @@ function useForm(formSchema) {
 
     if (validateForm()) {
       try {
-        const response = await fetch('/api/auth/signup', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-        if (!response.ok) {
-          const error = await response.json();
-          throw Error(error.message);
-        }
-        console.log('signup');
+        const res = await apiService.postJson('/api/auth/signup', data);
+        console.log('Ok', res);
       } catch (e) {
         console.log(e.message);
       }

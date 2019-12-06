@@ -51,7 +51,7 @@ Input.defaultProps = {
   name: null,
   type: 'text',
   placeholder: null,
-  value: null,
+  value: '',
   children: null,
   error: false,
   cls: null,

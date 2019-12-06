@@ -6,8 +6,8 @@ const {
 const signupUser = async (req, res) => {
   try {
     validateService.validateUserSignup(req.body);
-    await authService.signup(req.body);
-    res.send('Ok!');
+    const { username, email } = await authService.signup(req.body);
+    res.send({ username, email });
   } catch (e) {
     res.status(e.status || 500).send(e);
   }

@@ -13,14 +13,30 @@ const loginFormCss = cn('login-form');
 const inputCss = loginFormCss('input');
 
 function useForm(formSchema) {
-  const [state] = useState(formSchema);
+  const [state, setState] = useState(formSchema);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-    dispatch(authAction.login);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(authAction.login(state.username.value, state.password.value));
   };
 
-  return { state, handleSubmit };
+  const handleChange = (event) => {
+    event.persist();
+
+    const { name, value } = event.target;
+
+    setState((prevState) => ({
+      ...prevState,
+      [name]: {
+        ...prevState[name],
+        value,
+      },
+    }));
+  };
+
+  return { state, handleSubmit, handleChange };
 }
 
 const formSchema = {
@@ -32,7 +48,7 @@ const formSchema = {
 
 function LoginForm(props) {
   const { cls } = props;
-  const { state, handleSubmit } = useForm(formSchema);
+  const { state, handleSubmit, handleChange } = useForm(formSchema);
 
   return (
     <form onSubmit={handleSubmit} className={loginFormCss({}, [cls])}>
@@ -41,12 +57,16 @@ function LoginForm(props) {
         type="text"
         name="username"
         placeholder="Username or Email"
+        value={state.username.value}
+        onChange={handleChange}
         cls={inputCss}
       />
       <Input
         type="password"
         name="password"
         placeholder="Password"
+        value={state.password.value}
+        onChange={handleChange}
         cls={inputCss}
       >
         {state.password.message}
