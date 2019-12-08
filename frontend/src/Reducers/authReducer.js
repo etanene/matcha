@@ -1,8 +1,15 @@
-const authReducer = (state = '', action) => {
+import { authAction } from '../Actions';
+import { userService } from '../Services';
+
+const user = userService.getUser();
+
+const initialState = user ? user.username : '';
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'USER_LOGIN':
-      return 'login';
-    case 'USER_LOGOUT':
+    case authAction.LOGIN_SUCCESS:
+      return action.username;
+    case authAction.LOGIN_LOGOUT:
       return '';
     default:
       return state;

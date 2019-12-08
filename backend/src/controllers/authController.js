@@ -13,9 +13,18 @@ const signupUser = async (req, res) => {
   }
 };
 
-const loginUser = (req, res) => {
-  console.log('login');
-  res.send('login');
+const loginUser = async (req, res) => {
+  try {
+    console.log('login');
+    console.log(req.body);
+    console.log(req.session);
+    console.log('sessionID', req.session.id);
+    await authService.login(req.body);
+    res.send({ token: req.session.id });
+  } catch (e) {
+    console.log(e);
+    res.status(e.status || 500).send(e);
+  }
 };
 
 const logoutUser = (req, res) => {

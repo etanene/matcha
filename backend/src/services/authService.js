@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
+const validateService = require('../services/validateService');
 
 const signup = async (data) => {
   try {
@@ -25,6 +26,26 @@ const signup = async (data) => {
   }
 };
 
+const login = async (data) => {
+  try {
+    const loginData = validateService.getLoginData(data.username);
+    const users = await userModel.getUser(loginData);
+    if (!users.length) {
+      throw new AuthException('Invalid username or password!');
+    }
+    const user = users[0];
+
+    const validPasswd = await bcrypt.compare(data.password, user.passwd);
+    if (!validPasswd) {
+      throw new AuthException('Invalid username or password!');
+    }
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
 module.exports = {
   signup,
+  login,
 };
