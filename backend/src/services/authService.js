@@ -5,6 +5,7 @@ const { userModel } = require('../models');
 const { AuthException } = require('../errors');
 const validateService = require('./validateService');
 const mailService = require('./mailService');
+const { HOST_URL } = require('../config');
 
 const signup = async (data) => {
   try {
@@ -22,7 +23,7 @@ const signup = async (data) => {
     user.unique = uuid();
     await userModel.addUser(user);
 
-    const link = `<a>http://localhost:8080/api/auth/verify/${user.unique}</a>`;
+    const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
     await mailService.sendMail(
       user.email,
       'Matcha email verification',
