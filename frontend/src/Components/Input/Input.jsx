@@ -12,6 +12,7 @@ function Input(props) {
     type,
     name,
     placeholder,
+    value,
     children,
     error,
     cls,
@@ -24,6 +25,7 @@ function Input(props) {
         type={type}
         name={name}
         placeholder={placeholder}
+        value={value}
         className={inputCss('input-tag', { size, error })}
         onChange={onChange}
       />
@@ -37,6 +39,7 @@ Input.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
   children: PropTypes.string,
   error: PropTypes.bool,
   cls: PropTypes.string,
@@ -48,6 +51,7 @@ Input.defaultProps = {
   name: null,
   type: 'text',
   placeholder: null,
+  value: '',
   children: null,
   error: false,
   cls: null,

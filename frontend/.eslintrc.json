@@ -25,7 +25,7 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/button-has-type": "off",
-        "no-console": "off"
+        "no-console": "warn"
     },
     "settings": {
         "import/resolver": {

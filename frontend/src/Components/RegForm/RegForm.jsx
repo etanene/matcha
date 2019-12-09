@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { apiService } from '../../Services';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -17,18 +21,21 @@ function useForm(formSchema) {
       return;
     }
 
-    const res = await fetch(`/api/user/get?${params.name}=${params.value}`);
-    const data = await res.json();
+    try {
+      const data = await apiService.getJson(`/api/user/get?${params.name}=${params.value}`);
 
-    if (data.length) {
-      setState((prevState) => ({
-        ...prevState,
-        [params.key]: {
-          ...[params.key],
-          error: true,
-          message: params.message,
-        },
-      }));
+      if (data.length) {
+        setState((prevState) => ({
+          ...prevState,
+          [params.key]: {
+            ...prevState[params.key],
+            error: true,
+            message: params.message,
+          },
+        }));
+      }
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -108,18 +115,8 @@ function useForm(formSchema) {
 
     if (validateForm()) {
       try {
-        const response = await fetch('/api/auth/signup', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-        if (!response.ok) {
-          const error = await response.json();
-          throw Error(error.message);
-        }
-        console.log('signup');
+        const res = await apiService.postJson('/api/auth/signup', data);
+        console.log('Ok', res);
       } catch (e) {
         console.log(e.message);
       }
@@ -159,7 +156,11 @@ const formSchema = {
 function RegForm(props) {
   const { cls } = props;
   const { state, handleChange, handleSubmit } = useForm(formSchema);
+  const userState = useSelector((reduxState) => reduxState.user);
 
+  if (userState.isAuth) {
+    return (<Redirect to="/" />);
+  }
   return (
     <form onSubmit={handleSubmit} className={regFormCss({}, [cls])}>
       <span className={regFormCss('form-name')}>Sign Up</span>
@@ -167,6 +168,7 @@ function RegForm(props) {
         type="text"
         name="username"
         placeholder="Username"
+        value={state.username.value}
         error={state.username.error}
         onChange={handleChange}
         cls={inputCss}
@@ -177,6 +179,7 @@ function RegForm(props) {
         type="text"
         name="email"
         placeholder="Email"
+        value={state.email.value}
         error={state.email.error}
         onChange={handleChange}
         cls={inputCss}
@@ -187,6 +190,7 @@ function RegForm(props) {
         type="text"
         name="first_name"
         placeholder="First name"
+        value={state.first_name.value}
         error={state.first_name.error}
         onChange={handleChange}
         cls={inputCss}
@@ -195,6 +199,7 @@ function RegForm(props) {
         type="text"
         name="last_name"
         placeholder="Last name"
+        value={state.last_name.value}
         error={state.last_name.error}
         onChange={handleChange}
         cls={inputCss}
@@ -203,6 +208,7 @@ function RegForm(props) {
         type="password"
         name="password"
         placeholder="Password"
+        value={state.password.value}
         error={state.password.error}
         onChange={handleChange}
         cls={inputCss}
@@ -213,6 +219,7 @@ function RegForm(props) {
         type="password"
         name="confirm_password"
         placeholder="Confirm password"
+        value={state.confirm_password.value}
         error={state.confirm_password.error}
         onChange={handleChange}
         cls={inputCss}
