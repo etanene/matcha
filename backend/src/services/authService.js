@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt');
+const uuid = require('uuid/v4');
 
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
-const validateService = require('../services/validateService');
+const validateService = require('./validateService');
+const mailService = require('./mailService');
 
 const signup = async (data) => {
   try {
@@ -17,8 +19,15 @@ const signup = async (data) => {
       throw new AuthException('Email already exists!');
     }
     user.password = await bcrypt.hash(user.password, 1);
+    user.unique = uuid();
     await userModel.addUser(user);
 
+    const link = `<a>http://localhost:8080/api/auth/verify/${user.unique}</a>`;
+    await mailService.sendMail(
+      user.email,
+      'Matcha email verification',
+      `Please, verify your matcha account ${link}`,
+    );
     return (user);
   } catch (e) {
     console.log(e.message);
@@ -39,6 +48,19 @@ const login = async (data) => {
     if (!validPasswd) {
       throw new AuthException('Invalid username or password!');
     }
+    if (!user.validate) {
+      throw new AuthException('Please, validate your account on email');
+    }
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+const verify = async (ulink) => {
+  try {
+    const res = await userModel.verifyUser({ unique_link: ulink });
+    return (res);
   } catch (e) {
     console.log(e);
     throw e;
@@ -48,4 +70,5 @@ const login = async (data) => {
 module.exports = {
   signup,
   login,
+  verify,
 };

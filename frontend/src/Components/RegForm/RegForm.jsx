@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { apiService } from '../../Services';
 
@@ -154,7 +156,11 @@ const formSchema = {
 function RegForm(props) {
   const { cls } = props;
   const { state, handleChange, handleSubmit } = useForm(formSchema);
+  const userState = useSelector((reduxState) => reduxState.user);
 
+  if (userState.isAuth) {
+    return (<Redirect to="/" />);
+  }
   return (
     <form onSubmit={handleSubmit} className={regFormCss({}, [cls])}>
       <span className={regFormCss('form-name')}>Sign Up</span>

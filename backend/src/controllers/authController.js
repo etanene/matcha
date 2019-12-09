@@ -15,10 +15,6 @@ const signupUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    console.log('login');
-    console.log(req.body);
-    console.log(req.session);
-    console.log('sessionID', req.session.id);
     await authService.login(req.body);
     res.send({ token: req.session.id });
   } catch (e) {
@@ -28,12 +24,33 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-  console.log('logout');
-  res.send('logout');
+  try {
+    req.session.destroy();
+    res.send({ message: 'user logout!' });
+  } catch (e) {
+    console.log(e);
+    res.status(e.status || 500).send(e);
+  }
+};
+
+const verifyUser = async (req, res) => {
+  try {
+    console.log(req.params);
+    if (req.params) {
+      const isVerify = await authService.verify(req.params.uuid);
+      if (isVerify) {
+        res.redirect('/login');
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(e.status || 500).send(e);
+  }
 };
 
 module.exports = {
   signupUser,
   loginUser,
   logoutUser,
+  verifyUser,
 };

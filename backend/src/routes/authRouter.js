@@ -10,4 +10,6 @@ router.post('/signup', authController.signupUser);
 
 router.get('/logout', authController.logoutUser);
 
+router.get('/verify/:uuid', authController.verifyUser);
+
 module.exports = router;

@@ -3,6 +3,8 @@ import { cn } from '@bem-react/classname';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { authAction } from '../../Actions';
+
 import Button from '../Button/Button';
 import Logo from '../Logo/Logo';
 import NavBar from '../NavBar/NavBar';
@@ -13,12 +15,12 @@ const buttonCss = headerCss('button');
 
 function Header() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const { isAuth, user } = useSelector((state) => state.user);
 
-  const navBar = user ? (
+  const navBar = isAuth ? (
     <NavBar>
-      {user}
-      <Button size="l" onClick={() => dispatch({ type: 'USER_LOGOUT' })} cls={buttonCss}>Log out</Button>
+      {user.username}
+      <Button size="l" onClick={() => dispatch({ type: authAction.LOGIN_LOGOUT })} cls={buttonCss}>Log out</Button>
     </NavBar>
   ) : (
     <NavBar>

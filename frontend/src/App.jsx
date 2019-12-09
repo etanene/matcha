@@ -26,7 +26,7 @@ function App() {
       <PageContent>
         <Switch>
           <Route exact path="/">
-            {user ? 'home' : <Redirect to="/login" />}
+            {user.isAuth ? 'home' : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
             <LoginForm cls={pageContentCss('login-form')} />
