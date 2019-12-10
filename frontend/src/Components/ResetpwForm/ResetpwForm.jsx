@@ -1,33 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
+import { useForm } from '../../Hooks';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import './ResetpwForm.css';
 
 const resetpwFormCss = cn('resetpw-form');
+const inputCss = resetpwFormCss('input');
+
+const formSchema = {
+  email: {
+    regex: /^\S+@\S+\.\S+$/,
+    message: 'Invalid email layout.',
+  },
+  submit: {
+    url: '/api/user/resetpw',
+  },
+};
 
 function ResetpwForm(props) {
   const { cls } = props;
-  const inputCss = resetpwFormCss('input');
+  const {
+    state,
+    handleChange,
+    handleSubmit,
+    fetchUser,
+  } = useForm(formSchema);
   const userState = useSelector((reduxState) => reduxState.user);
+
+  useEffect(() => {
+    fetchUser({
+      name: 'email',
+      value: state.email.value,
+      field: 'email',
+      message: 'Email does not exists.',
+      error: state.email.error,
+      exists: false,
+    });
+  });
 
   if (userState.isAuth) {
     return (<Redirect to="/" />);
   }
   return (
-    <div className={resetpwFormCss({}, [cls])}>
+    <form onSubmit={handleSubmit} className={resetpwFormCss({}, [cls])}>
       <span className={resetpwFormCss('form-name')}>Reset Password</span>
       <Input
         type="email"
+        name="email"
         placeholder="Email"
+        value={state.email.value}
+        error={state.email.error}
+        onChange={handleChange}
         cls={inputCss}
-      />
+      >
+        {state.email.message}
+      </Input>
       <Button type="submit">Reset</Button>
-    </div>
+    </form>
   );
 }
 
