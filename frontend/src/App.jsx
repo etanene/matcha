@@ -12,6 +12,7 @@ import PageContent from './Components/PageContent/PageContent';
 import RegForm from './Components/RegForm/RegForm';
 import LoginForm from './Components/LoginForm/LoginForm';
 import ResetpwForm from './Components/ResetpwForm/ResetpwForm';
+import ChangepwForm from './Components/ChangepwForm/ChangepwForm';
 import './App.css';
 
 
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/reset">
             <ResetpwForm cls={pageContentCss('resetpw-form')} />
+          </Route>
+          <Route path="/changepw/:uuid">
+            <ChangepwForm cls={pageContentCss('changepw-form')} />
           </Route>
         </Switch>
       </PageContent>

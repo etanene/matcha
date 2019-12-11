@@ -16,8 +16,15 @@ function DbException(message) {
   this.status = 500;
 }
 
+function UserException(message) {
+  this.message = message;
+  this.name = 'User';
+  this.status = 400;
+}
+
 module.exports = {
   AuthException,
   ValidateException,
   DbException,
+  UserException,
 };

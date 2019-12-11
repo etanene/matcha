@@ -4,7 +4,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.jsx',
   output: {
-    path: path.join(__dirname, '/build'),
+    path: path.join(__dirname, '/build/'),
+    publicPath: '/',
     filename: 'build.js',
   },
   module: {

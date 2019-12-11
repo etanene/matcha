@@ -30,17 +30,16 @@ const getUser = async (data) => {
   }
 };
 
-const verifyUser = async (data) => {
+const updateUser = async (data, condition) => {
   try {
     const res = await db.query(`
       UPDATE
         users
-      SET
-        validate = TRUE
-      ${dbUtils.getCondition(data)}
-    `, Object.values(data));
+      ${dbUtils.getUpdateValues(data)}
+      ${dbUtils.getCondition(condition, Object.keys(data).length)}
+    `, [...Object.values(data), ...Object.values(condition)]);
 
-    return (res.rowCount);
+    return (res.rows);
   } catch (e) {
     throw new DbException('Cant update user data');
   }
@@ -49,5 +48,5 @@ const verifyUser = async (data) => {
 module.exports = {
   addUser,
   getUser,
-  verifyUser,
+  updateUser,
 };
