@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
+import { apiService } from '../../Services';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -26,8 +27,12 @@ const formSchema = {
     regex: /^\S+@\S+\.\S+$/,
     message: 'Invalid email layout.',
   },
-  first_name: {},
-  last_name: {},
+  first_name: {
+    message: 'Required field.',
+  },
+  last_name: {
+    message: 'Required field.',
+  },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
@@ -38,9 +43,11 @@ const formSchema = {
   confirm_password: {
     message: 'Passwords do not match.',
   },
-  submit: {
-    url: '/api/auth/signup',
-  },
+};
+
+const submitForm = async (data) => {
+  await apiService.postJson('/api/auth/signup', data);
+  console.log('Submit regForm');
 };
 
 function RegForm(props) {
@@ -50,7 +57,7 @@ function RegForm(props) {
     handleChange,
     handleSubmit,
     fetchUser,
-  } = useForm(formSchema);
+  } = useForm(formSchema, submitForm);
   const userState = useSelector((reduxState) => reduxState.user);
 
   useEffect(() => {
@@ -111,7 +118,9 @@ function RegForm(props) {
         error={state.first_name.error}
         onChange={handleChange}
         cls={inputCss}
-      />
+      >
+        {state.first_name.message}
+      </Input>
       <Input
         type="text"
         name="last_name"
@@ -120,7 +129,9 @@ function RegForm(props) {
         error={state.last_name.error}
         onChange={handleChange}
         cls={inputCss}
-      />
+      >
+        {state.last_name.message}
+      </Input>
       <Input
         type="password"
         name="password"

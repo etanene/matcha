@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
+import { apiService } from '../../Services';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -18,9 +19,11 @@ const formSchema = {
     regex: /^\S+@\S+\.\S+$/,
     message: 'Invalid email layout.',
   },
-  submit: {
-    url: '/api/user/resetpw',
-  },
+};
+
+const submitForm = async (data) => {
+  await apiService.postJson('/api/user/resetpw', data);
+  console.log('submit ResetpwForm');
 };
 
 function ResetpwForm(props) {
@@ -30,7 +33,7 @@ function ResetpwForm(props) {
     handleChange,
     handleSubmit,
     fetchUser,
-  } = useForm(formSchema);
+  } = useForm(formSchema, submitForm);
   const userState = useSelector((reduxState) => reduxState.user);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { apiService } from '../Services';
 
-const useForm = (formSchema) => {
+const useForm = (formSchema, submit) => {
   const [state, setState] = useState(formSchema);
 
   const validateField = (name, value) => {
@@ -47,8 +47,9 @@ const useForm = (formSchema) => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = Object.values(event.target).reduce((obj, current) => {
       let mergeObj = {};
 
@@ -60,8 +61,7 @@ const useForm = (formSchema) => {
 
     if (validateForm()) {
       try {
-        const res = await apiService.postJson(formSchema.submit.url, data);
-        console.log('Ok', res);
+        submit(data);
       } catch (e) {
         console.log(e.message);
       }
