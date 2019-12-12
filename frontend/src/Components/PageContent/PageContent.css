@@ -2,21 +2,5 @@
 
 .page-content {
   display: flex;
-}
-
-/* элементы */
-.page-content-reg-form {
-  margin: auto;
-}
-
-.page-content-login-form {
-  margin: auto;
-}
-
-.page-content-resetpw-form {
-  margin: auto;
-}
-
-.page-content-changepw-form {
-  margin: auto;
+  justify-content: center;
 }
