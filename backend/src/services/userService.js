@@ -7,7 +7,6 @@ const { HOST_URL } = require('../config');
 const mailService = require('./mailService');
 
 const getUser = async (params) => {
-  console.log(params);
   try {
     const user = await userModel.getUser(params);
     return (user);

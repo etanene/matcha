@@ -1,4 +1,4 @@
-import { authAction } from '../Actions';
+import { authAction, userAction } from '../Actions';
 import { userService } from '../Services';
 
 const user = userService.getUser();
@@ -28,6 +28,11 @@ const authReducer = (state = initialState, action) => {
         isAuth: false,
         error: action.payload,
         user: null,
+      };
+    case userAction.USER_RESET_ERROR:
+      return {
+        ...state,
+        error: '',
       };
     default:
       return state;

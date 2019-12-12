@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from '../../Hooks';
-import { authAction } from '../../Actions';
+import { authAction, userAction } from '../../Actions';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -28,13 +28,18 @@ function LoginForm(props) {
   const dispatch = useDispatch();
 
   function submitForm(data) {
-    console.log(data);
     dispatch({ type: authAction.LOGIN_REGUEST, ...data });
+    console.log('submit loginForm');
   }
 
   const { state, handleSubmit, handleChange } = useForm(formSchema, submitForm);
   const userState = useSelector((reduxState) => reduxState.user);
 
+  useEffect(() => (
+    () => {
+      dispatch({ type: userAction.USER_RESET_ERROR });
+    }
+  ), [dispatch]);
 
   if (userState.isAuth) {
     return (<Redirect to="/" />);
