@@ -1,4 +1,4 @@
-const { userService } = require('../services');
+const { userService, validateService } = require('../services');
 
 const get = async (req, res) => {
   try {
@@ -9,6 +9,29 @@ const get = async (req, res) => {
   }
 };
 
+const resetpw = async (req, res) => {
+  try {
+    validateService.validateEmail(req.body.email);
+    await userService.resetPwUser(req.body.email);
+    res.send({ message: 'reset' });
+  } catch (e) {
+    res.status(e.status || 500).send(e);
+  }
+};
+
+const changepw = async (req, res) => {
+  try {
+    validateService.validatePasswords(req.body.password, req.body.confirm_password);
+    await userService.changePwUser(req.body.password, req.params);
+
+    res.send({ message: 'Password changed' });
+  } catch (e) {
+    res.status(e.status || 500).send(e);
+  }
+};
+
 module.exports = {
   get,
+  resetpw,
+  changepw,
 };

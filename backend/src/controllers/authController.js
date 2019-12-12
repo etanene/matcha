@@ -5,7 +5,7 @@ const {
 
 const signupUser = async (req, res) => {
   try {
-    validateService.validateUserSignup(req.body);
+    validateService.validateUser(req.body);
     const { username, email } = await authService.signup(req.body);
     res.send({ username, email });
   } catch (e) {
@@ -18,7 +18,6 @@ const loginUser = async (req, res) => {
     await authService.login(req.body);
     res.send({ token: req.session.id });
   } catch (e) {
-    console.log(e);
     res.status(e.status || 500).send(e);
   }
 };
@@ -28,22 +27,18 @@ const logoutUser = (req, res) => {
     req.session.destroy();
     res.send({ message: 'user logout!' });
   } catch (e) {
-    console.log(e);
     res.status(e.status || 500).send(e);
   }
 };
 
 const verifyUser = async (req, res) => {
   try {
-    console.log(req.params);
     if (req.params) {
-      const isVerify = await authService.verify(req.params.uuid);
-      if (isVerify) {
-        res.redirect('/login');
-      }
+      await authService.verify(req.params.uuid);
+
+      res.redirect('/login');
     }
   } catch (e) {
-    console.log(e);
     res.status(e.status || 500).send(e);
   }
 };

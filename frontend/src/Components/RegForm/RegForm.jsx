@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
 
 import Input from '../Input/Input';
@@ -12,119 +13,6 @@ import './RegForm.css';
 
 const regFormCss = cn('reg-form');
 const inputCss = regFormCss('input');
-
-function useForm(formSchema) {
-  const [state, setState] = useState(formSchema);
-
-  const fetchUser = async (params) => {
-    if (params.error) {
-      return;
-    }
-
-    try {
-      const data = await apiService.getJson(`/api/user/get?${params.name}=${params.value}`);
-
-      if (data.length) {
-        setState((prevState) => ({
-          ...prevState,
-          [params.key]: {
-            ...prevState[params.key],
-            error: true,
-            message: params.message,
-          },
-        }));
-      }
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchUser({
-      key: 'username',
-      name: 'login',
-      value: state.username.value,
-      message: 'Login already exists!',
-      error: state.username.error,
-    });
-  }, [state.username.value, state.username.error]);
-
-  useEffect(() => {
-    fetchUser({
-      key: 'email',
-      name: 'email',
-      value: state.email.value,
-      message: 'Email already exists!',
-      error: state.email.error,
-    });
-  }, [state.email.value, state.email.error]);
-
-  const validateField = (name, value) => {
-    if (name === 'confirm_password') {
-      return (value !== state.password.value);
-    }
-    return ((formSchema[name].regex && !formSchema[name].regex.test(value)) || value === '');
-  };
-
-  const validateForm = () => {
-    const names = Object.keys(state);
-    let result = true;
-
-    for (let i = 0; i < names.length; i += 1) {
-      if (state[names[i]].error || !state[names[i]].value) {
-        result = false;
-        setState((prevState) => ({
-          ...prevState,
-          [names[i]]: {
-            ...prevState[names[i]],
-            error: true,
-          },
-        }));
-      }
-    }
-    return (result);
-  };
-
-  const handleChange = (event) => {
-    event.persist();
-
-    const { name, value } = event.target;
-
-    setState((prevState) => ({
-      ...prevState,
-      [name]: {
-        ...prevState[name],
-        error: validateField(name, value),
-        message: formSchema[name].message,
-        value,
-      },
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = Object.values(event.target).reduce((obj, current) => {
-      let mergeObj = {};
-
-      if (current.nodeName === 'INPUT') {
-        mergeObj = { [current.name]: current.value };
-      }
-      return (Object.assign(obj, mergeObj));
-    }, {});
-
-    if (validateForm()) {
-      try {
-        const res = await apiService.postJson('/api/auth/signup', data);
-        console.log('Ok', res);
-      } catch (e) {
-        console.log(e.message);
-      }
-    }
-  };
-  // console.log(state);
-  return { state, handleChange, handleSubmit };
-}
 
 const formSchema = {
   username: {
@@ -139,8 +27,12 @@ const formSchema = {
     regex: /^\S+@\S+\.\S+$/,
     message: 'Invalid email layout.',
   },
-  first_name: {},
-  last_name: {},
+  first_name: {
+    message: 'Required field.',
+  },
+  last_name: {
+    message: 'Required field.',
+  },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
@@ -153,10 +45,42 @@ const formSchema = {
   },
 };
 
+const submitForm = async (data) => {
+  await apiService.postJson('/api/auth/signup', data);
+  console.log('Submit regForm');
+};
+
 function RegForm(props) {
   const { cls } = props;
-  const { state, handleChange, handleSubmit } = useForm(formSchema);
+  const {
+    state,
+    handleChange,
+    handleSubmit,
+    fetchUser,
+  } = useForm(formSchema, submitForm);
   const userState = useSelector((reduxState) => reduxState.user);
+
+  useEffect(() => {
+    fetchUser({
+      name: 'email',
+      value: state.email.value,
+      field: 'email',
+      message: 'Email already exists!',
+      error: state.email.error,
+      exists: true,
+    });
+  }, [state.email.value, state.email.error, fetchUser]);
+
+  useEffect(() => {
+    fetchUser({
+      name: 'username',
+      value: state.username.value,
+      field: 'login',
+      message: 'Login already exists!',
+      error: state.username.error,
+      exists: true,
+    });
+  }, [state.username.value, state.username.error, fetchUser]);
 
   if (userState.isAuth) {
     return (<Redirect to="/" />);
@@ -194,7 +118,9 @@ function RegForm(props) {
         error={state.first_name.error}
         onChange={handleChange}
         cls={inputCss}
-      />
+      >
+        {state.first_name.message}
+      </Input>
       <Input
         type="text"
         name="last_name"
@@ -203,7 +129,9 @@ function RegForm(props) {
         error={state.last_name.error}
         onChange={handleChange}
         cls={inputCss}
-      />
+      >
+        {state.last_name.message}
+      </Input>
       <Input
         type="password"
         name="password"

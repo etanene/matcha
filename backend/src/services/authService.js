@@ -60,8 +60,11 @@ const login = async (data) => {
 
 const verify = async (ulink) => {
   try {
-    const res = await userModel.verifyUser({ unique_link: ulink });
-    return (res);
+    const res = await userModel.updateUser({ validate: 'TRUE' }, { unique_link: ulink });
+
+    if (!res) {
+      throw new AuthException('Can not find user!');
+    }
   } catch (e) {
     console.log(e);
     throw e;
