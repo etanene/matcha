@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
+import { REGEX } from '../../Constants';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -16,7 +17,7 @@ const inputCss = resetpwFormCss('input');
 
 const formSchema = {
   email: {
-    regex: /^\S+@\S+\.\S+$/,
+    regex: REGEX.EMAIL,
     message: 'Invalid email layout.',
   },
 };

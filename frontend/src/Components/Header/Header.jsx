@@ -35,7 +35,7 @@ function Header() {
 
   return (
     <header className={headerCss()}>
-      <Link to="/">
+      <Link className={headerCss('link-logo')} to="/">
         <Logo>Matcha</Logo>
       </Link>
       {navBar}

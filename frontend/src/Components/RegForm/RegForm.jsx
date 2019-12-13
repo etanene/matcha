@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
+import { REGEX } from '../../Constants';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -18,13 +19,13 @@ const formSchema = {
   username: {
     // доступны: большие/маленькие буквы, цифры
     // длина: 4 - 12
-    regex: /^[A-Za-z\d]{4,12}$/,
+    regex: REGEX.USERNAME,
     message: 'You can use a-z, A-Z, 0-9. Length from 4 to 12.',
   },
   email: {
     // доступны: любые символы
     // обязательно: @ и точка
-    regex: /^\S+@\S+\.\S+$/,
+    regex: REGEX.EMAIL,
     message: 'Invalid email layout.',
   },
   first_name: {
@@ -37,7 +38,7 @@ const formSchema = {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
     // длина: 4 - 12
-    regex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/,
+    regex: REGEX.PASSWORD,
     message: 'Password must contain upper and lower letter, number. Length from 4 to 12.',
   },
   confirm_password: {

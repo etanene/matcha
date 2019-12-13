@@ -30,13 +30,13 @@
   /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
   /* ------------------------ */
 
-  /* общие поверхности */
+  /* block */
   --surface-border-color: var(--grey-200);
 
   /* header */
   --header-color: var(--surface-color);
 
-  /* логотип */
+  /* logo */
   --logo-font-size: var(--font-size-l);
 
   /* input */
@@ -48,15 +48,20 @@
   --input-placeholder-color: var(--grey-400);
   --input-color-error: var(--red-300);
 
-  /* кнопки */
+  /* button */
   --button-size-s: 20px;
   --button-size-m: 25px;
   --button-size-l: 30px;
   --button-color: var(--grey-500);
   --button-border-radius: var(--border-radius-size-s);
 
-  /* формы */
+  /* form */
   --form-border-radius: var(--border-radius-size-m);
+
+  /* icon */
+  --icon-size-s: 24px;
+  --icon-size-m: 32px;
+  --icon-size-l: 48px;
 }
 
 body {

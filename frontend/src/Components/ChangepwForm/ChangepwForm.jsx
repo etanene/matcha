@@ -5,6 +5,7 @@ import { Redirect, useParams } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
+import { REGEX } from '../../Constants';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -15,7 +16,7 @@ const inputCss = changepwFormCss('input');
 
 const formSchema = {
   password: {
-    regex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/,
+    regex: REGEX.PASSWORD,
     message: 'Password must contain upper and lower letter, number. Length from 4 to 12.',
   },
   confirm_password: {
