@@ -3,7 +3,7 @@
 .resetpw-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  max-width: 300px;
 }
 
 /* элементы */

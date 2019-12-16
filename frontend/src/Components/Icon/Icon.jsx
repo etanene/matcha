@@ -7,10 +7,15 @@ import './Icon.css';
 const iconCss = cn('icon');
 
 function Icon(props) {
-  const { icon, size } = props;
+  const {
+    icon,
+    size,
+    viewBox,
+    fill,
+  } = props;
 
   return (
-    <svg viewBox="0 0 64 64" className={iconCss({ size })}>
+    <svg viewBox={viewBox} className={iconCss({ size, fill })}>
       <path d={icon} />
     </svg>
   );
@@ -18,11 +23,14 @@ function Icon(props) {
 
 Icon.propTypes = {
   icon: PropTypes.string.isRequired,
+  viewBox: PropTypes.string.isRequired,
   size: PropTypes.string,
+  fill: PropTypes.string,
 };
 
 Icon.defaultProps = {
   size: 'm',
+  fill: null,
 };
 
 export default Icon;

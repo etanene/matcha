@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux/';
+import { cn } from '@bem-react/classname';
 
 import Header from './Components/Header/Header';
 import PageContent from './Components/PageContent/PageContent';
@@ -15,6 +16,7 @@ import ChangepwForm from './Components/ChangepwForm/ChangepwForm';
 import Main from './Components/Main/Main';
 import './App.css';
 
+const pageContentCss = cn('page-content');
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -25,16 +27,16 @@ function App() {
       <PageContent>
         <Switch>
           <Route path="/login">
-            <LoginForm />
+            <LoginForm cls={pageContentCss('login-form')} />
           </Route>
           <Route path="/signup">
-            <RegForm />
+            <RegForm cls={pageContentCss('reg-form')} />
           </Route>
           <Route path="/reset">
-            <ResetpwForm />
+            <ResetpwForm cls={pageContentCss('resetpw-form')} />
           </Route>
           <Route path="/changepw/:uuid">
-            <ChangepwForm />
+            <ChangepwForm cls={pageContentCss('changepw-form')} />
           </Route>
           <Route path="/">
             {user.isAuth ? <Main /> : <Redirect to="/login" />}

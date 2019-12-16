@@ -3,8 +3,7 @@
 .reg-form {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid var(--surface-border-color); */
-  width: 300px;
+  max-width: 300px;
 }
 
 /* элементы */

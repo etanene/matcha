@@ -16,3 +16,8 @@
   width: var(--icon-size-l);
   height: var(--icon-size-l);
 }
+
+/* цвет */
+.icon_fill_grey {
+  fill: var(--icon-color-grey);
+}

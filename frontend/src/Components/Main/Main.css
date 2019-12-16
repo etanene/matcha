@@ -1,8 +1,13 @@
 .main {
-
 }
 
 /* элементы */
 .main-navbar {
-
+  display: flex;
+  justify-content: space-around;
+  max-width: 960px;
+  margin: 10px auto;
+}
+.main-profile {
+  margin: 0 auto;
 }

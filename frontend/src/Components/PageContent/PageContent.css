@@ -3,3 +3,17 @@
 .page-content {
 
 }
+
+/* элементы */
+.page-content-changepw-form {
+  margin: 0 auto;
+}
+.page-content-login-form {
+  margin: 0 auto;
+}
+.page-content-reg-form {
+  margin: 0 auto;
+}
+.page-content-resetpw-form {
+  margin: 0 auto;
+}

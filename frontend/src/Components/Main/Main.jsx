@@ -18,13 +18,13 @@ function Main() {
   return (
     <div className={mainCss()}>
       <NavBar cls={navBarCss}>
-        <Link to="/profile"><Icon icon={ICONS.PROFILE} /></Link>
-        <Link to="/match"><Icon icon={ICONS.MATCH} /></Link>
-        <Link to="/chat"><Icon icon={ICONS.CHAT} /></Link>
+        <Link to="/profile"><Icon icon={ICONS.PROFILE} viewBox="0 0 64 64" /></Link>
+        <Link to="/match"><Icon icon={ICONS.MATCH} viewBox="0 0 64 64" /></Link>
+        <Link to="/chat"><Icon icon={ICONS.CHAT} viewBox="0 0 64 64" /></Link>
       </NavBar>
       <Switch>
         <Route path="/profile">
-          <Profile />
+          <Profile cls={mainCss('profile')} />
         </Route>
         <Route path="/match">
           <Match />

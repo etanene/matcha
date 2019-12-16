@@ -14,6 +14,7 @@
   --border-radius-size-l: 12px;
 
   /* цвета */
+  --white-500: #ffffff;
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
   --grey-200: #dddddd;
@@ -23,6 +24,7 @@
   --red-300: #ff6666;
 
   /* цвета поверхностей */
+  --surface-block-color: var(--white-500);
   --surface-color: var(--grey-50);
   
 
@@ -62,6 +64,14 @@
   --icon-size-s: 24px;
   --icon-size-m: 32px;
   --icon-size-l: 48px;
+  --icon-color-grey: var(--grey-400);
+
+  /* photo-input */
+  --photo-input-background: var(--surface-block-color);
+  --photo-input-border-radius: var(--border-radius-size-m);
+  --photo-input-border-color: var(--grey-200);
+  --photo-input-text-color: var(--grey-400);
+  --photo-input-text-size: var(--font-size-l);
 }
 
 body {
