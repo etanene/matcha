@@ -6,13 +6,16 @@ import PhotoInput from '../PhotoInput/PhotoInput';
 import './PhotoProfile.css';
 
 const photoProfileCss = cn('photo-profile');
+const photoInputCss = photoProfileCss('photo-input');
 
 function PhotoProfile(props) {
   const { cls } = props;
 
   return (
     <div className={photoProfileCss({}, [cls])}>
-      <PhotoInput />
+      <PhotoInput id={1} cls={photoInputCss} />
+      <PhotoInput id={2} cls={photoInputCss} />
+      <PhotoInput id={3} cls={photoInputCss} />
     </div>
   );
 }

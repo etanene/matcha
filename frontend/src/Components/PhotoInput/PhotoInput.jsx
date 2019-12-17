@@ -9,18 +9,26 @@ import './PhotoInput.css';
 const photoInputCss = cn('photo-input');
 
 function PhotoInput(props) {
-  const { cls } = props;
+  const { id, cls } = props;
 
   return (
     <div className={photoInputCss({}, [cls])}>
-      <Icon fill="grey" size="l" viewBox="0 0 315 315" icon={ICONS.ADD} />
-      <span>Add photo</span>
+      <label htmlFor={photoInputCss(`input${id}`)}>
+        <div className={photoInputCss('layer')}>
+          <div className={photoInputCss('card')}>
+            <Icon fill="grey" size="l" viewBox="0 0 315 315" icon={ICONS.ADD} />
+            <span>Add photo</span>
+          </div>
+        </div>
+        <input type="file" id={photoInputCss(`input${id}`)} />
+      </label>
     </div>
   );
 }
 
 PhotoInput.propTypes = {
   cls: PropTypes.string,
+  id: PropTypes.number.isRequired,
 };
 
 PhotoInput.defaultProps = {

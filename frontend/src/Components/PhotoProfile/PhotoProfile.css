@@ -1,0 +1,9 @@
+.photo-profile {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* элементы */
+.photo-profile-photo-input {
+  margin: 5px;
+}
