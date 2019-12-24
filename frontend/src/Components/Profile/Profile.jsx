@@ -3,6 +3,7 @@ import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
+import Button from '../Button/Button';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -11,9 +12,10 @@ function Profile(props) {
   const { cls } = props;
 
   return (
-    <div className={profileCss({}, [cls])}>
+    <form className={profileCss({}, [cls])}>
       <PhotoProfile />
-    </div>
+      <Button cls={profileCss('submit')}>Save</Button>
+    </form>
   );
 }
 

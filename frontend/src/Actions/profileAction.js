@@ -1,0 +1,5 @@
+const PROFILE_PHOTO_ADD = 'PROFILE_PHOTO_ADD';
+
+export default {
+  PROFILE_PHOTO_ADD,
+};
