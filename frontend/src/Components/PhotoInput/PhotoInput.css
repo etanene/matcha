@@ -10,6 +10,11 @@
   cursor: pointer;
 }
 
+/* цвет карточки */
+.photo-input_error {
+  border: 1px solid var(--input-color-error);;
+}
+
 /* элементы */
 .photo-input-layer {
   width: 100%;
@@ -45,18 +50,3 @@
   box-sizing: border-box;
   display: none;
 }
-
-/* .photo-input {
-  width: 180px;
-  height: 220px;
-  background-color: var(--photo-input-background);
-  border-radius: var(--photo-input-border-radius);
-  border: 1px solid var(--photo-input-border-color);
-  color: var(--photo-input-text-color);
-  font-size: var(--photo-input-text-size);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-} */

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { profileAction } from '../../Actions';
 
 import Icon from '../Icon/Icon';
 import { ICONS } from '../../Constants';
@@ -9,8 +12,12 @@ import './PhotoInput.css';
 const photoInputCss = cn('photo-input');
 
 function PhotoInput(props) {
-  const { id, cls } = props;
-  const [file, setFile] = useState();
+  const { id, cls, error } = props;
+  const photo = useSelector((state) => (
+    state.profile.photo.value && state.profile.photo.value[id]
+  ));
+  const [file, setFile] = useState(photo && photo.src);
+  const dispatch = useDispatch();
 
   function handleChange(event) {
     const reader = new FileReader();
@@ -18,11 +25,11 @@ function PhotoInput(props) {
 
     reader.onloadend = () => {
       setFile(reader.result);
+      dispatch(profileAction.addPhoto(id, reader.result));
     };
     reader.readAsDataURL(inputFile);
   }
 
-  console.log(file);
   const content = file ? (
     <div className={photoInputCss('photo')}>
       <img src={file} alt="img" className={photoInputCss('img')} />
@@ -36,7 +43,7 @@ function PhotoInput(props) {
   );
 
   return (
-    <div className={photoInputCss({}, [cls])}>
+    <div className={photoInputCss({ error: !file && error }, [cls])}>
       <label htmlFor={photoInputCss(`input${id}`)}>
         <div className={photoInputCss('layer')}>
           {content}
@@ -49,10 +56,12 @@ function PhotoInput(props) {
 PhotoInput.propTypes = {
   cls: PropTypes.string,
   id: PropTypes.number.isRequired,
+  error: PropTypes.bool,
 };
 
 PhotoInput.defaultProps = {
   cls: null,
+  error: false,
 };
 
 export default PhotoInput;

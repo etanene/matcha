@@ -9,22 +9,24 @@ const photoProfileCss = cn('photo-profile');
 const photoInputCss = photoProfileCss('photo-input');
 
 function PhotoProfile(props) {
-  const { cls } = props;
+  const { error, cls } = props;
 
   return (
     <div className={photoProfileCss({}, [cls])}>
-      <PhotoInput id={1} cls={photoInputCss} />
-      <PhotoInput id={2} cls={photoInputCss} />
-      <PhotoInput id={3} cls={photoInputCss} />
+      <PhotoInput error={Boolean(error)} id={0} cls={photoInputCss} />
+      <PhotoInput error={Boolean(error)} id={1} cls={photoInputCss} />
+      <PhotoInput error={Boolean(error)} id={2} cls={photoInputCss} />
     </div>
   );
 }
 
 PhotoProfile.propTypes = {
+  error: PropTypes.string,
   cls: PropTypes.string,
 };
 
 PhotoProfile.defaultProps = {
+  error: '',
   cls: null,
 };
 

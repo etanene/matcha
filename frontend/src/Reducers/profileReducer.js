@@ -3,22 +3,47 @@ import { profileAction } from '../Actions';
 function addPhoto(state, photo) {
   return {
     ...state,
-    photo: [
-      ...state.photo.slice(0, photo.id),
-      { ...photo },
-      ...state.photo.slice(photo.id + 1),
-    ],
+    photo: {
+      ...state.photo,
+      value: {
+        ...state.photo.value,
+        [photo.id]: { ...photo },
+      },
+    },
   };
 }
 
+function setError(state, errors) {
+  const fields = Object.keys(errors);
+
+  const newState = fields.reduce((result, field) => {
+    const current = {
+      ...state,
+      [field]: {
+        ...state[field],
+        error: errors[field],
+      },
+    };
+    return Object.assign(result, current);
+  }, {});
+
+  return newState;
+}
+
 const initialState = {
-  photo: [],
+  photo: {
+    value: {},
+    error: '',
+  },
+  sex: 'male',
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case profileAction.PROFILE_PHOTO_ADD:
       return addPhoto(state, action.payload);
+    case profileAction.PROFILE_SET_ERROR:
+      return setError(state, action.payload);
     default:
       return state;
   }
