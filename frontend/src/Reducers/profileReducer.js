@@ -35,7 +35,11 @@ const initialState = {
     value: {},
     error: '',
   },
-  sex: 'male',
+  sex: {
+    value: 'male',
+    error: '',
+  },
+  isLoading: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -44,6 +48,11 @@ const profileReducer = (state = initialState, action) => {
       return addPhoto(state, action.payload);
     case profileAction.PROFILE_SET_ERROR:
       return setError(state, action.payload);
+    case profileAction.PROFILE_SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     default:
       return state;
   }

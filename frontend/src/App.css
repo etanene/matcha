@@ -20,12 +20,15 @@
   --grey-200: #dddddd;
   --grey-300: #cccccc;
   --grey-400: #bbbbbb;
+  --grey-400-transparent: rgba(170, 170, 170, 0.5);
   --grey-500: #6b6b6b;
   --red-300: #ff6666;
+  --transparent: rgba(0, 0, 0, 0);
 
-  /* цвета поверхностей */
+  /* поверхности */
   --surface-block-color: var(--white-500);
   --surface-color: var(--grey-50);
+  --surface-border-radius: var(--border-radius-size-m);
   
 
   /* ------------------------ */
@@ -37,6 +40,13 @@
 
   /* header */
   --header-color: var(--surface-color);
+
+  /* modal */
+  --modal-color: var(--grey-400-transparent);
+
+  /* spinner */
+  --spinner-outer-color: var(--grey-500);
+  --spinner-inner-color: var(--transparent);
 
   /* logo */
   --logo-font-size: var(--font-size-l);

@@ -7,6 +7,7 @@ import { profileAction } from '../../Actions';
 
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../Button/Button';
+import LoadingModal from '../LoadingModal/LoadingModal';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -36,7 +37,7 @@ function Profile(props) {
     const errors = {};
     const data = fields.reduce((result, field) => {
       if (!profileSchema[field]) {
-        return {};
+        return result;
       }
 
       const { value, error } = profileSchema[field].validate(profile[field]);
@@ -44,11 +45,13 @@ function Profile(props) {
         isValid = false;
         errors[field] = error;
       }
-      return Object.assign(result, value);
+      console.log(value);
+      return Object.assign(result, { [field]: value });
     }, {});
 
     if (isValid) {
       console.log('data', data);
+      dispatch(profileAction.submit(data));
     } else {
       console.log('errors', errors);
       dispatch(profileAction.setError(errors));
@@ -59,6 +62,7 @@ function Profile(props) {
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile error={profile.photo.error} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
+      <LoadingModal isLoading={profile.isLoading} />
     </form>
   );
 }
