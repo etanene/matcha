@@ -1,11 +1,10 @@
 const photoService = require('./photoService');
 
-const saveProfile = (profile) => {
+const saveProfile = async (profile, user) => {
   const { photo } = profile;
 
-  Object.values(photo).forEach((item) => {
-    photoService.savePhoto(item);
-  });
+  await photoService.savePhotos(photo, user);
+  console.log('done');
 };
 
 module.exports = {

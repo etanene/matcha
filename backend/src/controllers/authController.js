@@ -16,6 +16,7 @@ const signupUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     await authService.login(req.body);
+    req.session.logged = req.body.username;
     res.send({ token: req.session.id });
   } catch (e) {
     res.status(e.status || 500).send(e);
