@@ -7,14 +7,23 @@ import {
 
 import { apiService } from '../Services';
 
-import { profileAction } from '../Actions';
+import { profileAction, authAction } from '../Actions';
 
 function* submitProfile(action) {
   yield put(profileAction.setLoading(true));
-  const { payload } = action;
-  console.log('payload', payload);
-  yield call(apiService.postJson, '/api/profile/save', payload);
-  yield put(profileAction.setLoading(false));
+  try {
+    const { payload } = action;
+    console.log('payload', payload);
+    yield call(apiService.postJson, '/api/profile/save', payload);
+  } catch (e) {
+    // will notify
+    console.log(e);
+    if (e.status === 401) {
+      yield put(authAction.logout());
+    }
+  } finally {
+    yield put(profileAction.setLoading(false));
+  }
 }
 
 function* watchSubmitProfile() {

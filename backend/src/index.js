@@ -15,8 +15,8 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/', router);
 

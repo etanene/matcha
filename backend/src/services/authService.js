@@ -71,8 +71,37 @@ const verify = async (ulink) => {
   }
 };
 
+const getToken = (data) => {
+  try {
+    const token = data.split(' ');
+    if (token[0] === 'Bearer' && token[1]) {
+      return token[1];
+    }
+    throw new AuthException('Unauthorized', 401);
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      throw new AuthException('Unauthorized', 401);
+    }
+    throw e;
+  }
+};
+
+const isAuth = (data, session) => {
+  try {
+    const token = getToken(data);
+    if (token !== session) {
+      throw new AuthException('Unauthorized', 401);
+    }
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
 module.exports = {
   signup,
   login,
   verify,
+  isAuth,
 };

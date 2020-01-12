@@ -1,7 +1,7 @@
-function AuthException(message) {
+function AuthException(message, status = 400) {
   this.message = message;
   this.name = 'Auth';
-  this.status = 400;
+  this.status = status;
 }
 
 function ValidateException(message) {

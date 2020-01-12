@@ -44,9 +44,21 @@ const verifyUser = async (req, res) => {
   }
 };
 
+const isAuth = (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+
+    authService.isAuth(authorization, req.session.id);
+    next();
+  } catch (e) {
+    res.status(e.status || 401).send(e);
+  }
+};
+
 module.exports = {
   signupUser,
   loginUser,
   logoutUser,
   verifyUser,
+  isAuth,
 };

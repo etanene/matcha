@@ -9,10 +9,15 @@ const login = (username, password) => ({
   password,
 });
 
+const logout = () => ({
+  type: LOGIN_LOGOUT,
+});
+
 export default {
   LOGIN_REGUEST,
   LOGIN_SUCCESS,
   LOGIN_LOGOUT,
   LOGIN_ERROR,
   login,
+  logout,
 };

@@ -1,9 +1,9 @@
 const express = require('express');
 
-const { profileController } = require('../controllers');
+const { profileController, authController } = require('../controllers');
 
 const router = express.Router();
 
-router.post('/save', profileController.save);
+router.post('/save', authController.isAuth, profileController.save);
 
 module.exports = router;
