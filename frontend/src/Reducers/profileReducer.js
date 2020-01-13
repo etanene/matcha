@@ -7,27 +7,46 @@ function addPhoto(state, photo) {
       ...state.photo,
       value: {
         ...state.photo.value,
-        [photo.id]: { ...photo },
+        [photo.id]: {
+          ...photo,
+          isChanged: true,
+        },
       },
     },
   };
 }
 
+function resetChangePhoto(state) {
+  const newValue = Object.keys(state.photo.value).reduce((result, id) => ({
+    ...result,
+    [id]: {
+      ...state.photo.value[id],
+      isChanged: false,
+    },
+  }), {});
+
+  return {
+    ...state,
+    photo: {
+      ...state.photo,
+      value: newValue,
+    },
+  };
+}
+
 function setError(state, errors) {
-  const fields = Object.keys(errors);
+  const newFields = Object.keys(errors).reduce((result, field) => ({
+    ...result,
+    [field]: {
+      ...state[field],
+      error: errors[field],
+    },
+  }), {});
 
-  const newState = fields.reduce((result, field) => {
-    const current = {
-      ...state,
-      [field]: {
-        ...state[field],
-        error: errors[field],
-      },
-    };
-    return Object.assign(result, current);
-  }, {});
-
-  return newState;
+  return {
+    ...state,
+    ...newFields,
+  };
 }
 
 const initialState = {
@@ -46,6 +65,8 @@ const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case profileAction.PROFILE_PHOTO_ADD:
       return addPhoto(state, action.payload);
+    case profileAction.PROFILE_RESET_CHANGE_PHOTO:
+      return resetChangePhoto(state);
     case profileAction.PROFILE_SET_ERROR:
       return setError(state, action.payload);
     case profileAction.PROFILE_SET_LOADING:

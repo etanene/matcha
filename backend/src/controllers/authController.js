@@ -2,6 +2,7 @@ const {
   validateService,
   authService,
 } = require('../services');
+const { InternalError } = require('../errors');
 
 const signupUser = async (req, res) => {
   try {
@@ -9,6 +10,9 @@ const signupUser = async (req, res) => {
     const { username, email } = await authService.signup(req.body);
     res.send({ username, email });
   } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    }
     res.status(e.status || 500).send(e);
   }
 };
@@ -19,6 +23,9 @@ const loginUser = async (req, res) => {
     req.session.logged = req.body.username;
     res.send({ token: req.session.id });
   } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    }
     res.status(e.status || 500).send(e);
   }
 };
@@ -28,6 +35,9 @@ const logoutUser = (req, res) => {
     req.session.destroy();
     res.send({ message: 'user logout!' });
   } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    }
     res.status(e.status || 500).send(e);
   }
 };
@@ -40,6 +50,9 @@ const verifyUser = async (req, res) => {
       res.redirect('/login');
     }
   } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    }
     res.status(e.status || 500).send(e);
   }
 };
@@ -51,7 +64,10 @@ const isAuth = (req, res, next) => {
     authService.isAuth(authorization, req.session.id);
     next();
   } catch (e) {
-    res.status(e.status || 401).send(e);
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    }
+    res.status(e.status || 500).send(e);
   }
 };
 

@@ -13,21 +13,22 @@ const savePhoto = async (photo, user) => {
 
 const savePhotos = async (photos, user) => {
   try {
-    try {
-      await fs.access('/app/public/photo');
-    } catch (e) {
-      await fs.mkdir('/app/public/photo', { recursive: true });
-    }
-
-    const promises = Object.values(photos).map(async (photo) => {
-      await savePhoto(photo, user);
-    });
-    await Promise.all(promises);
+    await fs.access('/app/public/photo');
   } catch (e) {
-    console.log(e);
-    throw e;
+    await fs.mkdir('/app/public/photo', { recursive: true });
   }
+
+  const promises = Object.values(photos).map(async (photo) => {
+    if (photo.isChanged) {
+      await savePhoto(photo, user);
+    }
+  });
+  await Promise.all(promises);
 };
+
+// const getPhotos = async (login) => {
+//   const photos = await photoModel.getPhotos();
+// };
 
 module.exports = {
   savePhotos,

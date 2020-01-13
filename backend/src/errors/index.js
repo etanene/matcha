@@ -10,21 +10,21 @@ function ValidateException(message) {
   this.status = 400;
 }
 
-function DbException(message) {
-  this.message = message;
-  this.name = 'DbInternal';
-  this.status = 500;
-}
-
 function UserException(message) {
   this.message = message;
   this.name = 'User';
   this.status = 400;
 }
 
+function InternalError(message) {
+  this.message = message || 'Internal Error!';
+  this.name = 'Internal';
+  this.status = 500;
+}
+
 module.exports = {
   AuthException,
   ValidateException,
-  DbException,
   UserException,
+  InternalError,
 };

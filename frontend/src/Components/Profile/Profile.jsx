@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +28,14 @@ const profileSchema = {
 function Profile(props) {
   const { cls } = props;
   const profile = useSelector((state) => state.profile);
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('render');
+    // console.log('user', user);
+    dispatch(profileAction.getProfile(user.username));
+  }, [dispatch, user]);
 
   function handleSubmit(event) {
     event.preventDefault();

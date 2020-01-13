@@ -1,48 +1,35 @@
 const { db, dbUtils } = require('../db');
-const { DbException } = require('../errors');
 
 const addUser = async (user) => {
-  try {
-    await db.query(`
-      INSERT INTO
-        users (email, login, first_name, last_name, passwd, unique_link)
-      VALUES
-        ($1, $2, $3, $4, $5, $6)
-    `, [user.email, user.username, user.first_name, user.last_name, user.password, user.unique]);
-  } catch (e) {
-    throw new DbException('Cant insert user data!');
-  }
+  await db.query(`
+    INSERT INTO
+      users (email, login, first_name, last_name, passwd, unique_link)
+    VALUES
+      ($1, $2, $3, $4, $5, $6)
+  `, [user.email, user.username, user.first_name, user.last_name, user.password, user.unique]);
 };
 
 const getUser = async (data) => {
-  try {
-    const res = await db.query(`
-      SELECT
-        *
-      FROM
-        users
-      ${dbUtils.getCondition(data)}
-    `, Object.values(data));
+  const res = await db.query(`
+    SELECT
+      *
+    FROM
+      users
+    ${dbUtils.getCondition(data)}
+  `, Object.values(data));
 
-    return (res.rows);
-  } catch (e) {
-    throw new DbException('Cant select user data');
-  }
+  return (res.rows);
 };
 
 const updateUser = async (data, condition) => {
-  try {
-    const res = await db.query(`
-      UPDATE
-        users
-      ${dbUtils.getUpdateValues(data)}
-      ${dbUtils.getCondition(condition, Object.keys(data).length)}
-    `, [...Object.values(data), ...Object.values(condition)]);
+  const res = await db.query(`
+    UPDATE
+      users
+    ${dbUtils.getUpdateValues(data)}
+    ${dbUtils.getCondition(condition, Object.keys(data).length)}
+  `, [...Object.values(data), ...Object.values(condition)]);
 
-    return (res.rows);
-  } catch (e) {
-    throw new DbException('Cant update user data');
-  }
+  return (res.rows);
 };
 
 module.exports = {

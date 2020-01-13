@@ -8,66 +8,51 @@ const mailService = require('./mailService');
 const { HOST_URL } = require('../config');
 
 const signup = async (data) => {
-  try {
-    const user = data;
+  const user = data;
 
-    const checkLogin = await userModel.getUser({ login: user.username });
-    if (checkLogin.length) {
-      throw new AuthException('Login already exists!');
-    }
-    const checkEmail = await userModel.getUser({ email: user.email });
-    if (checkEmail.length) {
-      throw new AuthException('Email already exists!');
-    }
-    user.password = await bcrypt.hash(user.password, 1);
-    user.unique = uuid();
-    await userModel.addUser(user);
-
-    const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
-    await mailService.sendMail(
-      user.email,
-      'Matcha email verification',
-      `Please, verify your matcha account ${link}`,
-    );
-    return (user);
-  } catch (e) {
-    console.log(e.message);
-    throw e;
+  const checkLogin = await userModel.getUser({ login: user.username });
+  if (checkLogin.length) {
+    throw new AuthException('Login already exists!');
   }
+  const checkEmail = await userModel.getUser({ email: user.email });
+  if (checkEmail.length) {
+    throw new AuthException('Email already exists!');
+  }
+  user.password = await bcrypt.hash(user.password, 1);
+  user.unique = uuid();
+  await userModel.addUser(user);
+
+  const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
+  await mailService.sendMail(
+    user.email,
+    'Matcha email verification',
+    `Please, verify your matcha account ${link}`,
+  );
+  return (user);
 };
 
 const login = async (data) => {
-  try {
-    const loginData = validateService.getLoginData(data.username);
-    const users = await userModel.getUser(loginData);
-    if (!users.length) {
-      throw new AuthException('Invalid username or password!');
-    }
-    const user = users[0];
+  const loginData = validateService.getLoginData(data.username);
+  const users = await userModel.getUser(loginData);
+  if (!users.length) {
+    throw new AuthException('Invalid username or password!');
+  }
+  const user = users[0];
 
-    const validPasswd = await bcrypt.compare(data.password, user.passwd);
-    if (!validPasswd) {
-      throw new AuthException('Invalid username or password!');
-    }
-    if (!user.validate) {
-      throw new AuthException('Please, validate your account on email');
-    }
-  } catch (e) {
-    console.log(e);
-    throw e;
+  const validPasswd = await bcrypt.compare(data.password, user.passwd);
+  if (!validPasswd) {
+    throw new AuthException('Invalid username or password!');
+  }
+  if (!user.validate) {
+    throw new AuthException('Please, validate your account on email');
   }
 };
 
 const verify = async (ulink) => {
-  try {
-    const res = await userModel.updateUser({ validate: 'TRUE' }, { unique_link: ulink });
+  const res = await userModel.updateUser({ validate: 'TRUE' }, { unique_link: ulink });
 
-    if (!res) {
-      throw new AuthException('Can not find user!');
-    }
-  } catch (e) {
-    console.log(e);
-    throw e;
+  if (!res) {
+    throw new AuthException('Can not find user!');
   }
 };
 
@@ -88,14 +73,9 @@ const getToken = (data) => {
 };
 
 const isAuth = (data, session) => {
-  try {
-    const token = getToken(data);
-    if (token !== session) {
-      throw new AuthException('Unauthorized', 401);
-    }
-  } catch (e) {
-    console.log(e);
-    throw e;
+  const token = getToken(data);
+  if (token !== session) {
+    throw new AuthException('Unauthorized', 401);
   }
 };
 

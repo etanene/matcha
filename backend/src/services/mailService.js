@@ -9,19 +9,14 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendMail = async (userEmail, subject, text) => {
-  try {
-    const message = {
-      from: 'matcha21@yandex.ru',
-      to: userEmail,
-      subject,
-      html: `<p>${text}</p>`,
-    };
+  const message = {
+    from: 'matcha21@yandex.ru',
+    to: userEmail,
+    subject,
+    html: `<p>${text}</p>`,
+  };
 
-    await transporter.sendMail(message);
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
+  await transporter.sendMail(message);
 };
 
 module.exports = {

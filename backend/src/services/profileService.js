@@ -7,6 +7,12 @@ const saveProfile = async (profile, user) => {
   console.log('done');
 };
 
+const getProfile = async (params) => {
+  console.log('getProfileService', params);
+  // const photos = await photoService;
+};
+
 module.exports = {
   saveProfile,
+  getProfile,
 };
