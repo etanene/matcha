@@ -4,7 +4,6 @@ const saveProfile = async (profile, user) => {
   const { photo } = profile;
 
   await photoService.savePhotos(photo, user);
-  console.log('done');
 };
 
 const getProfile = async (params) => {
