@@ -26,10 +26,13 @@ const savePhotos = async (photos, user) => {
   await Promise.all(promises);
 };
 
-// const getPhotos = async (login) => {
-//   const photos = await photoModel.getPhotos();
-// };
+const getPhotos = async (login) => {
+  const photos = await photoModel.getPhotos(login);
+  console.log('photos', photos);
+  return (photos);
+};
 
 module.exports = {
   savePhotos,
+  getPhotos,
 };

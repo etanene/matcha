@@ -17,6 +17,7 @@ function PhotoInput(props) {
     state.profile.photo.value && state.profile.photo.value[id]
   ));
   const [file, setFile] = useState(photo && photo.src);
+  console.log('fileinput', file);
   const dispatch = useDispatch();
 
   function handleChange(event) {

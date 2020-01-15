@@ -8,8 +8,9 @@ const get = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -21,8 +22,9 @@ const resetpw = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -35,8 +37,9 @@ const changepw = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 

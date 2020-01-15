@@ -12,8 +12,9 @@ const signupUser = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -25,8 +26,9 @@ const loginUser = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -37,8 +39,9 @@ const logoutUser = (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -52,8 +55,9 @@ const verifyUser = async (req, res) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 
@@ -66,8 +70,9 @@ const isAuth = (req, res, next) => {
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
     }
-    res.status(e.status || 500).send(e);
   }
 };
 

@@ -1,6 +1,6 @@
 const { db } = require('../db');
 
-const savePhoto = async (photo, name, user) => {
+const savePhoto = async (photo, name, username) => {
   await db.query(`
     UPDATE
       photos
@@ -16,7 +16,7 @@ const savePhoto = async (photo, name, user) => {
           users
         WHERE
           login = $1
-      )`, [user, name, photo.id]);
+      )`, [username, name, photo.id]);
   await db.query(`
     INSERT INTO
       photos (user_id, name, order_id)
@@ -44,12 +44,25 @@ const savePhoto = async (photo, name, user) => {
             login = $1
         )
       );
-  `, [user, name, photo.id]);
+  `, [username, name, photo.id]);
 };
 
-// const getPhotos = async (username) => {
-// }
+const getPhotos = async (username) => {
+  const res = await db.query(`
+    SELECT
+      ph.name, ph.order_id
+    FROM
+      photos ph
+    JOIN
+      users u ON u.user_id = ph.user_id
+    WHERE
+      u.login = $1
+  `, [username]);
+
+  return (res.rows);
+};
 
 module.exports = {
   savePhoto,
+  getPhotos,
 };

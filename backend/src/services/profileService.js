@@ -8,7 +8,10 @@ const saveProfile = async (profile, user) => {
 
 const getProfile = async (params) => {
   console.log('getProfileService', params);
-  // const photos = await photoService;
+  const { login } = params;
+  const photos = await photoService.getPhotos(login);
+
+  return { photos };
 };
 
 module.exports = {

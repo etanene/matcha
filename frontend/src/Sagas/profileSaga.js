@@ -35,6 +35,7 @@ function* getProfile(action) {
     const { payload } = action;
     const profile = yield call(apiService.getJson, `/api/profile/get?login=${payload}`);
     console.log('getProfile', profile);
+    yield put(profileAction.saveProfile(profile));
   } catch (e) {
     // will notify
     console.log(e);

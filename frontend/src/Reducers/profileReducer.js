@@ -34,6 +34,24 @@ function resetChangePhoto(state) {
   };
 }
 
+function saveProfile(state, profile) {
+  const { photos } = profile;
+  const newPhotos = photos.reduce((result, photo) => ({
+    ...result,
+    [photo.order_id]: {
+      id: photo.order_id,
+      src: `api/public/photo/${photo.name}`,
+    },
+  }), {});
+  return {
+    ...state,
+    photo: {
+      ...state.photo,
+      value: newPhotos,
+    },
+  };
+}
+
 function setError(state, errors) {
   const newFields = Object.keys(errors).reduce((result, field) => ({
     ...result,
@@ -67,6 +85,8 @@ const profileReducer = (state = initialState, action) => {
       return addPhoto(state, action.payload);
     case profileAction.PROFILE_RESET_CHANGE_PHOTO:
       return resetChangePhoto(state);
+    case profileAction.PROFILE_SAVE:
+      return saveProfile(state, action.payload);
     case profileAction.PROFILE_SET_ERROR:
       return setError(state, action.payload);
     case profileAction.PROFILE_SET_LOADING:

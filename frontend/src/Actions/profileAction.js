@@ -28,6 +28,11 @@ function getProfile(login) {
   return { type: PROFILE_GET, payload: login };
 }
 
+const PROFILE_SAVE = 'PROFILE_SAVE';
+function saveProfile(profile) {
+  return { type: PROFILE_SAVE, payload: profile };
+}
+
 export default {
   PROFILE_PHOTO_ADD,
   addPhoto,
@@ -41,4 +46,6 @@ export default {
   resetChangePhoto,
   PROFILE_GET,
   getProfile,
+  PROFILE_SAVE,
+  saveProfile,
 };
