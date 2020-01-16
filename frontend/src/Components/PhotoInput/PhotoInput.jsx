@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { profileAction } from '../../Actions';
 
@@ -12,12 +12,18 @@ import './PhotoInput.css';
 const photoInputCss = cn('photo-input');
 
 function PhotoInput(props) {
-  const { id, cls, error } = props;
-  const photo = useSelector((state) => (
-    state.profile.photo.value && state.profile.photo.value[id]
-  ));
+  const {
+    id,
+    photo,
+    cls,
+    error,
+  } = props;
+
   const [file, setFile] = useState(photo && photo.src);
-  console.log('fileinput', file);
+  useEffect(() => {
+    setFile(photo.src);
+  }, [photo.src]);
+
   const dispatch = useDispatch();
 
   function handleChange(event) {
@@ -55,12 +61,17 @@ function PhotoInput(props) {
 }
 
 PhotoInput.propTypes = {
+  photo: PropTypes.shape({
+    id: PropTypes.number,
+    src: PropTypes.string,
+  }),
   cls: PropTypes.string,
   id: PropTypes.number.isRequired,
   error: PropTypes.bool,
 };
 
 PhotoInput.defaultProps = {
+  photo: {},
   cls: null,
   error: false,
 };

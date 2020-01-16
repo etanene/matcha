@@ -10,3 +10,7 @@ export const REGEX = {
   USERNAME: /^[A-Za-z\d]{4,12}$/,
   EMAIL: /^\S+@\S+\.\S+$/,
 };
+
+export const VALUES = {
+  PHOTO_COUNT: 3,
+};

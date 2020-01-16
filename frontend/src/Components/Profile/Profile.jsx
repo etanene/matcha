@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { profileAction } from '../../Actions';
 
+import { VALUES } from '../../Constants';
+
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
@@ -17,7 +19,7 @@ const profileSchema = {
     validate: (photo) => {
       let error;
 
-      if (Object.values(photo.value).length !== 3) {
+      if (Object.values(photo.value).length !== VALUES.PHOTO_COUNT) {
         error = 'Requires 3 photos';
       }
       return { value: photo.value, error };
@@ -67,7 +69,7 @@ function Profile(props) {
 
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
-      <PhotoProfile error={profile.photo.error} />
+      <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
     </form>
