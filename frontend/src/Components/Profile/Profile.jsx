@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import { VALUES } from '../../Constants';
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
+import Textarea from '../Textarea/Textarea';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -38,6 +39,14 @@ function Profile(props) {
     // console.log('user', user);
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
+
+  const [about, setAbout] = useState('');
+  function handleChangeAbout(event) {
+    event.persist();
+
+    const { value } = event.target;
+    setAbout(value);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -70,6 +79,7 @@ function Profile(props) {
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
+      <Textarea value={about} onChange={handleChangeAbout} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
     </form>
