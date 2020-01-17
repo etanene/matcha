@@ -1,0 +1,30 @@
+@import url('../../App.css');
+
+.message-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
+.message-box-box-close {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  opacity: .3;
+  cursor: pointer;
+  border: none;
+}
+.message-box-box-body {
+  padding: 2rem;
+  width: 400px;
+  border-radius: 5px;
+  background: #fff;
+  height: 200px;
+}
