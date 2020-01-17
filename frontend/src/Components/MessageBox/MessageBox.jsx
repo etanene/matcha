@@ -6,17 +6,17 @@ import './MessageBox.css';
 const messageBoxCss = cn('message-box');
 
 const MessageBox = (props) => {
-  const { children } = props;
-  const [isMessageBoxOpen, setIsMessageBoxOpen] = useState(false);
+  const {isOpen, message} = props;
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    isMessageBoxOpen && (
+    isOpen && (
       <div className={messageBoxCss()}>
-      <button onClick={() => setIsMessageBoxOpen(false)} className={messageBoxCss('box-close')}>
+      <button onClick={() => setIsOpen(false)} className={messageBoxCss('box-close')}>
         X
       </button>
       <div className={messageBoxCss('box-body')}>
-        {children}
+        {message}
       </div>
     </div>
     )
