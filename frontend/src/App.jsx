@@ -12,15 +12,19 @@ import PageContent from './Components/PageContent/PageContent';
 import RegForm from './Components/RegForm/RegForm';
 import LoginForm from './Components/LoginForm/LoginForm';
 import ResetpwForm from './Components/ResetpwForm/ResetpwForm';
+<<<<<<< HEAD
 import ChangepwForm from './Components/ChangepwForm/ChangepwForm';
 import Main from './Components/Main/Main';
+=======
+import MessageBox from './Components/MessageBox/MessageBox';
+>>>>>>> message_box_redux_end
 import './App.css';
 
 const pageContentCss = cn('page-content');
 
 function App() {
   const user = useSelector((state) => state.user);
-
+  const messagebox = useSelector((state) => state.messageBox);
   return (
     <div>
       <Header />
@@ -43,6 +47,11 @@ function App() {
           </Route>
         </Switch>
       </PageContent>
+      <MessageBox
+        isOpen={messagebox.isOpen}
+        message={messagebox.message}
+        error={messagebox.error}
+      />
     </div>
   );
 }
