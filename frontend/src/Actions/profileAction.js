@@ -38,6 +38,11 @@ function setAbout(value) {
   return { type: PROFILE_SET_ABOUT, payload: value };
 }
 
+const PROFILE_SET_DATA = 'PROFILE_SET_DATA';
+function setData(field, value) {
+  return { type: PROFILE_SET_DATA, payload: { field, value } };
+}
+
 export default {
   PROFILE_PHOTO_ADD,
   addPhoto,
@@ -55,4 +60,6 @@ export default {
   saveProfile,
   PROFILE_SET_ABOUT,
   setAbout,
+  PROFILE_SET_DATA,
+  setData,
 };

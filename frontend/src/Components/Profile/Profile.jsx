@@ -11,6 +11,7 @@ import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
 import Textarea from '../Textarea/Textarea';
+import RadioButton from '../RadioButton/RadioButton';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -60,6 +61,13 @@ function Profile(props) {
     dispatch(profileAction.setAbout(value));
   }
 
+  function handleChangeSex(event) {
+    event.persist();
+
+    const { value } = event.target;
+    dispatch(profileAction.setData('sex', value));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     let isValid = true;
@@ -91,6 +99,8 @@ function Profile(props) {
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
+      <RadioButton value="male" label="Male" onChange={handleChangeSex} />
+      <RadioButton value="female" label="Female" onChange={handleChangeSex} />
       <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChangeAbout} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />

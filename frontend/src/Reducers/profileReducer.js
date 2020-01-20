@@ -51,7 +51,7 @@ function saveProfile(state, profile) {
       value: newPhotos,
     },
     about: {
-      ...about,
+      ...state.about,
       value: about,
     },
   };
@@ -89,28 +89,37 @@ const initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
+  const { type, payload } = action;
   console.log('state', state);
-  switch (action.type) {
+  switch (type) {
     case profileAction.PROFILE_PHOTO_ADD:
-      return addPhoto(state, action.payload);
+      return addPhoto(state, payload);
     case profileAction.PROFILE_RESET_CHANGE_PHOTO:
       return resetChangePhoto(state);
     case profileAction.PROFILE_SAVE:
-      return saveProfile(state, action.payload);
+      return saveProfile(state, payload);
     case profileAction.PROFILE_SET_ABOUT:
       return {
         ...state,
         about: {
           error: '',
-          value: action.payload,
+          value: payload,
+        },
+      };
+    case profileAction.PROFILE_SET_DATA:
+      return {
+        ...state,
+        [payload.type]: {
+          error: '',
+          value: payload.value,
         },
       };
     case profileAction.PROFILE_SET_ERROR:
-      return setError(state, action.payload);
+      return setError(state, payload);
     case profileAction.PROFILE_SET_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        isLoading: payload,
       };
     default:
       return state;
