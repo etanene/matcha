@@ -21,8 +21,9 @@ function Textarea(props) {
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        className={textareaCss('area', { error: !!error })}
       />
-      { error && <span>{error}</span> }
+      { error && <span className={textareaCss('message')}>{error}</span> }
     </div>
   );
 }

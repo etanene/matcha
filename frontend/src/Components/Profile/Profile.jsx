@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,6 +26,20 @@ const profileSchema = {
       return { value: photo.value, error };
     },
   },
+  about: {
+    validate: (about) => {
+      let error;
+
+      console.log('abotut', about.value);
+      if (!about.value) {
+        error = 'Required field';
+      } else if (about.value.length > 120) {
+        error = 'Length must be lower 120';
+      }
+
+      return { value: about.value, error };
+    },
+  },
 };
 
 function Profile(props) {
@@ -36,16 +50,14 @@ function Profile(props) {
 
   useEffect(() => {
     console.log('render');
-    // console.log('user', user);
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
 
-  const [about, setAbout] = useState('');
   function handleChangeAbout(event) {
     event.persist();
 
     const { value } = event.target;
-    setAbout(value);
+    dispatch(profileAction.setAbout(value));
   }
 
   function handleSubmit(event) {
@@ -79,7 +91,7 @@ function Profile(props) {
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
-      <Textarea value={about} onChange={handleChangeAbout} cls={profileCss('textarea')} />
+      <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChangeAbout} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
     </form>
