@@ -11,6 +11,7 @@ import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
 import Textarea from '../Textarea/Textarea';
+import RadioGroup from '../RadioGroup/RadioGroup';
 import RadioButton from '../RadioButton/RadioButton';
 import './Profile.css';
 
@@ -99,8 +100,15 @@ function Profile(props) {
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
-      <RadioButton value="male" label="Male" onChange={handleChangeSex} />
-      <RadioButton value="female" label="Female" onChange={handleChangeSex} />
+      <RadioGroup
+        name="sex"
+        value={profile.sex.value}
+        error={profile.sex.error}
+        onChange={handleChangeSex}
+      >
+        <RadioButton value="male" label="Male" />
+        <RadioButton value="female" label="Female" />
+      </RadioGroup>
       <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChangeAbout} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
