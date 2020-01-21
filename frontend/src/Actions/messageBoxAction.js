@@ -3,7 +3,7 @@ function close() {
   return { type: MESSAGEBOX_CLOSE };
 }
 
-const MESSAGEBOX_OPEN = 'MESSAGEBOX_OPEN';
+const MESSAGEBOX_OPEN = 'MESSAGEBOX_OPENs';
 function open(message, error) {
   return { type: MESSAGEBOX_OPEN, payload: { message, error } };
 }
