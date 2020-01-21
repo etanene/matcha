@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
 import { REGEX } from '../../Constants';
+import { messageBoxAction } from '../../Actions';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -46,13 +47,14 @@ const formSchema = {
   },
 };
 
-const submitForm = async (data) => {
-  await apiService.postJson('/api/auth/signup', data);
-  console.log('Submit regForm');
-};
-
 function RegForm(props) {
   const { cls } = props;
+  const dispatch = useDispatch();
+
+  const submitForm = async (data) => {
+    const res = await apiService.postJson('/api/auth/signup', data);
+    dispatch(messageBoxAction.open(res.message));
+  };
   const {
     state,
     handleChange,

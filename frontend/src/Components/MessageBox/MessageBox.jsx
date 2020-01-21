@@ -17,7 +17,7 @@ const MessageBox = (props) => {
     <div className={messageBoxCss()}>
       <div className={messageBoxCss('body', { error })}>
         <button onClick={() => dispatch(messageBoxAction.close())} className={messageBoxCss('close')}>
-        X
+        x
         </button>
         {message}
       </div>
