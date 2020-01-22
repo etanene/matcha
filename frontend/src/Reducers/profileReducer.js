@@ -109,7 +109,7 @@ const profileReducer = (state = initialState, action) => {
     case profileAction.PROFILE_SET_DATA:
       return {
         ...state,
-        [payload.type]: {
+        [payload.field]: {
           error: '',
           value: payload.value,
         },

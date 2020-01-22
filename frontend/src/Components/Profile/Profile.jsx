@@ -32,7 +32,6 @@ const profileSchema = {
     validate: (about) => {
       let error;
 
-      console.log('abotut', about.value);
       if (!about.value) {
         error = 'Required field';
       } else if (about.value.length > 120) {
@@ -64,6 +63,7 @@ function Profile(props) {
 
   function handleChangeSex(event) {
     event.persist();
+    console.log('event', event);
 
     const { value } = event.target;
     dispatch(profileAction.setData('sex', value));
@@ -97,10 +97,12 @@ function Profile(props) {
     }
   }
 
+  console.log('profile', profile);
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
       <RadioGroup
+        title="SEX"
         name="sex"
         value={profile.sex.value}
         error={profile.sex.error}
