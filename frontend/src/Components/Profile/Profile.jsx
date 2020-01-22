@@ -28,6 +28,17 @@ const profileSchema = {
       return { value: photo.value, error };
     },
   },
+  sex: {
+    validate: (sex) => {
+      let error;
+
+      if (!sex.value) {
+        error = 'Required field';
+      }
+
+      return { value: sex.value, error };
+    },
+  },
   about: {
     validate: (about) => {
       let error;

@@ -35,7 +35,7 @@ function resetChangePhoto(state) {
 }
 
 function saveProfile(state, profile) {
-  const { photos, about } = profile;
+  const { photos, sex, about } = profile;
 
   const newPhotos = photos.reduce((result, photo) => ({
     ...result,
@@ -49,6 +49,10 @@ function saveProfile(state, profile) {
     photo: {
       ...state.photo,
       value: newPhotos,
+    },
+    sex: {
+      ...state.sex,
+      value: sex,
     },
     about: {
       ...state.about,

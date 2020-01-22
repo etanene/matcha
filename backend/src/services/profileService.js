@@ -2,10 +2,10 @@ const photoService = require('./photoService');
 const { userModel } = require('../models');
 
 const saveProfile = async (profile, user) => {
-  const { photo, about } = profile;
+  const { photo, sex, about } = profile;
 
   await photoService.savePhotos(photo, user);
-  await userModel.updateUser({ info: about }, { login: user });
+  await userModel.updateUser({ info: about, sex }, { login: user });
 };
 
 const getProfile = async (params) => {
@@ -16,7 +16,7 @@ const getProfile = async (params) => {
   console.log('user', user[0]);
   console.log('info', user[0].info);
 
-  return { photos, about: user[0].info };
+  return { photos, sex: user[0].sex, about: user[0].info };
 };
 
 module.exports = {
