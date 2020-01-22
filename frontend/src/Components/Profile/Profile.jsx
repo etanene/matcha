@@ -39,6 +39,17 @@ const profileSchema = {
       return { value: sex.value, error };
     },
   },
+  orientation: {
+    validate: (orientation) => {
+      let error;
+
+      if (!orientation.value) {
+        error = 'Required field';
+      }
+
+      return { value: orientation.value, error };
+    },
+  },
   about: {
     validate: (about) => {
       let error;
@@ -65,19 +76,13 @@ function Profile(props) {
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
 
-  function handleChangeAbout(event) {
-    event.persist();
+  function handleChange(field) {
+    return function (event) {
+      event.persist();
 
-    const { value } = event.target;
-    dispatch(profileAction.setAbout(value));
-  }
-
-  function handleChangeSex(event) {
-    event.persist();
-    console.log('event', event);
-
-    const { value } = event.target;
-    dispatch(profileAction.setData('sex', value));
+      const { value } = event.target;
+      dispatch(profileAction.setData(field, value));
+    };
   }
 
   function handleSubmit(event) {
@@ -95,7 +100,7 @@ function Profile(props) {
         isValid = false;
         errors[field] = error;
       }
-      console.log(value);
+      console.log('value', value);
       return Object.assign(result, { [field]: value });
     }, {});
 
@@ -117,12 +122,23 @@ function Profile(props) {
         name="sex"
         value={profile.sex.value}
         error={profile.sex.error}
-        onChange={handleChangeSex}
+        onChange={handleChange('sex')}
       >
         <RadioButton value="male" label="Male" />
         <RadioButton value="female" label="Female" />
       </RadioGroup>
-      <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChangeAbout} cls={profileCss('textarea')} />
+      <RadioGroup
+        title="ORIENTATION"
+        name="orientation"
+        value={profile.orientation.value}
+        error={profile.orientation.error}
+        onChange={handleChange('orientation')}
+      >
+        <RadioButton value="homo" label="Homo" />
+        <RadioButton value="hetero" label="Hetero" />
+        <RadioButton value="bi" label="Bi" />
+      </RadioGroup>
+      <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChange('about')} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
     </form>

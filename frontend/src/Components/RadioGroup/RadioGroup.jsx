@@ -51,7 +51,7 @@ RadioGroup.defaultProps = {
   value: '',
   name: '',
   onChange: null,
-  cls: PropTypes.string,
+  cls: '',
 };
 
 export default RadioGroup;

@@ -2,10 +2,23 @@ const photoService = require('./photoService');
 const { userModel } = require('../models');
 
 const saveProfile = async (profile, user) => {
-  const { photo, sex, about } = profile;
+  const {
+    photo,
+    sex,
+    orientation,
+    about,
+  } = profile;
 
   await photoService.savePhotos(photo, user);
-  await userModel.updateUser({ info: about, sex }, { login: user });
+  await userModel.updateUser(
+    {
+      info: about,
+      sex,
+      orientation,
+    }, {
+      login: user,
+    },
+  );
 };
 
 const getProfile = async (params) => {
@@ -15,8 +28,17 @@ const getProfile = async (params) => {
   const user = await userModel.getUser({ login });
   console.log('user', user[0]);
   console.log('info', user[0].info);
-
-  return { photos, sex: user[0].sex, about: user[0].info };
+  const {
+    sex,
+    info,
+    orientation,
+  } = user[0];
+  return {
+    photos,
+    sex,
+    about: info,
+    orientation,
+  };
 };
 
 module.exports = {
