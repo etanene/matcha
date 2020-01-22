@@ -6,8 +6,9 @@
   border-radius: 50%;
   background: rgb(222, 222, 222);
   position: absolute;
-  left: calc(100% - 25px);
   top: 5px;
+  right: 5px;
+  left: calc(100% - 25px);
   cursor: pointer;
   border: none;
   outline: none;

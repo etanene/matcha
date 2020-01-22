@@ -12,10 +12,9 @@ function CloseButton(props) {
   return (
     <button
       onClick={onClick}
+      aria-label="x"
       className={closebuttonCss()}
-    >
-      x
-    </button>
+    />
   );
 }
 
