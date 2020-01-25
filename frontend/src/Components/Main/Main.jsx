@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 import { ICONS } from '../../Constants';
 
 import NavBar from '../NavBar/NavBar';
-import Icon from '../Icon/Icon';
+import Icon from '../common/Icon/Icon';
 import Profile from '../Profile/Profile';
 import Match from '../Match/Match';
 import Chat from '../Chat/Chat';

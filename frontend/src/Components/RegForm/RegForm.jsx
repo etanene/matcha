@@ -8,8 +8,8 @@ import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
 import { REGEX } from '../../Constants';
 
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../common/Input/Input';
+import Button from '../common/Button/Button';
 import './RegForm.css';
 
 const regFormCss = cn('reg-form');

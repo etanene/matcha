@@ -8,11 +8,11 @@ import { profileAction } from '../../Actions';
 import { VALUES } from '../../Constants';
 
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
-import Button from '../Button/Button';
+import Button from '../common/Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
-import Textarea from '../Textarea/Textarea';
+import Textarea from '../common/Textarea/Textarea';
 import RadioGroup from '../RadioGroup/RadioGroup';
-import RadioButton from '../RadioButton/RadioButton';
+import RadioButton from '../common/RadioButton/RadioButton';
 import './Profile.css';
 
 const profileCss = cn('profile');
