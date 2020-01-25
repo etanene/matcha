@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { authAction } from '../../Actions';
 
-import Button from '../Button/Button';
+import Button from '../common/Button/Button';
 import Logo from '../Logo/Logo';
 import NavBar from '../NavBar/NavBar';
 import './Header.css';

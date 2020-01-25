@@ -13,6 +13,7 @@ function* submitProfile(action) {
   yield put(profileAction.setLoading(true));
   try {
     const { payload } = action;
+    console.log('payload', payload);
     yield call(apiService.postJson, '/api/profile/save', payload);
     yield put(profileAction.resetChangePhoto());
   } catch (e) {

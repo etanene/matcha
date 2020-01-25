@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,9 +8,11 @@ import { profileAction } from '../../Actions';
 import { VALUES } from '../../Constants';
 
 import PhotoProfile from '../PhotoProfile/PhotoProfile';
-import Button from '../Button/Button';
+import Button from '../common/Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
-import Textarea from '../Textarea/Textarea';
+import Textarea from '../common/Textarea/Textarea';
+import RadioGroup from '../RadioGroup/RadioGroup';
+import RadioButton from '../common/RadioButton/RadioButton';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -26,6 +28,41 @@ const profileSchema = {
       return { value: photo.value, error };
     },
   },
+  sex: {
+    validate: (sex) => {
+      let error;
+
+      if (!sex.value) {
+        error = 'Required field';
+      }
+
+      return { value: sex.value, error };
+    },
+  },
+  orientation: {
+    validate: (orientation) => {
+      let error;
+
+      if (!orientation.value) {
+        error = 'Required field';
+      }
+
+      return { value: orientation.value, error };
+    },
+  },
+  about: {
+    validate: (about) => {
+      let error;
+
+      if (!about.value) {
+        error = 'Required field';
+      } else if (about.value.length > 120) {
+        error = 'Length must be lower 120';
+      }
+
+      return { value: about.value, error };
+    },
+  },
 };
 
 function Profile(props) {
@@ -36,16 +73,16 @@ function Profile(props) {
 
   useEffect(() => {
     console.log('render');
-    // console.log('user', user);
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
 
-  const [about, setAbout] = useState('');
-  function handleChangeAbout(event) {
-    event.persist();
+  function handleChange(field) {
+    return function (event) {
+      event.persist();
 
-    const { value } = event.target;
-    setAbout(value);
+      const { value } = event.target;
+      dispatch(profileAction.setData(field, value));
+    };
   }
 
   function handleSubmit(event) {
@@ -63,7 +100,7 @@ function Profile(props) {
         isValid = false;
         errors[field] = error;
       }
-      console.log(value);
+      console.log('value', value);
       return Object.assign(result, { [field]: value });
     }, {});
 
@@ -76,10 +113,32 @@ function Profile(props) {
     }
   }
 
+  console.log('profile', profile);
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
-      <Textarea value={about} onChange={handleChangeAbout} cls={profileCss('textarea')} />
+      <RadioGroup
+        title="SEX"
+        name="sex"
+        value={profile.sex.value}
+        error={profile.sex.error}
+        onChange={handleChange('sex')}
+      >
+        <RadioButton value="male" label="Male" />
+        <RadioButton value="female" label="Female" />
+      </RadioGroup>
+      <RadioGroup
+        title="ORIENTATION"
+        name="orientation"
+        value={profile.orientation.value}
+        error={profile.orientation.error}
+        onChange={handleChange('orientation')}
+      >
+        <RadioButton value="homo" label="Homo" />
+        <RadioButton value="hetero" label="Hetero" />
+        <RadioButton value="bi" label="Bi" />
+      </RadioGroup>
+      <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChange('about')} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
     </form>

@@ -35,7 +35,13 @@ function resetChangePhoto(state) {
 }
 
 function saveProfile(state, profile) {
-  const { photos } = profile;
+  const {
+    photos,
+    sex,
+    orientation,
+    about,
+  } = profile;
+
   const newPhotos = photos.reduce((result, photo) => ({
     ...result,
     [photo.order_id]: {
@@ -48,6 +54,18 @@ function saveProfile(state, profile) {
     photo: {
       ...state.photo,
       value: newPhotos,
+    },
+    sex: {
+      ...state.sex,
+      value: sex,
+    },
+    orientation: {
+      ...state.orientation,
+      value: orientation,
+    },
+    about: {
+      ...state.about,
+      value: about,
     },
   };
 }
@@ -76,23 +94,49 @@ const initialState = {
     value: 'male',
     error: '',
   },
+  orientation: {
+    value: 'hetero',
+    error: '',
+  },
+  about: {
+    value: '',
+    error: '',
+  },
   isLoading: false,
 };
 
 const profileReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case profileAction.PROFILE_PHOTO_ADD:
-      return addPhoto(state, action.payload);
+      return addPhoto(state, payload);
     case profileAction.PROFILE_RESET_CHANGE_PHOTO:
       return resetChangePhoto(state);
     case profileAction.PROFILE_SAVE:
-      return saveProfile(state, action.payload);
+      return saveProfile(state, payload);
+    case profileAction.PROFILE_SET_ABOUT:
+      return {
+        ...state,
+        about: {
+          error: '',
+          value: payload,
+        },
+      };
+    case profileAction.PROFILE_SET_DATA:
+      return {
+        ...state,
+        [payload.field]: {
+          error: '',
+          value: payload.value,
+        },
+      };
     case profileAction.PROFILE_SET_ERROR:
-      return setError(state, action.payload);
+      return setError(state, payload);
     case profileAction.PROFILE_SET_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        isLoading: payload,
       };
     default:
       return state;

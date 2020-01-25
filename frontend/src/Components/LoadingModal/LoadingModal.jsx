@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Modal from '../Modal/Modal';
-import Spinner from '../Spinner/Spinner';
+import Modal from '../common/Modal/Modal';
+import Spinner from '../common/Spinner/Spinner';
 
 function LoadingModal(props) {
   const { isLoading } = props;

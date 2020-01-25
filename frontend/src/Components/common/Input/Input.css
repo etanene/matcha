@@ -1,4 +1,4 @@
-@import url('../../App.css');
+@import url('../../../App.css');
 
 .input {
   display: flex;
@@ -34,5 +34,5 @@
 
 /* цвет инпута */
 .input-input-tag_error {
-  border: 1px solid var(--input-color-error);;
+  border: 1px solid var(--input-color-error);
 }

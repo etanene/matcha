@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { profileAction } from '../../Actions';
 
-import Icon from '../Icon/Icon';
+import Icon from '../common/Icon/Icon';
 import { ICONS } from '../../Constants';
 import './PhotoInput.css';
 

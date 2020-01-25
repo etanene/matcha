@@ -7,10 +7,10 @@
 
 /* элементы */
 .profile-submit {
-  width: 210px;
+  max-width: 210px;
   margin: 20px auto;
 }
 .profile-textarea {
-  width: 360px;
-  margin: 20px auto;
+  width: 60%;
+  margin: 5px auto 0;
 }
