@@ -11,8 +11,9 @@ import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../common/Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
 import Textarea from '../common/Textarea/Textarea';
-import RadioGroup from '../RadioGroup/RadioGroup';
+import RadioGroup from '../common/RadioGroup/RadioGroup';
 import RadioButton from '../common/RadioButton/RadioButton';
+import TagsInput from '../TagsInput/TagsInput';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -138,6 +139,7 @@ function Profile(props) {
         <RadioButton value="hetero" label="Hetero" />
         <RadioButton value="bi" label="Bi" />
       </RadioGroup>
+      <TagsInput cls />
       <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChange('about')} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />

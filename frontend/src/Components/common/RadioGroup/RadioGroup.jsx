@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 
-import RadioButton from '../common/RadioButton/RadioButton';
+import RadioButton from '../RadioButton/RadioButton';
 import './RadioGroup.css';
 
 const radioGroupCss = cn('radio-group');
