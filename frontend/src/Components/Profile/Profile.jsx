@@ -11,7 +11,7 @@ import PhotoProfile from '../PhotoProfile/PhotoProfile';
 import Button from '../common/Button/Button';
 import LoadingModal from '../LoadingModal/LoadingModal';
 import Textarea from '../common/Textarea/Textarea';
-import RadioGroup from '../RadioGroup/RadioGroup';
+import RadioGroup from '../common/RadioGroup/RadioGroup';
 import RadioButton from '../common/RadioButton/RadioButton';
 import './Profile.css';
 
@@ -72,7 +72,6 @@ function Profile(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('render');
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
 

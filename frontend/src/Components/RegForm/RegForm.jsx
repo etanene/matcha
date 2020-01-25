@@ -47,13 +47,19 @@ const formSchema = {
   },
 };
 
-function RegForm(props) {
+const RegForm = React.memo((props) => {
   const { cls } = props;
   const dispatch = useDispatch();
 
+  console.log('render');
+
   const submitForm = async (data) => {
-    const res = await apiService.postJson('/api/auth/signup', data);
-    dispatch(messageBoxAction.open(res.message));
+    try {
+      const res = await apiService.postJson('/api/auth/signup', data);
+      dispatch(messageBoxAction.open(res.message));
+    } catch (e) {
+      dispatch(messageBoxAction.open(e.message, true));
+    }
   };
   const {
     state,
@@ -160,7 +166,7 @@ function RegForm(props) {
       <Button type="submit" cls={regFormCss('submit')}>Sign up</Button>
     </form>
   );
-}
+});
 
 RegForm.propTypes = {
   cls: PropTypes.string,

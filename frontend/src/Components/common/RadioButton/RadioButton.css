@@ -1,0 +1,22 @@
+@import url('../../../App.css');
+
+.radio-button {
+  box-sizing: padding-box;
+}
+
+.radio-button-input {
+  display: none;
+}
+
+.radio-button-label {
+  padding: 15px;
+  width: 50px;
+  background-color: var(--radio-button-background);
+  border-radius: var(--radio-button-border-radius);
+  border: 1px solid var(--radio-button-border-color);
+  text-align: center;
+}
+
+.radio-button-label_checked {
+  background: var(--radio-button-label_checked-color);
+}

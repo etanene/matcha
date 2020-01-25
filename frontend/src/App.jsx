@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux/';
 import { cn } from '@bem-react/classname';
 
 import Header from './Components/Header/Header';
+import MessageBox from './Components/common/MessageBox/MessageBox';
 import PageContent from './Components/PageContent/PageContent';
 import RegForm from './Components/RegForm/RegForm';
 import LoginForm from './Components/LoginForm/LoginForm';
 import ResetpwForm from './Components/ResetpwForm/ResetpwForm';
 import ChangepwForm from './Components/ChangepwForm/ChangepwForm';
 import Main from './Components/Main/Main';
-import MessageBox from './Components/MessageBox/MessageBox';
+
 import './App.css';
 
 const pageContentCss = cn('page-content');

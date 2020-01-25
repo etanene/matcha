@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 
+import './RadioButton.css';
+
 const radioButtonCss = cn('radio-button');
 
 function RadioButton(props) {
@@ -23,8 +25,9 @@ function RadioButton(props) {
         type="radio"
         name={name}
         onChange={onChange}
+        className={radioButtonCss('input')}
       />
-      {label && <span>{label}</span>}
+      {label && <div className={radioButtonCss('label', { checked })}>{label}</div>}
     </label>
   );
 }

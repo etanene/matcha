@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { useDispatch } from 'react-redux';
 
 import CloseButton from '../CloseButton/CloseButton';
-import { messageBoxAction } from '../../Actions';
+import { messageBoxAction } from '../../../Actions';
 import './MessageBox.css';
 
 const messageBoxCss = cn('message-box');

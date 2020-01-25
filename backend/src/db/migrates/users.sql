@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS users
   birthday TIMESTAMP,
   passwd varchar(255) NOT NULL,
   sex sex,
-  orientation orientation,
+  orientation orientation NOT NULL DEFAULT 'bi',
   info varchar(10000),
   city varchar(255),
   latitude varchar(255),

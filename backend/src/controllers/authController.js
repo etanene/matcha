@@ -8,8 +8,8 @@ const signupUser = async (req, res) => {
   try {
     validateService.validateUser(req.body);
     const { username, email } = await authService.signup(req.body);
-    const messagebox = 'Welcome! Please check your email for account confirm!';
-    res.send({ username, email, messagebox });
+    const message = 'Welcome! Please check your email for account confirm!';
+    res.send({ username, email, message });
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
