@@ -158,7 +158,6 @@ function RegForm(props) {
         {state.confirm_password.message}
       </Input>
       <Button type="submit" cls={regFormCss('submit')}>Sign up</Button>
-      <Button onClick={() => dispatch(messageBoxAction.open('Privet Pidorok'))} cls={regFormCss('submit')}>Test</Button>
     </form>
   );
 }
