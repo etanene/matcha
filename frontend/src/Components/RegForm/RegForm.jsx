@@ -35,6 +35,10 @@ const formSchema = {
   last_name: {
     message: 'Required field.',
   },
+  birthday: {
+    regex: REGEX.DATE,
+    message: 'Invalid date layout. DD.MM.YYYY',
+  },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
@@ -140,6 +144,17 @@ const RegForm = React.memo((props) => {
         cls={inputCss}
       >
         {state.last_name.message}
+      </Input>
+      <Input
+        type="text"
+        name="birthday"
+        placeholder="Birthday. dd.MM.yyyy"
+        value={state.birthday.value}
+        error={state.birthday.error}
+        onChange={handleChange}
+        cls={inputCss}
+      >
+        {state.birthday.message}
       </Input>
       <Input
         type="password"

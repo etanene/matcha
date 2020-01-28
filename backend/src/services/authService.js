@@ -9,7 +9,6 @@ const validateService = require('./validateService');
 
 const signup = async (data) => {
   const user = data;
-
   const checkLogin = await userModel.getUser({ login: user.username });
   if (checkLogin.length) {
     throw new AuthException('Login already exists!');
@@ -18,6 +17,9 @@ const signup = async (data) => {
   if (checkEmail.length) {
     throw new AuthException('Email already exists!');
   }
+  user.birthday = user.birthday.split('.');
+  [user.birthday[0], user.birthday[1]] = [user.birthday[1], user.birthday[0]];
+  user.birthday = user.birthday.join('/');
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
   await userModel.addUser(user);
