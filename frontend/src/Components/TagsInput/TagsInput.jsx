@@ -8,6 +8,7 @@ import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
 import ListGroup from '../common/ListGroup/ListGroup';
 import ListButton from '../common/ListButton/ListButton';
+import Tag from '../common/Tag/Tag';
 import './TagsInput.css';
 
 const tagsInputCss = cn('tags-input');
@@ -47,7 +48,9 @@ function TagsInput(props) {
 
   function handleAddTag(value) {
     return function () {
-      setTags([...tags, value]);
+      if (!tags.includes(value)) {
+        setTags([...tags, value]);
+      }
     };
   }
 
@@ -55,7 +58,7 @@ function TagsInput(props) {
     <div className={tagsInputCss({}, [cls])}>
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <span>{tag}</span>
+          <Tag>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>
@@ -69,7 +72,7 @@ function TagsInput(props) {
       </div>
       <ListGroup>
         {tagsList.map((tag) => (
-          <ListButton>{tag}</ListButton>
+          <ListButton onClick={handleAddTag(tag)}>{tag}</ListButton>
         ))}
       </ListGroup>
     </div>

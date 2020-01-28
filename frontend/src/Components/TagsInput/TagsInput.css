@@ -9,3 +9,7 @@
   display: flex;
   align-items: center;
 }
+.tags-input-tags {
+  display: flex;
+  flex-direction: row;
+}
