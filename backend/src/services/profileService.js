@@ -1,5 +1,6 @@
 const photoService = require('./photoService');
 const { userModel } = require('../models');
+const tagService = require('./tagService');
 
 const saveProfile = async (profile, user) => {
   const {
@@ -19,6 +20,7 @@ const saveProfile = async (profile, user) => {
       login: user,
     },
   );
+  await tagService.saveTags(tags, user);
 };
 
 const getProfile = async (params) => {

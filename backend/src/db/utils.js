@@ -32,11 +32,35 @@ const getUpdateValues = (data, startInd = 0) => {
 
 // convert: [...data]
 // to: (data[0]), (data[1]), (data[2])
-const getInsertValue = (data) => {
-  
+const getInsertValue = (data, startInd = 0) => {
+  if (!data.length) {
+    return '';
+  }
+
+  let ind = startInd;
+  const values = data.map(() => {
+    ind += 1;
+    return (`($${ind})`);
+  });
+  return `VALUES ${values.join(', ')}`;
+};
+
+// convert: [...data]
+// to: (data[0], data[1], data[2])
+const getInValues = (data, startInd = 0) => {
+  if (!data.length) {
+    return '';
+  }
+
+  let ind = startInd;
+  const values = data.map(() => {
+    ind += 1;
+    return ``;
+  });
 };
 
 module.exports = {
   getCondition,
   getUpdateValues,
+  getInsertValue,
 };
