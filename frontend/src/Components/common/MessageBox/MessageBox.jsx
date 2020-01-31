@@ -21,7 +21,7 @@ const MessageBox = (props) => {
     isOpen && (
     <div className={messageBoxCss()}>
       <div className={messageBoxCss('body', { error })}>
-        <CloseButton onClick={close}> </CloseButton>
+        <CloseButton onClick={close} cls={messageBoxCss('close-button')}> </CloseButton>
         <div className={messageBoxCss('text')}>{message}</div>
       </div>
     </div>

@@ -7,23 +7,28 @@ import './CloseButton.css';
 const closebuttonCss = cn('close-btn');
 
 function CloseButton(props) {
-  const { onClick } = props;
+  const {
+    onClick,
+    cls,
+  } = props;
 
   return (
     <button
       onClick={onClick}
       aria-label="x"
-      className={closebuttonCss()}
+      className={closebuttonCss({}, [cls])}
     />
   );
 }
 
 CloseButton.propTypes = {
   onClick: PropTypes.func,
+  cls: PropTypes.string,
 };
 
 CloseButton.defaultProps = {
   onClick: null,
+  cls: null,
 };
 
 export default CloseButton;

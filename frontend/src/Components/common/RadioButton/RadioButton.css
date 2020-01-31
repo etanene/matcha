@@ -8,7 +8,7 @@
   display: none;
 }
 
-.radio-button-label {
+.radio-button-background {
   padding: 15px;
   width: 50px;
   background-color: var(--radio-button-background);
@@ -17,6 +17,6 @@
   text-align: center;
 }
 
-.radio-button-label_checked {
-  background: var(--radio-button-label_checked-color);
+.radio-button-background_checked {
+  background: var(--radio-button-background_checked-color);
 }

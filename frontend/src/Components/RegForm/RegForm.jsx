@@ -148,7 +148,7 @@ const RegForm = React.memo((props) => {
       <Input
         type="text"
         name="birthday"
-        placeholder="Birthday. dd.MM.yyyy"
+        placeholder="Birthday"
         value={state.birthday.value}
         error={state.birthday.error}
         onChange={handleChange}

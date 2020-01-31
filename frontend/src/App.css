@@ -87,7 +87,7 @@
   --radio-button-background: var(--surface-block-color);
   --radio-button-border-radius: var(--border-radius-size-m);
   --radio-button-border-color: var(--grey-200);
-  --radio-button-label_checked-color: var(--grey-400);
+  --radio-button-background_checked-color: var(--grey-400);
 }
 
 body {

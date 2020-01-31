@@ -27,7 +27,7 @@ function RadioButton(props) {
         onChange={onChange}
         className={radioButtonCss('input')}
       />
-      {label && <div className={radioButtonCss('label', { checked })}>{label}</div>}
+      {label && <div className={radioButtonCss('background', { checked })}>{label}</div>}
     </label>
   );
 }
