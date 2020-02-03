@@ -13,6 +13,7 @@ import LoadingModal from '../LoadingModal/LoadingModal';
 import Textarea from '../common/Textarea/Textarea';
 import RadioGroup from '../common/RadioGroup/RadioGroup';
 import RadioButton from '../common/RadioButton/RadioButton';
+import TagsInput from '../TagsInput/TagsInput';
 import './Profile.css';
 
 const profileCss = cn('profile');
@@ -63,6 +64,17 @@ const profileSchema = {
       return { value: about.value, error };
     },
   },
+  tags: {
+    validate: (tags) => {
+      let error;
+
+      if (!tags.value.length) {
+        error = 'Required field';
+      }
+
+      return { value: tags.value, error };
+    },
+  },
 };
 
 function Profile(props) {
@@ -76,7 +88,7 @@ function Profile(props) {
   }, [dispatch, user]);
 
   function handleChange(field) {
-    return function (event) {
+    return (event) => {
       event.persist();
 
       const { value } = event.target;
@@ -137,6 +149,7 @@ function Profile(props) {
         <RadioButton value="hetero" label="Hetero" />
         <RadioButton value="bi" label="Bi" />
       </RadioGroup>
+      <TagsInput tags={profile.tags.value} />
       <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChange('about')} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
