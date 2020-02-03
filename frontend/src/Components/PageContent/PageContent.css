@@ -17,3 +17,8 @@
 .page-content-resetpw-form {
   margin: 0 auto;
 }
+.page-content-message-box {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}

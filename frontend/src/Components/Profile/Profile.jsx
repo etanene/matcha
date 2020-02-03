@@ -84,7 +84,6 @@ function Profile(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('render');
     dispatch(profileAction.getProfile(user.username));
   }, [dispatch, user]);
 
