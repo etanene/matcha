@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
 import { REGEX } from '../../Constants';
+import { messageBoxAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -34,6 +35,10 @@ const formSchema = {
   last_name: {
     message: 'Required field.',
   },
+  birthday: {
+    regex: REGEX.DATE,
+    message: 'Invalid date layout. DD.MM.YYYY',
+  },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
@@ -46,13 +51,20 @@ const formSchema = {
   },
 };
 
-const submitForm = async (data) => {
-  await apiService.postJson('/api/auth/signup', data);
-  console.log('Submit regForm');
-};
-
-function RegForm(props) {
+const RegForm = React.memo((props) => {
   const { cls } = props;
+  const dispatch = useDispatch();
+
+  console.log('render');
+
+  const submitForm = async (data) => {
+    try {
+      const res = await apiService.postJson('/api/auth/signup', data);
+      dispatch(messageBoxAction.open(res.message));
+    } catch (e) {
+      dispatch(messageBoxAction.open(e.message, true));
+    }
+  };
   const {
     state,
     handleChange,
@@ -134,6 +146,17 @@ function RegForm(props) {
         {state.last_name.message}
       </Input>
       <Input
+        type="text"
+        name="birthday"
+        placeholder="Birthday"
+        value={state.birthday.value}
+        error={state.birthday.error}
+        onChange={handleChange}
+        cls={inputCss}
+      >
+        {state.birthday.message}
+      </Input>
+      <Input
         type="password"
         name="password"
         placeholder="Password"
@@ -158,7 +181,7 @@ function RegForm(props) {
       <Button type="submit" cls={regFormCss('submit')}>Sign up</Button>
     </form>
   );
-}
+});
 
 RegForm.propTypes = {
   cls: PropTypes.string,

@@ -9,6 +9,7 @@ export const REGEX = {
   PASSWORD: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/,
   USERNAME: /^[A-Za-z\d]{4,12}$/,
   EMAIL: /^\S+@\S+\.\S+$/,
+  DATE: /^([0-2][0-9]|(3)[0-1])(\.)(((0)[0-9])|((1)[0-2]))(\.)\d{4}$/,
 };
 
 export const VALUES = {

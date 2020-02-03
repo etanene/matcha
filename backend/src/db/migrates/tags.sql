@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS tags
+(
+  tag_id SERIAL PRIMARY KEY NOT NULL,
+  tag_value varchar(255) UNIQUE NOT NULL
+);

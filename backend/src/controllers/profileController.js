@@ -7,6 +7,7 @@ const save = async (req, res) => {
     await profileService.saveProfile(req.body, req.session.logged);
     res.send({ message: 'profile save' });
   } catch (e) {
+    console.log(e);
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
     } else {

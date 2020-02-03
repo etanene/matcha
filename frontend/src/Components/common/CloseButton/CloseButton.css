@@ -1,0 +1,29 @@
+@import url('../../../App.css');
+
+.close-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(222, 222, 222);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.close-btn:before, .close-btn:after {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  height: 10px;
+  width: 1px;
+  background-color: rgb(0, 0, 0);
+  content: '';
+}
+
+.close-btn:before {
+  transform: rotate(45deg);
+}
+
+.close-btn:after {
+  transform: rotate(-45deg);
+}

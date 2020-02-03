@@ -102,6 +102,10 @@ const initialState = {
     value: '',
     error: '',
   },
+  tags: {
+    value: [],
+    error: '',
+  },
   isLoading: false,
 };
 

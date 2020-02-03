@@ -4,12 +4,16 @@ const uuid = require('uuid/v4');
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
 const validateService = require('./validateService');
-const mailService = require('./mailService');
-const { HOST_URL } = require('../config');
+// const mailService = require('./mailService');
+// const { HOST_URL } = require('../config');
 
+function swapDayMonth(date) {
+  const splittedDate = date.split('.');
+  [splittedDate[0], splittedDate[1]] = [splittedDate[1], splittedDate[0]];
+  return splittedDate.join('/');
+}
 const signup = async (data) => {
   const user = data;
-
   const checkLogin = await userModel.getUser({ login: user.username });
   if (checkLogin.length) {
     throw new AuthException('Login already exists!');
@@ -18,16 +22,17 @@ const signup = async (data) => {
   if (checkEmail.length) {
     throw new AuthException('Email already exists!');
   }
+  user.birthday = swapDayMonth(user.birthday);
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
   await userModel.addUser(user);
 
-  const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
-  await mailService.sendMail(
-    user.email,
-    'Matcha email verification',
-    `Please, verify your matcha account ${link}`,
-  );
+  // const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
+  // await mailService.sendMail(
+  //   user.email,
+  //   'Matcha email verification',
+  //   `Please, verify your matcha account ${link}`,
+  // );
   return (user);
 };
 
