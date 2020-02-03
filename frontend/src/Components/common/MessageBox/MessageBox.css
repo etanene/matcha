@@ -1,9 +1,6 @@
 @import url('../../../App.css');
 
 .message-box {
-  position: absolute;
-  top: 0;
-  right: 10px;
   display: flex;
   justify-content: center;
   padding-top: 90px;
@@ -32,10 +29,4 @@
   top: 5px;
   right: 5px;
   left: calc(100% - 25px);
-}
-
-.message-box-close-button:before, .message-box-close-button:after {
-  position: absolute;
-  top: 25%;
-  left: 50%;
 }

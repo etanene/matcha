@@ -7,12 +7,10 @@ const validateService = require('./validateService');
 // const mailService = require('./mailService');
 // const { HOST_URL } = require('../config');
 
-function dateChanger(date) {
-  let changedDate = date;
-  changedDate = date.split('.');
-  [changedDate[0], changedDate[1]] = [changedDate[1], changedDate[0]];
-  changedDate = changedDate.join('/');
-  return changedDate;
+function swapDayMonth(date) {
+  const splittedDate = date.split('.');
+  [splittedDate[0], splittedDate[1]] = [splittedDate[1], splittedDate[0]];
+  return splittedDate.join('/');
 }
 const signup = async (data) => {
   const user = data;
@@ -24,7 +22,7 @@ const signup = async (data) => {
   if (checkEmail.length) {
     throw new AuthException('Email already exists!');
   }
-  user.birthday = dateChanger(user.birthday);
+  user.birthday = swapDayMonth(user.birthday);
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
   await userModel.addUser(user);

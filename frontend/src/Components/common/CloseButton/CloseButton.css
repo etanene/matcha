@@ -11,6 +11,9 @@
 }
 
 .close-btn:before, .close-btn:after {
+  position: absolute;
+  top: 25%;
+  left: 50%;
   height: 10px;
   width: 1px;
   background-color: rgb(0, 0, 0);

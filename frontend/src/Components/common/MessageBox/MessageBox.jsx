@@ -10,16 +10,20 @@ import './MessageBox.css';
 const messageBoxCss = cn('message-box');
 
 const MessageBox = (props) => {
-  const { isOpen, message, error } = props;
+  const {
+    isOpen,
+    message,
+    error,
+    cls,
+  } = props;
   const dispatch = useDispatch();
 
   function close() {
     dispatch(messageBoxAction.close());
   }
-
   return (
     isOpen && (
-    <div className={messageBoxCss()}>
+    <div className={messageBoxCss({}, [cls])}>
       <div className={messageBoxCss('body', { error })}>
         <CloseButton onClick={close} cls={messageBoxCss('close-button')}> </CloseButton>
         <div className={messageBoxCss('text')}>{message}</div>
@@ -32,6 +36,7 @@ const MessageBox = (props) => {
 MessageBox.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
+  cls: null,
 };
 
 export default MessageBox;

@@ -49,6 +49,7 @@ function App() {
         isOpen={messagebox.isOpen}
         message={messagebox.message}
         error={messagebox.error}
+        cls={pageContentCss('message-box')}
       />
     </div>
   );
