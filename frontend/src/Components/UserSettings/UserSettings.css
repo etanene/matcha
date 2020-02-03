@@ -1,0 +1,10 @@
+.user-settings {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  position: relative;
+}
+
+.user-settings-changepw-form {
+  margin: 0 auto;
+}

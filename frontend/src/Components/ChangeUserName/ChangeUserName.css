@@ -1,0 +1,20 @@
+@import url('../../App.css');
+
+.changeusername-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+/* элементы */
+.changeusername-form-form-name {
+  margin: 10px auto;
+}
+
+.changeusername-form-input {
+  margin: 5px 0;
+}
+
+.changeusername-form-submit {
+  margin: 5px 0;
+}

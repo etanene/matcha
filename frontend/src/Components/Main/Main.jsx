@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import Match from '../Match/Match';
 import Chat from '../Chat/Chat';
 import './Main.css';
+import UserSettings from '../UserSettings/UserSettings';
 
 const mainCss = cn('main');
 const navBarCss = mainCss('navbar');
@@ -31,6 +32,9 @@ function Main() {
         </Route>
         <Route path="/chat">
           <Chat />
+        </Route>
+        <Route path="/user/settings">
+          <UserSettings cls={mainCss('user-settings')} />
         </Route>
       </Switch>
     </div>
