@@ -8,7 +8,10 @@ const saveProfile = async (profile, user) => {
     sex,
     orientation,
     about,
+    tags,
   } = profile;
+  // console.log('save profile', profile);
+  console.log('tags', tags);
 
   await photoService.savePhotos(photo, user);
   await userModel.updateUser(
@@ -28,6 +31,7 @@ const getProfile = async (params) => {
   const { login } = params;
   const photos = await photoService.getPhotos(login);
   const user = await userModel.getUser({ login });
+  // const tags = await
   console.log('user', user[0]);
   console.log('info', user[0].info);
   const {

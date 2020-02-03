@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
-// import { apiService } from '../../Services';
+import { apiService } from '../../Services';
+
+import { profileAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -14,12 +17,14 @@ import './TagsInput.css';
 const tagsInputCss = cn('tags-input');
 
 function TagsInput(props) {
-  const { cls } = props;
+  const { tags, cls } = props;
 
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
-  const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
+  // const [tags, setTags] = useState(data);
   console.log('tags', tags);
+
 
   function handleChangeInput(event) {
     event.persist();
@@ -30,16 +35,23 @@ function TagsInput(props) {
   }
 
   async function fetchTag(value) {
-    // const data = await apiService.getJson(`/api/tags/get?tag=${value}`);
-
-    let data = [];
-    if (value[0] === 'c') {
-      data = ['cars', 'cats'];
-    } else if (value[0] === 'd') {
-      data = ['dogs'];
+    try {
+      if (!value) {
+        return;
+      }
+      const res = await apiService.getJson(`/api/tag/get?tag=${value}`);
+      console.log('res tags', res);
+      // let data = [];
+      // if (value[0] === 'c') {
+      //   data = ['cars', 'cats'];
+      // } else if (value[0] === 'd') {
+      //   data = ['dogs'];
+      // }
+      // console.log(data);
+      setTagsList(res);
+    } catch (e) {
+      console.log(e);
     }
-    console.log(data);
-    setTagsList(data);
   }
 
   useEffect(() => {
@@ -47,9 +59,11 @@ function TagsInput(props) {
   }, [currentTag]);
 
   function handleAddTag(value) {
-    return function () {
+    return () => {
       if (!tags.includes(value)) {
-        setTags([...tags, value]);
+        console.log(tags, value);
+        // setTags([...tags, value]);
+        dispatch(profileAction.setData('tags', [...tags, value]));
       }
     };
   }
@@ -58,7 +72,7 @@ function TagsInput(props) {
     <div className={tagsInputCss({}, [cls])}>
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <Tag>{tag}</Tag>
+          <Tag key={tag}>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>
@@ -72,7 +86,7 @@ function TagsInput(props) {
       </div>
       <ListGroup>
         {tagsList.map((tag) => (
-          <ListButton onClick={handleAddTag(tag)}>{tag}</ListButton>
+          <ListButton key={tag} onClick={handleAddTag(tag)}>{tag}</ListButton>
         ))}
       </ListGroup>
     </div>
@@ -80,10 +94,14 @@ function TagsInput(props) {
 }
 
 TagsInput.propTypes = {
+  tags: PropTypes.arrayOf(
+    PropTypes.string,
+  ),
   cls: PropTypes.string,
 };
 
 TagsInput.defaultProps = {
+  tags: [],
   cls: '',
 };
 

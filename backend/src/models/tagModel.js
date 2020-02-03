@@ -4,28 +4,40 @@ const saveTags = async (tags) => {
   console.log('tags model', tags);
   await db.query(`
     INSERT INTO
-      tags (value)
+      tags (tag_value)
     ${dbUtils.getInsertValue(tags)}
-    ON CONFLICT (value)
+    ON CONFLICT (tag_value)
       DO NOTHING
   `, [...tags]);
 };
 
-const saveTaggings = async (tags, user) => {
-  console.log('taggings model', tags, user);
-
+const saveTaggings = async (tags, userId) => {
+  console.log('taggings model', tags, userId);
   await db.query(`
     INSERT INTO
-      taggings (user_id, tag_id)
+      taggings (tag_id, user_id)
     SELECT
-      tag_id, (SELECT)
+      tag_id, ${userId}
     FROM
-      tags t
+      tags
     WHERE
-      t.value IN ()
-  `, []);
+      tag_value IN ${dbUtils.getInValues(tags)}
+  `, [...tags]);
+};
+
+const getTags = async (tag) => {
+  await db.query(`
+    SELECT
+      *
+    FROM
+      tags
+    WHERE
+      SIMILARITY(CAST(tag_value AS Character), CAST($1 AS Character)) > 0.7
+  `, [tag]);
 };
 
 module.exports = {
   saveTags,
+  saveTaggings,
+  getTags,
 };

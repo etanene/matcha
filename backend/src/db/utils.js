@@ -55,12 +55,14 @@ const getInValues = (data, startInd = 0) => {
   let ind = startInd;
   const values = data.map(() => {
     ind += 1;
-    return ``;
+    return `$${ind}`;
   });
+  return `(${values.join(', ')})`;
 };
 
 module.exports = {
   getCondition,
   getUpdateValues,
   getInsertValue,
+  getInValues,
 };
