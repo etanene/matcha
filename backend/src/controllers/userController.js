@@ -43,8 +43,20 @@ const changepw = async (req, res) => {
   }
 };
 
+const changeuserpw = async (req) => {
+  try {
+    validateService.validatePasswords(req.body.password, req.body.confirm_password);
+
+    console.log('body', req.body);
+    console.log('logged', req.session.logged);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 module.exports = {
   get,
   resetpw,
   changepw,
+  changeuserpw,
 };

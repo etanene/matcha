@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 
 import { useForm } from '../../Hooks';
-// import { apiService } from '../../Services';
+import { apiService } from '../../Services';
 import { REGEX } from '../../Constants';
 
 import Input from '../common/Input/Input';
@@ -29,15 +29,15 @@ const formSchema = {
 function ChangeUserPwForm(props) {
   const { cls } = props;
 
-  // async function submitForm(data) {
-  //   try {
-  //     await apiService.postJson(`/api/user/changeuserpw`, data);
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // }
+  async function submitForm(data) {
+    try {
+      await apiService.postJson('/api/user/changeUserpw', data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
 
-  const { state, handleChange, handleSubmit } = useForm(formSchema);
+  const { state, handleChange, handleSubmit } = useForm(formSchema, submitForm);
 
   return (
     <form onSubmit={handleSubmit} className={changeUserPwFormCss({}, [cls])}>

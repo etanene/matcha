@@ -35,8 +35,19 @@ const changePwUser = async (password, userData) => {
   }
 };
 
+// const checkPassword = async (password, login) => {
+//   const users = await userModel.getUser({ login });
+//   const user = users[0];
+//   const validPasswd = await bcrypt.compare(password, user.passwd);
+
+//   if (!validPasswd) {
+//     throw new AuthException('Invalid username or password!');
+//   }
+// };
+
 module.exports = {
   getUser,
   resetPwUser,
   changePwUser,
+  // checkPassword,
 };
