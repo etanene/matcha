@@ -39,11 +39,14 @@ const getProfile = async (params) => {
     info,
     orientation,
   } = user[0];
+  const tags = await tagService.getTagsByUser({ login });
+  console.log('tags profile', tags);
   return {
     photos,
     sex,
     about: info,
     orientation,
+    tags,
   };
 };
 

@@ -1,3 +1,5 @@
+CREATE EXTENSION pg_trgm;
+
 DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'sex') THEN

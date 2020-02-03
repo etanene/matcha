@@ -15,7 +15,14 @@ const getTags = async (params) => {
   return tags;
 };
 
+const getTagsByUser = async (params) => {
+  const { login } = params;
+  const tags = await tagModel.getTagsByUser(login);
+  return tags;
+};
+
 module.exports = {
   saveTags,
   getTags,
+  getTagsByUser,
 };
