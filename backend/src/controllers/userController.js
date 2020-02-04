@@ -43,14 +43,18 @@ const changepw = async (req, res) => {
   }
 };
 
-const changeuserpw = async (req) => {
+const changeUserpw = async (req, res) => {
   try {
     validateService.validatePasswords(req.body.password, req.body.confirm_password);
-
-    console.log('body', req.body);
-    console.log('logged', req.session.logged);
+    await userService.checkPassword(req.body.old_password, req.session.logged);
+    await userService.changePwUser(req.body.password, { login: req.session.logged });
+    res.send({ message: 'Password changed' });
   } catch (e) {
-    console.log(e);
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
   }
 };
 
@@ -58,5 +62,5 @@ module.exports = {
   get,
   resetpw,
   changepw,
-  changeuserpw,
+  changeUserpw,
 };
