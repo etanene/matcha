@@ -33,11 +33,6 @@ function saveProfile(profile) {
   return { type: PROFILE_SAVE, payload: profile };
 }
 
-const PROFILE_SET_ABOUT = 'PROFILE_SET_ABOUT';
-function setAbout(value) {
-  return { type: PROFILE_SET_ABOUT, payload: value };
-}
-
 const PROFILE_SET_DATA = 'PROFILE_SET_DATA';
 function setData(field, value) {
   return { type: PROFILE_SET_DATA, payload: { field, value } };
@@ -58,8 +53,6 @@ export default {
   getProfile,
   PROFILE_SAVE,
   saveProfile,
-  PROFILE_SET_ABOUT,
-  setAbout,
   PROFILE_SET_DATA,
   setData,
 };

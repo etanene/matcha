@@ -40,6 +40,7 @@ function saveProfile(state, profile) {
     sex,
     orientation,
     about,
+    tags,
   } = profile;
 
   const newPhotos = photos.reduce((result, photo) => ({
@@ -66,6 +67,10 @@ function saveProfile(state, profile) {
     about: {
       ...state.about,
       value: about,
+    },
+    tags: {
+      ...state.tags,
+      value: tags.map((tag) => (tag.tag_value)),
     },
   };
 }
@@ -119,14 +124,6 @@ const profileReducer = (state = initialState, action) => {
       return resetChangePhoto(state);
     case profileAction.PROFILE_SAVE:
       return saveProfile(state, payload);
-    case profileAction.PROFILE_SET_ABOUT:
-      return {
-        ...state,
-        about: {
-          error: '',
-          value: payload,
-        },
-      };
     case profileAction.PROFILE_SET_DATA:
       return {
         ...state,

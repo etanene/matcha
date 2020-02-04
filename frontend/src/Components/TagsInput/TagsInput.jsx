@@ -41,14 +41,7 @@ function TagsInput(props) {
       }
       const res = await apiService.getJson(`/api/tag/get?tag=${value}`);
       console.log('res tags', res);
-      // let data = [];
-      // if (value[0] === 'c') {
-      //   data = ['cars', 'cats'];
-      // } else if (value[0] === 'd') {
-      //   data = ['dogs'];
-      // }
-      // console.log(data);
-      setTagsList(res);
+      setTagsList(res.map((tag) => (tag.tag_value)));
     } catch (e) {
       console.log(e);
     }
