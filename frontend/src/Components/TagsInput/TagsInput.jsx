@@ -17,7 +17,7 @@ import './TagsInput.css';
 const tagsInputCss = cn('tags-input');
 
 function TagsInput(props) {
-  const { tags, cls } = props;
+  const { tags, title, cls } = props;
 
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
@@ -54,15 +54,16 @@ function TagsInput(props) {
   function handleAddTag(value) {
     return () => {
       if (!tags.includes(value)) {
-        console.log(tags, value);
-        // setTags([...tags, value]);
         dispatch(profileAction.setData('tags', [...tags, value]));
+        setCurrentTag('');
+        setTagsList([]);
       }
     };
   }
 
   return (
     <div className={tagsInputCss({}, [cls])}>
+      {title && <span className={tagsInputCss('title')}>{title}</span>}
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
           <Tag key={tag}>{tag}</Tag>
@@ -90,11 +91,13 @@ TagsInput.propTypes = {
   tags: PropTypes.arrayOf(
     PropTypes.string,
   ),
+  title: PropTypes.string,
   cls: PropTypes.string,
 };
 
 TagsInput.defaultProps = {
   tags: [],
+  title: '',
   cls: '',
 };
 

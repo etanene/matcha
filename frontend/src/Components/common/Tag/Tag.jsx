@@ -2,6 +2,8 @@ import React from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 
+import './Tag.css';
+
 const tagCss = cn('tag');
 
 function Tag(props) {
@@ -9,7 +11,7 @@ function Tag(props) {
 
   return (
     <div className={tagCss({}, [cls])}>
-      {children}
+      {`#${children}`}
     </div>
   );
 }

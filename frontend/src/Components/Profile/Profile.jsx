@@ -149,7 +149,7 @@ function Profile(props) {
         <RadioButton value="hetero" label="Hetero" />
         <RadioButton value="bi" label="Bi" />
       </RadioGroup>
-      <TagsInput tags={profile.tags.value} />
+      <TagsInput tags={profile.tags.value} title="TAGS" cls={profileCss('tags-input')} />
       <Textarea value={profile.about.value} error={profile.about.error} onChange={handleChange('about')} cls={profileCss('textarea')} />
       <Button type="submit" cls={profileCss('submit')}>Save</Button>
       <LoadingModal isLoading={profile.isLoading} />
