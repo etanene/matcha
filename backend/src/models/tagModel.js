@@ -1,7 +1,6 @@
 const { db, dbUtils } = require('../db');
 
 const saveTags = async (tags) => {
-  console.log('tags model', tags);
   await db.query(`
     INSERT INTO
       tags (tag_value)
@@ -12,7 +11,6 @@ const saveTags = async (tags) => {
 };
 
 const saveTaggings = async (tags, userId) => {
-  console.log('taggings model', tags, userId);
   await db.query(`
     INSERT INTO
       taggings (tag_id, user_id)
@@ -23,10 +21,9 @@ const saveTaggings = async (tags, userId) => {
     WHERE
       tag_value IN ${dbUtils.getInValues(tags)}
     AND
-    NOT EXISTS
-      (
+      tag_value NOT IN (
         SELECT
-          1
+          tags.tag_value
         FROM
           tags
         JOIN
@@ -53,7 +50,6 @@ const getTags = async (tag) => {
 };
 
 const getTagsByUser = async (user) => {
-  console.log('user model', user);
   const res = await db.query(`
     SELECT
       tags.tag_id, tags.tag_value
