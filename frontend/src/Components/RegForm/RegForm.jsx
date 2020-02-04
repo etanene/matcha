@@ -55,8 +55,6 @@ const RegForm = React.memo((props) => {
   const { cls } = props;
   const dispatch = useDispatch();
 
-  console.log('render');
-
   const submitForm = async (data) => {
     try {
       const res = await apiService.postJson('/api/auth/signup', data);

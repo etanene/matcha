@@ -36,7 +36,11 @@ const MessageBox = (props) => {
 MessageBox.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
-  cls: null,
+  cls: PropTypes.string,
+};
+
+MessageBox.defaultProps = {
+  cls: '',
 };
 
 export default MessageBox;
