@@ -58,9 +58,23 @@ const changeUserpw = async (req, res) => {
   }
 };
 
+const changeUserName = async (req, res) => {
+  try {
+    await userService.changeName(req.body.first_name, req.body.last_name, req.session.logged);
+    res.send({ message: 'First name and Last name changed' });
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 module.exports = {
   get,
   resetpw,
   changepw,
   changeUserpw,
+  changeUserName,
 };

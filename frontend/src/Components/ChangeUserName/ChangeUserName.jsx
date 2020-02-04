@@ -1,9 +1,11 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from '../../Hooks';
-// import { apiService } from '../../Services';
+import { apiService } from '../../Services';
+import { profileAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -23,41 +25,54 @@ const formSchema = {
 
 function ChangeUserName(props) {
   const { cls } = props;
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile);
+  console.log(profile);
 
-  // async function submitForm(data) {
-  //   try {
-  //     await apiService.postJson(`/api/user/changeusername`, data);
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // }
+  function handleChange(field) {
+    return (event) => {
+      event.persist();
+      console.log('hello');
 
-  const { state, handleChange, handleSubmit } = useForm(formSchema);
+      const { value } = event.target;
+      dispatch(profileAction.setData(field, value));
+    };
+  }
+
+  async function submitForm(data) {
+    try {
+      await apiService.postJson('/api/user/changeUserName', data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  const { handleSubmit } = useForm(formSchema, submitForm);
 
   return (
     <form onSubmit={handleSubmit} className={changeUserNameCss({}, [cls])}>
-      <span className={changeUserNameCss('form-name')}>Change Firstname and Lastname</span>
+      <span className={changeUserNameCss('form-name')}>Change First name and Last name</span>
       <Input
         type="text"
         name="first_name"
         placeholder="First name"
-        value={state.first_name.value}
-        error={state.first_name.error}
-        onChange={handleChange}
+        value={profile.firstName.value}
+        error={profile.firstName.error}
+        onChange={handleChange('firstName')}
         cls={inputCss}
       >
-        {state.first_name.message}
+        {profile.firstName.error}
       </Input>
       <Input
         type="text"
         name="last_name"
         placeholder="Last name"
-        value={state.last_name.value}
-        error={state.last_name.error}
-        onChange={handleChange}
+        value={profile.lastName.value}
+        error={profile.lastName.error}
+        onChange={handleChange('lastName')}
         cls={inputCss}
       >
-        {state.last_name.message}
+        {profile.lastName.error}
       </Input>
       <Button type="submit" cls={changeUserNameCss('submit')}>Change name</Button>
     </form>
