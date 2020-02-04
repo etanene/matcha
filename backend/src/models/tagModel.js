@@ -17,15 +17,13 @@ const saveTaggings = async (tags, userId) => {
     INSERT INTO
       taggings (tag_id, user_id)
     SELECT
-      (
-        SELECT
-          tag_id, ${userId}
-        FROM
-          tags
-        WHERE
-          tag_value IN ${dbUtils.getInValues(tags)}
-      )
-    WHERE NOT EXISTS
+        tag_id, ${userId}
+    FROM
+      tags
+    WHERE
+      tag_value IN ${dbUtils.getInValues(tags)}
+    AND
+    NOT EXISTS
       (
         SELECT
           1
