@@ -58,9 +58,24 @@ const changeUserpw = async (req, res) => {
   }
 };
 
+const changeUserEmail = async (req, res) => {
+  try {
+    validateService.validateEmail(req.body.email);
+    await userService.changeUserEmail(req.body.email, req.session.logged);
+    res.send({ message: 'Email changed' });
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 module.exports = {
   get,
   resetpw,
   changepw,
   changeUserpw,
+  changeUserEmail,
 };

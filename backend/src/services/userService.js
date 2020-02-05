@@ -45,9 +45,18 @@ const checkPassword = async (password, login) => {
   }
 };
 
+const changeUserEmail = async (newEmail, login) => {
+  const res = await userModel.updateUser({ email: newEmail }, { login });
+
+  if (!res) {
+    throw new UserException('Can not find user! And change Email');
+  }
+};
+
 module.exports = {
   getUser,
   resetPwUser,
   changePwUser,
   checkPassword,
+  changeUserEmail,
 };
