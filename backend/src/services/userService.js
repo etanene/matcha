@@ -45,19 +45,9 @@ const checkPassword = async (password, login) => {
   }
 };
 
-const changeName = async (firstname, lastname, login) => {
-  const res = await userModel.updateUser({ first_name: firstname, last_name: lastname },
-    { login });
-
-  if (!res) {
-    throw new UserException('Can not find user! And change First name and Last name!');
-  }
-};
-
 module.exports = {
   getUser,
   resetPwUser,
   changePwUser,
   checkPassword,
-  changeName,
 };
