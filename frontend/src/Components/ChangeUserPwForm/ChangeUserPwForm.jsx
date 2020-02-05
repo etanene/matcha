@@ -1,10 +1,12 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
 import { REGEX } from '../../Constants';
+import { messageBoxAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -26,14 +28,16 @@ const formSchema = {
   },
 };
 
-function ChangeUserPwForm(props) {
+const ChangeUserPwForm = React.memo((props) => {
   const { cls } = props;
+  const dispatch = useDispatch();
 
   async function submitForm(data) {
     try {
-      await apiService.postJson('/api/user/changeUserpw', data);
+      const res = await apiService.postJson('/api/user/changeUserpw', data);
+      dispatch(messageBoxAction.open(res.message));
     } catch (e) {
-      console.log(e.message);
+      dispatch(messageBoxAction.open(e.message, true));
     }
   }
 
@@ -78,7 +82,7 @@ function ChangeUserPwForm(props) {
       <Button type="submit" cls={changeUserPwFormCss('submit')}>Change password</Button>
     </form>
   );
-}
+});
 
 ChangeUserPwForm.propTypes = {
   cls: PropTypes.string,
