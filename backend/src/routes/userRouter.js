@@ -12,4 +12,6 @@ router.post('/changepw', userController.changepw);
 
 router.post('/changeUserpw', authController.isAuth, userController.changeUserpw);
 
+router.post('/changeUserEmail', authController.isAuth, userController.changeUserEmail);
+
 module.exports = router;
