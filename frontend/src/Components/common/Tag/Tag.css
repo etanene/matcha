@@ -1,0 +1,7 @@
+@import url('../../../App.css');
+
+.tag {
+  padding: 5px 15px;
+  border: 1px solid var(--radio-button-border-color);
+  border-radius: var(--radio-button-border-radius);
+}

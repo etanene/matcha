@@ -14,29 +14,41 @@
   --border-radius-size-l: 12px;
 
   /* цвета */
+  --white-500: #ffffff;
   --grey-50: #fafafa;
   --grey-100: #eeeeee;
   --grey-200: #dddddd;
   --grey-300: #cccccc;
   --grey-400: #bbbbbb;
+  --grey-400-transparent: rgba(170, 170, 170, 0.5);
   --grey-500: #6b6b6b;
   --red-300: #ff6666;
+  --transparent: rgba(0, 0, 0, 0);
 
-  /* цвета поверхностей */
+  /* поверхности */
+  --surface-block-color: var(--white-500);
   --surface-color: var(--grey-50);
+  --surface-border-radius: var(--border-radius-size-m);
   
 
   /* ------------------------ */
   /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
   /* ------------------------ */
 
-  /* общие поверхности */
+  /* block */
   --surface-border-color: var(--grey-200);
 
   /* header */
   --header-color: var(--surface-color);
 
-  /* логотип */
+  /* modal */
+  --modal-color: var(--grey-400-transparent);
+
+  /* spinner */
+  --spinner-outer-color: var(--grey-500);
+  --spinner-inner-color: var(--transparent);
+
+  /* logo */
   --logo-font-size: var(--font-size-l);
 
   /* input */
@@ -48,15 +60,34 @@
   --input-placeholder-color: var(--grey-400);
   --input-color-error: var(--red-300);
 
-  /* кнопки */
+  /* button */
   --button-size-s: 20px;
   --button-size-m: 25px;
   --button-size-l: 30px;
   --button-color: var(--grey-500);
   --button-border-radius: var(--border-radius-size-s);
 
-  /* формы */
+  /* form */
   --form-border-radius: var(--border-radius-size-m);
+
+  /* icon */
+  --icon-size-s: 24px;
+  --icon-size-m: 32px;
+  --icon-size-l: 48px;
+  --icon-color-grey: var(--grey-400);
+
+  /* photo-input */
+  --photo-input-background: var(--surface-block-color);
+  --photo-input-border-radius: var(--border-radius-size-m);
+  --photo-input-border-color: var(--grey-200);
+  --photo-input-text-color: var(--grey-400);
+  --photo-input-text-size: var(--font-size-l);
+
+  /* radio-button */
+  --radio-button-background: var(--surface-block-color);
+  --radio-button-border-radius: var(--border-radius-size-m);
+  --radio-button-border-color: var(--grey-200);
+  --radio-button-background_checked-color: var(--grey-400);
 }
 
 body {

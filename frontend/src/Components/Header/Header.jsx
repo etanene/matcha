@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { authAction } from '../../Actions';
 
-import Button from '../Button/Button';
+import Button from '../common/Button/Button';
 import Logo from '../Logo/Logo';
 import NavBar from '../NavBar/NavBar';
 import './Header.css';
@@ -21,6 +21,9 @@ function Header() {
     <NavBar>
       {user.username}
       <Button size="l" onClick={() => dispatch({ type: authAction.LOGIN_LOGOUT })} cls={buttonCss}>Log out</Button>
+      <Link to="/user/settings">
+        <Button size="l" cls={buttonCss}>Settings</Button>
+      </Link>
     </NavBar>
   ) : (
     <NavBar>
@@ -35,7 +38,7 @@ function Header() {
 
   return (
     <header className={headerCss()}>
-      <Link to="/">
+      <Link className={headerCss('link-logo')} to="/">
         <Logo>Matcha</Logo>
       </Link>
       {navBar}

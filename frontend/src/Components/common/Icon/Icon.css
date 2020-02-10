@@ -1,0 +1,23 @@
+@import url('../../../App.css');
+
+.icon {
+}
+
+/* размеры */
+.icon_size_s {
+  width: var(--icon-size-s);
+  height: var(--icon-size-s);
+}
+.icon_size_m {
+  width: var(--icon-size-m);
+  height: var(--icon-size-m);
+}
+.icon_size_l {
+  width: var(--icon-size-l);
+  height: var(--icon-size-l);
+}
+
+/* цвет */
+.icon_fill_grey {
+  fill: var(--icon-color-grey);
+}

@@ -21,8 +21,13 @@ function* auth(username, password) {
 
 function* authSaga() {
   while (true) {
-    const { username, password } = yield take(authAction.LOGIN_REGUEST);
-    const task = yield fork(auth, username, password);
+    const user = yield call(userService.getUser);
+    let task = null;
+
+    if (!user) {
+      const { username, password } = yield take(authAction.LOGIN_REGUEST);
+      task = yield fork(auth, username, password);
+    }
     const action = yield take([authAction.LOGIN_LOGOUT, authAction.LOGIN_ERROR]);
     if (action.type === 'LOGOUT') {
       yield cancel(task);

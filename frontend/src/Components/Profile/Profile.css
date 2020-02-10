@@ -1,0 +1,20 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  position: relative;
+}
+
+/* элементы */
+.profile-submit {
+  max-width: 210px;
+  margin: 20px auto;
+}
+.profile-textarea {
+  width: 60%;
+  margin: 5px auto 0;
+}
+.profile-tags-input {
+  width: 60%;
+  margin: 0 auto;
+}

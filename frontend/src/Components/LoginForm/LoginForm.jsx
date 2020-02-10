@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../Hooks';
 import { authAction, userAction } from '../../Actions';
 
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../common/Input/Input';
+import Button from '../common/Button/Button';
 import './LoginForm.css';
 
 const loginFormCss = cn('login-form');

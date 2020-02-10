@@ -40,7 +40,7 @@ Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.node,
   error: PropTypes.bool,
   cls: PropTypes.string,
   onChange: PropTypes.func,

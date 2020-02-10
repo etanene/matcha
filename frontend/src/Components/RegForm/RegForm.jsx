@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../Hooks';
 import { apiService } from '../../Services';
+import { REGEX } from '../../Constants';
+import { messageBoxAction } from '../../Actions';
 
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../common/Input/Input';
+import Button from '../common/Button/Button';
 import './RegForm.css';
 
 const regFormCss = cn('reg-form');
@@ -18,13 +20,13 @@ const formSchema = {
   username: {
     // доступны: большие/маленькие буквы, цифры
     // длина: 4 - 12
-    regex: /^[A-Za-z\d]{4,12}$/,
+    regex: REGEX.USERNAME,
     message: 'You can use a-z, A-Z, 0-9. Length from 4 to 12.',
   },
   email: {
     // доступны: любые символы
     // обязательно: @ и точка
-    regex: /^\S+@\S+\.\S+$/,
+    regex: REGEX.EMAIL,
     message: 'Invalid email layout.',
   },
   first_name: {
@@ -33,11 +35,15 @@ const formSchema = {
   last_name: {
     message: 'Required field.',
   },
+  birthday: {
+    regex: REGEX.DATE,
+    message: 'Invalid date layout. DD.MM.YYYY',
+  },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
     // длина: 4 - 12
-    regex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/,
+    regex: REGEX.PASSWORD,
     message: 'Password must contain upper and lower letter, number. Length from 4 to 12.',
   },
   confirm_password: {
@@ -45,13 +51,18 @@ const formSchema = {
   },
 };
 
-const submitForm = async (data) => {
-  await apiService.postJson('/api/auth/signup', data);
-  console.log('Submit regForm');
-};
-
-function RegForm(props) {
+const RegForm = React.memo((props) => {
   const { cls } = props;
+  const dispatch = useDispatch();
+
+  const submitForm = async (data) => {
+    try {
+      const res = await apiService.postJson('/api/auth/signup', data);
+      dispatch(messageBoxAction.open(res.message));
+    } catch (e) {
+      dispatch(messageBoxAction.open(e.message, true));
+    }
+  };
   const {
     state,
     handleChange,
@@ -133,6 +144,17 @@ function RegForm(props) {
         {state.last_name.message}
       </Input>
       <Input
+        type="text"
+        name="birthday"
+        placeholder="Birthday"
+        value={state.birthday.value}
+        error={state.birthday.error}
+        onChange={handleChange}
+        cls={inputCss}
+      >
+        {state.birthday.message}
+      </Input>
+      <Input
         type="password"
         name="password"
         placeholder="Password"
@@ -157,7 +179,7 @@ function RegForm(props) {
       <Button type="submit" cls={regFormCss('submit')}>Sign up</Button>
     </form>
   );
-}
+});
 
 RegForm.propTypes = {
   cls: PropTypes.string,

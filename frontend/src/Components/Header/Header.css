@@ -8,12 +8,12 @@
   align-items: center;
 }
 
-.header a {
-  text-decoration: none;
-  color: inherit;
-}
-
 /* элементы */
 .header-button {
   margin: 5px;
+}
+
+.header-link-logo {
+  text-decoration: none;
+  color: inherit;
 }
