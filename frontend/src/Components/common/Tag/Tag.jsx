@@ -2,6 +2,7 @@ import React from 'react';
 import { cn } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 
+import CloseButton from '../CloseButton/CloseButton';
 import './Tag.css';
 
 const tagCss = cn('tag');
@@ -11,6 +12,7 @@ function Tag(props) {
 
   return (
     <div className={tagCss({}, [cls])}>
+      <CloseButton onClick={console.log(props)} cls={tagCss('close-button')}> </CloseButton>
       {`#${children}`}
     </div>
   );

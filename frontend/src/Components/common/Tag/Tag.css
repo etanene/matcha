@@ -5,3 +5,8 @@
   border: 1px solid var(--radio-button-border-color);
   border-radius: var(--radio-button-border-radius);
 }
+
+.tag-close-button {
+  position: relative;
+  margin-right: 5px;
+}

@@ -24,7 +24,7 @@ function TagsInput(props) {
   const dispatch = useDispatch();
   // const [tags, setTags] = useState(data);
   console.log('tags', tags);
-
+  console.log('tagsList', tagsList);
 
   function handleChangeInput(event) {
     event.persist();
