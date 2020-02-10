@@ -1,9 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { cn } from '@bem-react/classname';
 
-function Match() {
+import Preview from '../Preview/Preview';
+import './Match.css';
+
+const matchCss = cn('match');
+
+function Match(props) {
+  const { cls } = props;
   return (
-    <div>Match</div>
+    <div className={matchCss({}, [cls])}>
+      match
+      <Preview cls={matchCss('preview')} />
+    </div>
   );
 }
+
+Match.propTypes = {
+  cls: PropTypes.string,
+};
+
+Match.defaultProps = {
+  cls: '',
+};
 
 export default Match;
