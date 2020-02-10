@@ -1,0 +1,20 @@
+@import url('../../App.css');
+
+.changeuserpw-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+/* элементы */
+.changeuserpw-form-form-name {
+  margin: 10px auto;
+}
+
+.changeuserpw-form-input {
+  margin: 5px 0;
+}
+
+.changeuserpw-form-submit {
+  margin: 5px 0;
+}
