@@ -1,9 +1,0 @@
-.match {
-  display: flex;
-  flex-direction: column;
-}
-
-/* элементы */
-.preview {
-  margin: 0 auto;
-}
