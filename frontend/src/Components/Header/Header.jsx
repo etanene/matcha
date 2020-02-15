@@ -21,6 +21,9 @@ function Header() {
     <NavBar>
       {user.username}
       <Button size="l" onClick={() => dispatch({ type: authAction.LOGIN_LOGOUT })} cls={buttonCss}>Log out</Button>
+      <Link to="/user/settings">
+        <Button size="l" cls={buttonCss}>Settings</Button>
+      </Link>
     </NavBar>
   ) : (
     <NavBar>

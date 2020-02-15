@@ -38,6 +38,8 @@ const getProfile = async (params) => {
     sex,
     info,
     orientation,
+    first_name: firstName,
+    last_name: lastName,
   } = user[0];
   const tags = await tagService.getTagsByUser({ login });
   console.log('tags profile', tags);
@@ -47,6 +49,8 @@ const getProfile = async (params) => {
     about: info,
     orientation,
     tags,
+    firstName,
+    lastName,
   };
 };
 
