@@ -1,9 +1,11 @@
 .match {
   display: flex;
   flex-direction: column;
+  max-width: 640px;
 }
 
 /* элементы */
-.preview {
+.match-preview {
+  width: 70%;
   margin: 0 auto;
 }

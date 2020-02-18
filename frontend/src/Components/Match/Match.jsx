@@ -11,7 +11,6 @@ function Match(props) {
   const { cls } = props;
   return (
     <div className={matchCss({}, [cls])}>
-      match
       <Preview cls={matchCss('preview')} />
     </div>
   );

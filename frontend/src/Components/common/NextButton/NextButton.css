@@ -1,0 +1,13 @@
+.next-button {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* элементы */
+.next-button-icon {
+  font-size: 48px;
+  text-align: center;
+}

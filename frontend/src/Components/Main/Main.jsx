@@ -9,8 +9,8 @@ import Icon from '../common/Icon/Icon';
 import Profile from '../Profile/Profile';
 import Match from '../Match/Match';
 import Chat from '../Chat/Chat';
-import './Main.css';
 import UserSettings from '../UserSettings/UserSettings';
+import './Main.css';
 
 const mainCss = cn('main');
 const navBarCss = mainCss('navbar');
@@ -28,7 +28,7 @@ function Main() {
           <Profile cls={mainCss('profile')} />
         </Route>
         <Route path="/match">
-          <Match />
+          <Match cls={mainCss('match')} />
         </Route>
         <Route path="/chat">
           <Chat />

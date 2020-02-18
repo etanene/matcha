@@ -1,0 +1,31 @@
+@import url('../../App.css');
+
+.preview {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+/* элементы */
+.preview-user-name {
+  display: flex;
+  justify-content: center;
+  font-size: var(--preview-user-name-text-size);
+  /* font-weight: bold; */
+  margin: 10px;
+}
+.preview-photo-slider {
+}
+.preview-container {
+  display: flex;
+  justify-content: space-around;
+}
+.preview-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+.preview-about {
+  text-align: center;
+  margin: 10px;
+}
