@@ -15,8 +15,8 @@ const getUser = async (data) => {
       *
     FROM
       users
-    ${dbUtils.getCondition(data)}
-  `, Object.values(data));
+    ${dbUtils.getInCondition(data)}
+  `, dbUtils.spreadValues(data));
 
   return (res.rows);
 };

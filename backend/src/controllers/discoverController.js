@@ -14,6 +14,6 @@ const getRecommendUsers = async (req, res) => {
   }
 };
 
-export default {
+module.exports = {
   getRecommendUsers,
 };
