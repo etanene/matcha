@@ -12,6 +12,25 @@ const saveTags = async (tags) => {
 
 const saveTaggings = async (tags, userId) => {
   await db.query(`
+    DELETE FROM
+      taggings
+    WHERE 
+      user_id = ${userId}
+    AND
+      tag_id NOT IN (
+        SELECT
+          taggings.tag_id
+        FROM
+          taggings
+        JOIN
+          tags ON tags.tag_id = taggings.tag_id
+        WHERE
+          tags.tag_value IN ${dbUtils.getInValues(tags)}
+          AND
+          taggings.user_id = ${userId}
+      )
+    `, [...tags]);
+  await db.query(`
     INSERT INTO
       taggings (tag_id, user_id)
     SELECT

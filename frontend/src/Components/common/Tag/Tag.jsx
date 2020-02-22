@@ -8,11 +8,11 @@ import './Tag.css';
 const tagCss = cn('tag');
 
 function Tag(props) {
-  const { children, cls } = props;
+  const { onDelete, children, cls } = props;
 
   return (
     <div className={tagCss({}, [cls])}>
-      <CloseButton onClick={console.log(props)} cls={tagCss('close-button')}> </CloseButton>
+      <CloseButton onClick={onDelete} cls={tagCss('close-button')}> </CloseButton>
       {`#${children}`}
     </div>
   );
@@ -21,10 +21,12 @@ function Tag(props) {
 Tag.propTypes = {
   children: PropTypes.node.isRequired,
   cls: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 Tag.defaultProps = {
   cls: '',
+  onDelete: null,
 };
 
 export default Tag;

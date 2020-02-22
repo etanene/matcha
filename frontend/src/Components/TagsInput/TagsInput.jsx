@@ -23,8 +23,6 @@ function TagsInput(props) {
   const [tagsList, setTagsList] = useState([]);
   const dispatch = useDispatch();
   // const [tags, setTags] = useState(data);
-  console.log('tags', tags);
-  console.log('tagsList', tagsList);
 
   function handleChangeInput(event) {
     event.persist();
@@ -40,7 +38,6 @@ function TagsInput(props) {
         return;
       }
       const res = await apiService.getJson(`/api/tag/get?tag=${value}`);
-      console.log('res tags', res);
       setTagsList(res.map((tag) => (tag.tag_value)));
     } catch (e) {
       console.log(e);
@@ -61,12 +58,20 @@ function TagsInput(props) {
     };
   }
 
+  function handleRemoveTag(tag) {
+    return () => {
+      const changedTags = [...tags];
+      changedTags.splice(changedTags.indexOf(tag), 1);
+      dispatch(profileAction.setData('tags', changedTags));
+    };
+  }
+
   return (
     <div className={tagsInputCss({}, [cls])}>
       {title && <span className={tagsInputCss('title')}>{title}</span>}
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
+          <Tag onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>

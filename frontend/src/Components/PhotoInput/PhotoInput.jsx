@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { profileAction } from '../../Actions';
 
+import CloseButton from '../common/CloseButton/CloseButton';
 import Icon from '../common/Icon/Icon';
 import { ICONS } from '../../Constants';
 import './PhotoInput.css';
@@ -37,8 +38,14 @@ function PhotoInput(props) {
     reader.readAsDataURL(inputFile);
   }
 
+  function handleDelete() {
+    setFile(null);
+    dispatch(profileAction.addPhoto(id, null));
+  }
+
   const content = file ? (
     <div className={photoInputCss('photo')}>
+      <CloseButton onClick={handleDelete} cls={photoInputCss('close-button')}> </CloseButton>
       <img src={file} alt="img" className={photoInputCss('img')} />
     </div>
   ) : (
