@@ -40,7 +40,7 @@ function PhotoInput(props) {
 
   function handleDelete() {
     setFile(null);
-    dispatch(profileAction.addPhoto(id, null));
+    dispatch(profileAction.delPhoto(id));
   }
 
   const content = file ? (

@@ -3,6 +3,11 @@ function addPhoto(id, src) {
   return { type: PROFILE_PHOTO_ADD, payload: { id, src } };
 }
 
+const PROFILE_PHOTO_DEL = 'PROFILE_PHOTO_DEL';
+function delPhoto(id) {
+  return { type: PROFILE_PHOTO_DEL, payload: { id } };
+}
+
 const PROFILE_SET_ERROR = 'PROFILE_SET_ERROR';
 function setError(error) {
   return { type: PROFILE_SET_ERROR, payload: error };
@@ -41,6 +46,8 @@ function setData(field, value) {
 export default {
   PROFILE_PHOTO_ADD,
   addPhoto,
+  PROFILE_PHOTO_DEL,
+  delPhoto,
   PROFILE_SET_ERROR,
   setError,
   PROFILE_SET_LOADING,
