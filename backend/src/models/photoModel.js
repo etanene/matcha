@@ -1,4 +1,4 @@
-const { db } = require('../db');
+const { db, dbUtils } = require('../db');
 
 const savePhoto = async (photo, name, username) => {
   await db.query(`
@@ -47,17 +47,17 @@ const savePhoto = async (photo, name, username) => {
   `, [username, name, photo.id]);
 };
 
-const getPhotos = async (username) => {
+const getPhotos = async (users) => {
   const res = await db.query(`
     SELECT
-      ph.name, ph.order_id
+      ph.name, ph.order_id, u.user_id
     FROM
       photos ph
     JOIN
       users u ON u.user_id = ph.user_id
     WHERE
-      u.login = $1
-  `, [username]);
+      u.login IN ${dbUtils.getInValues(users)}
+  `, users);
 
   return (res.rows);
 };

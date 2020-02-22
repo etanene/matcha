@@ -9,11 +9,13 @@ import { discoverAction, authAction } from '../Actions';
 
 import { apiService } from '../Services';
 
-function* getUsers() {
+function* getUsers(action) {
   yield put(discoverAction.setLoading(true));
+  const { payload } = action;
   try {
-    const users = yield call(apiService.getJson, '/api/discover/getRecommendUsers');
+    const users = yield call(apiService.getJson, '/api/discover/getRecommendUsers', payload);
     console.log('users on front', users);
+    yield put(discoverAction.saveUsers(users));
   } catch (e) {
     // will notify
     console.log(e);

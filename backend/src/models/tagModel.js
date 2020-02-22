@@ -49,10 +49,11 @@ const getTags = async (tag) => {
   return (res.rows);
 };
 
-const getTagsByUser = async (user) => {
+const getTagsByUser = async (users) => {
+  console.log('users', users);
   const res = await db.query(`
     SELECT
-      tags.tag_id, tags.tag_value
+      tags.tag_id, tags.tag_value, users.user_id
     FROM
       tags
     JOIN
@@ -66,9 +67,9 @@ const getTagsByUser = async (user) => {
         FROM
           users
         WHERE
-          login = $1
+          login IN ${dbUtils.getInValues(users)}
       )
-  `, [user]);
+  `, users);
 
   return (res.rows);
 };

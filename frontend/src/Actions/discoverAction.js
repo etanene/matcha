@@ -1,6 +1,6 @@
 const DISCOVER_GET_USERS = 'DISCOVER_GET_USERS';
-function getUsers() {
-  return { type: DISCOVER_GET_USERS };
+function getUsers(payload) {
+  return { type: DISCOVER_GET_USERS, payload };
 }
 
 const DISCOVER_SAVE_USERS = 'DISCOVER_SAVE_USERS';

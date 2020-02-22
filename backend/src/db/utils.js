@@ -29,7 +29,7 @@ const getInValues = (data, startInd = 0) => {
   return `(${values.join(', ')})`;
 };
 
-const getInCondition = (data, startInd = 0) => {
+const getInCondition = (data, without = {}, startInd = 0) => {
   const keys = Object.keys(data);
   if (!keys.length) {
     return '';
@@ -38,9 +38,17 @@ const getInCondition = (data, startInd = 0) => {
   let ind = startInd;
   const values = keys.map((key) => {
     if (Array.isArray(data[key])) {
-      return (`${key} IN ${getInValues(data[key], ind)}`);
+      const inValues = getInValues(data[key], ind);
+      ind += data[key].length;
+      if (without[key]) {
+        return (`${key} NOT IN ${inValues}`);
+      }
+      return (`${key} IN ${inValues}`);
     }
     ind += 1;
+    if (without[key]) {
+      return (`${key}!=$${ind}`);
+    }
     return (`${key}=$${ind}`);
   });
   return `WHERE ${values.join(' AND ')}`;

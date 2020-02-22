@@ -27,7 +27,7 @@ const savePhotos = async (photos, user) => {
 };
 
 const getPhotos = async (login) => {
-  const photos = await photoModel.getPhotos(login);
+  const photos = await photoModel.getPhotos([login]);
   console.log('photos', photos);
   return (photos);
 };

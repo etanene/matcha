@@ -17,7 +17,7 @@ const getTags = async (params) => {
 
 const getTagsByUser = async (params) => {
   const { login } = params;
-  const tags = await tagModel.getTagsByUser(login);
+  const tags = await tagModel.getTagsByUser([login]);
   return tags;
 };
 

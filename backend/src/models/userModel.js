@@ -9,13 +9,13 @@ const addUser = async (user) => {
   `, [user.email, user.username, user.first_name, user.last_name, user.birthday, user.password, user.unique]);
 };
 
-const getUser = async (data) => {
+const getUser = async (data, without) => {
   const res = await db.query(`
     SELECT
       *
     FROM
       users
-    ${dbUtils.getInCondition(data)}
+    ${dbUtils.getInCondition(data, without, 0)}
   `, dbUtils.spreadValues(data));
 
   return (res.rows);
