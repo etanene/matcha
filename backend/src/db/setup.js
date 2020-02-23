@@ -26,6 +26,12 @@ const fakephotos = fs.readFileSync(path.join(__dirname, '/migrates/fakephotos.sq
   await client.query(root);
   console.log('Root created');
 
+  await client.query('drop table if exists taggings');
+  console.log('Drop taggings created');
+
+  await client.query('drop table if exists photos;');
+  console.log('Drop photos created');
+
   // Создаем таблицу photos
   await client.query(photos);
   console.log('Table photos created');
