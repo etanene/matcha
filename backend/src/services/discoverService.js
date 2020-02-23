@@ -1,6 +1,7 @@
 const { userModel, tagModel, photoModel } = require('../models');
+const { UserException } = require('../errors');
 
-const getPartnerSex = (sex, orientation) => {
+function getPartnerSex(sex, orientation) {
   const options = {
     homo: {
       male: ['male'],
@@ -17,7 +18,19 @@ const getPartnerSex = (sex, orientation) => {
   };
 
   return options[orientation][sex];
-};
+}
+
+function mappingUserData(data) {
+  return data.reduce((result, item) => ({
+    ...result,
+    [item.user_id]: result[item.user_id] ? [
+      ...result[item.user_id],
+      item,
+    ] : [
+      item,
+    ],
+  }), {});
+}
 
 const getRecommendUsers = async (params) => {
   console.log('params', params);
@@ -26,8 +39,14 @@ const getRecommendUsers = async (params) => {
   console.log('partnersex', partnerSex);
   const users = await userModel.getUser({ sex: partnerSex, login }, { login: true });
   const logins = users.map((user) => user.login);
+  if (!logins.length) {
+    throw new UserException('No recommend users for you');
+  }
   const tags = await tagModel.getTagsByUser(logins);
   const photos = await photoModel.getPhotos(logins);
+
+  const mappedPhotos = mappingUserData(photos);
+  const mappedTags = mappingUserData(tags);
   console.log('users recommend', users);
   console.log('tags', tags);
   console.log('photos', photos);
@@ -45,8 +64,8 @@ const getRecommendUsers = async (params) => {
       lastName,
       sex,
       info,
-      photos,
-      tags,
+      photos: mappedPhotos[userId],
+      tags: mappedTags[userId],
     };
   });
   return result;

@@ -61,7 +61,7 @@ const getTagsByUser = async (users) => {
     JOIN
       users ON users.user_id = taggings.user_id
     WHERE
-      taggings.user_id = (
+      taggings.user_id IN (
         SELECT
           user_id
         FROM

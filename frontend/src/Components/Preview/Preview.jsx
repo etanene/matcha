@@ -12,30 +12,35 @@ import './Preview.css';
 const previewCss = cn('preview');
 
 function Preview(props) {
-  const { discover, cls } = props;
+  const {
+    discover,
+    cls,
+    onLike,
+  } = props;
 
   console.log('discover preview', discover);
 
-  if (discover) {
-    return (<div />);
-  }
   return (
     <div className={previewCss({}, [cls])}>
       <div className={previewCss('user-name')}>
-        {`${discover.firsName} ${discover.lastName}`}
+        {`${discover.firstName} ${discover.lastName}`}
       </div>
       <PhotoSlider photos={discover.photos} cls={previewCss('photo-slider')} />
       <div className={previewCss('container')}>
-        <Icon icon={ICONS.DISLIKE} viewBox="0 0 36 36" size="l" />
+        <div role="button" aria-hidden onClick={onLike} onKeyPress={onLike}>
+          <Icon icon={ICONS.DISLIKE} viewBox="0 0 36 36" size="l" />
+        </div>
         <div className={previewCss('tags')}>
           {discover.tags.map((tag) => (
-            <Tag key={tag.id}>{tag.value}</Tag>
+            <Tag key={tag.tag_id}>{tag.tag_value}</Tag>
           ))}
         </div>
-        <Icon icon={ICONS.LIKE} viewBox="0 0 512 512" size="l" />
+        <div role="button" aria-hidden onClick={onLike} onKeyPress={onLike}>
+          <Icon icon={ICONS.LIKE} viewBox="0 0 512 512" size="l" />
+        </div>
       </div>
       <div className={previewCss('about')}>
-        {discover.about}
+        {discover.info}
       </div>
     </div>
   );
@@ -43,18 +48,20 @@ function Preview(props) {
 
 Preview.propTypes = {
   discover: PropTypes.shape({
-    firsName: PropTypes.string,
+    firstName: PropTypes.string,
     lastName: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.object),
     tags: PropTypes.arrayOf(PropTypes.object),
-    about: PropTypes.string,
+    info: PropTypes.string,
   }),
   cls: PropTypes.string,
+  onLike: PropTypes.func,
 };
 
 Preview.defaultProps = {
   discover: {},
   cls: '',
+  onLike: null,
 };
 
 export default Preview;

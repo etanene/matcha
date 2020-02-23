@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +53,11 @@ function Match(props) {
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user.user);
   const discover = useSelector((state) => state.discover.users);
+
+  const [userInd, setUserInd] = useState(0);
+  function handleLike() {
+    setUserInd(userInd + 1);
+  }
   console.log('discover match', discover);
   console.log('profile', profile);
   console.log('user', user);
@@ -69,7 +74,11 @@ function Match(props) {
 
   return (
     <div className={matchCss({}, [cls])}>
-      <Preview discover={discover[0]} cls={matchCss('preview')} />
+      {discover[userInd] ? (
+        <Preview onLike={handleLike} discover={discover[userInd]} cls={matchCss('preview')} />
+      ) : (
+        <div>davai potom</div>
+      )}
     </div>
   );
 }

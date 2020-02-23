@@ -13,7 +13,7 @@ function PhotoCard(props) {
     <div className={photoCardCss({}, [cls])}>
       <div className={photoCardCss('layer')}>
         <div className={photoCardCss('container')}>
-          <img src={photo.src} alt="img" className={photoCardCss('img')} />
+          <img src={`api/public/photo/${photo.name}`} alt="img" className={photoCardCss('img')} />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ PhotoCard.propTypes = {
   photo: PropTypes.shape({
     id: PropTypes.number,
     order_id: PropTypes.number,
-    src: PropTypes.string,
+    name: PropTypes.string,
   }),
   cls: PropTypes.string,
 };
