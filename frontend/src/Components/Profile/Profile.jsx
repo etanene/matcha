@@ -121,7 +121,6 @@ function Profile(props) {
     }
   }
 
-  console.log('profile', profile);
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
