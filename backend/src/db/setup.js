@@ -10,6 +10,7 @@ const root = fs.readFileSync(path.join(__dirname, '/migrates/root.sql')).toStrin
 const photos = fs.readFileSync(path.join(__dirname, '/migrates/photos.sql')).toString();
 const tags = fs.readFileSync(path.join(__dirname, '/migrates/tags.sql')).toString();
 const taggings = fs.readFileSync(path.join(__dirname, '/migrates/taggings.sql')).toString();
+const likes = fs.readFileSync(path.join(__dirname, '/migrates/likes.sql')).toString();
 
 (async () => {
   await client.connect();
@@ -33,6 +34,10 @@ const taggings = fs.readFileSync(path.join(__dirname, '/migrates/taggings.sql'))
   // Создаем таблицу taggings
   await client.query(taggings);
   console.log('Table taggings created');
+
+  // Создаем таблицу likes
+  await client.query(likes);
+  console.log('Table likes created');
 
   client.end();
 })();

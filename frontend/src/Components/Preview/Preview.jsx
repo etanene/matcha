@@ -11,14 +11,15 @@ import './Preview.css';
 
 const previewCss = cn('preview');
 
+const TYPE_DISLIKE = 0;
+const TYPE_LIKE = 1;
+
 function Preview(props) {
   const {
     discover,
     cls,
     onLike,
   } = props;
-
-  console.log('discover preview', discover);
 
   return (
     <div className={previewCss({}, [cls])}>
@@ -27,7 +28,7 @@ function Preview(props) {
       </div>
       <PhotoSlider photos={discover.photos} cls={previewCss('photo-slider')} />
       <div className={previewCss('container')}>
-        <div role="button" aria-hidden onClick={onLike} onKeyPress={onLike}>
+        <div role="button" aria-hidden onClick={onLike(discover.userId, TYPE_DISLIKE)} onKeyPress={onLike}>
           <Icon icon={ICONS.DISLIKE} viewBox="0 0 36 36" size="l" />
         </div>
         <div className={previewCss('tags')}>
@@ -35,7 +36,7 @@ function Preview(props) {
             <Tag key={tag.tag_id}>{tag.tag_value}</Tag>
           ))}
         </div>
-        <div role="button" aria-hidden onClick={onLike} onKeyPress={onLike}>
+        <div role="button" aria-hidden onClick={onLike(discover.userId, TYPE_LIKE)} onKeyPress={onLike}>
           <Icon icon={ICONS.LIKE} viewBox="0 0 512 512" size="l" />
         </div>
       </div>
@@ -53,6 +54,7 @@ Preview.propTypes = {
     photos: PropTypes.arrayOf(PropTypes.object),
     tags: PropTypes.arrayOf(PropTypes.object),
     info: PropTypes.string,
+    userId: PropTypes.number,
   }),
   cls: PropTypes.string,
   onLike: PropTypes.func,

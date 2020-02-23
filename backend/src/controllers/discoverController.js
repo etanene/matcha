@@ -18,6 +18,21 @@ const getRecommendUsers = async (req, res) => {
   }
 };
 
+const like = async (req, res) => {
+  try {
+    console.log('like body', req.body);
+    res.send({});
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 module.exports = {
   getRecommendUsers,
+  like,
 };

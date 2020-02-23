@@ -13,6 +13,11 @@ function setLoading(loading) {
   return { type: DISCOVER_SET_LOADING, payload: loading };
 }
 
+const DISCOVER_LIKE = 'DISCOVER_LIKE';
+function like(payload) {
+  return { type: DISCOVER_LIKE, payload };
+}
+
 export default {
   DISCOVER_GET_USERS,
   getUsers,
@@ -20,4 +25,6 @@ export default {
   saveUsers,
   DISCOVER_SET_LOADING,
   setLoading,
+  DISCOVER_LIKE,
+  like,
 };

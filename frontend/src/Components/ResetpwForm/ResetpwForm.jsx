@@ -24,7 +24,6 @@ const formSchema = {
 
 const submitForm = async (data) => {
   await apiService.postJson('/api/user/resetpw', data);
-  console.log('submit ResetpwForm');
 };
 
 function ResetpwForm(props) {

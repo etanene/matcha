@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { discoverAction } from '../../Actions';
 
 import Preview from '../Preview/Preview';
+import LoadingModal from '../LoadingModal/LoadingModal';
 import './Match.css';
 
 const matchCss = cn('match');
@@ -52,18 +53,18 @@ function Match(props) {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user.user);
-  const discover = useSelector((state) => state.discover.users);
+  const discover = useSelector((state) => state.discover);
+  const discoverUsers = discover.users;
 
   const [userInd, setUserInd] = useState(0);
-  function handleLike() {
-    setUserInd(userInd + 1);
+  function handleLike(targetUserId, type) {
+    return () => {
+      dispatch(discoverAction.like({ from: user.username, to: targetUserId, type }));
+      setUserInd(userInd + 1);
+    };
   }
-  console.log('discover match', discover);
-  console.log('profile', profile);
-  console.log('user', user);
 
   useEffect(() => {
-    console.log('USE EFFECT');
     const { sex, orientation } = profile;
     dispatch(discoverAction.getUsers({
       sex: sex.value,
@@ -74,11 +75,12 @@ function Match(props) {
 
   return (
     <div className={matchCss({}, [cls])}>
-      {discover[userInd] ? (
-        <Preview onLike={handleLike} discover={discover[userInd]} cls={matchCss('preview')} />
+      {discoverUsers[userInd] ? (
+        <Preview onLike={handleLike} discover={discoverUsers[userInd]} cls={matchCss('preview')} />
       ) : (
         <div>davai potom</div>
       )}
+      <LoadingModal isLoading={discover.loading} />
     </div>
   );
 }

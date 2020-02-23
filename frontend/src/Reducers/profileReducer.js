@@ -127,7 +127,6 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
-  console.log('action', action);
   switch (type) {
     case profileAction.PROFILE_PHOTO_ADD:
       return addPhoto(state, payload);
