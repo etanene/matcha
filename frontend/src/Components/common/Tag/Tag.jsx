@@ -12,7 +12,7 @@ function Tag(props) {
 
   return (
     <div className={tagCss({}, [cls])}>
-      <CloseButton onClick={onDelete} cls={tagCss('close-button')}> </CloseButton>
+      <CloseButton onClick={onDelete} cls={tagCss('close-button')} />
       {`#${children}`}
     </div>
   );

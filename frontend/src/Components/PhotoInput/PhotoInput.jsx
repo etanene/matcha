@@ -45,7 +45,7 @@ function PhotoInput(props) {
 
   const content = file ? (
     <div className={photoInputCss('photo')}>
-      <CloseButton onClick={handleDelete} cls={photoInputCss('close-button')}> </CloseButton>
+      <CloseButton onClick={handleDelete} cls={photoInputCss('close-button')} />
       <img src={file} alt="img" className={photoInputCss('img')} />
     </div>
   ) : (
