@@ -50,3 +50,9 @@
   box-sizing: border-box;
   display: none;
 }
+
+.photo-input-close-button {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
