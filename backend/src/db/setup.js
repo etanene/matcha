@@ -18,19 +18,17 @@ const fakephotos = fs.readFileSync(path.join(__dirname, '/migrates/fakephotos.sq
 (async () => {
   await client.connect();
 
-  // Созданаем tables users
+  // Дропаем таблицы
+  await client.query('drop table if exists taggings, photos, users, tags');
+  console.log('Drop tables');
+
+  // Созданаем таблицу users
   await client.query(users);
   console.log('Tables users created');
 
   // Создаем в users рута
   await client.query(root);
   console.log('Root created');
-
-  await client.query('drop table if exists taggings');
-  console.log('Drop taggings created');
-
-  await client.query('drop table if exists photos;');
-  console.log('Drop photos created');
 
   // Создаем таблицу photos
   await client.query(photos);
@@ -44,6 +42,7 @@ const fakephotos = fs.readFileSync(path.join(__dirname, '/migrates/fakephotos.sq
   await client.query(taggings);
   console.log('Table taggings created');
 
+  // Создаем фейки
   await client.query(fakeusers);
   console.log('Fake users created');
 

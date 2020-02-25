@@ -28,3 +28,4 @@ VALUES
   ('dmackillo@miitbeian.gov.cn', 'dmackillo', 'Dorthea', 'MacKill', '04/07/1985', 'DlOoFLNPL6Zi', 'female', 'pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac', 'Nakasongola', 1.3118981, 32.463708, TRUE, 'hetero')
 ON CONFLICT (login)
   DO NOTHING;
+  
