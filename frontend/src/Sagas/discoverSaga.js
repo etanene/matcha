@@ -14,7 +14,6 @@ function* getUsers(action) {
   const { payload } = action;
   try {
     const users = yield call(apiService.getJson, '/api/discover/getRecommendUsers', payload);
-    console.log('users on front', users);
     yield put(discoverAction.saveUsers(users));
   } catch (e) {
     // will notify
@@ -30,9 +29,29 @@ function* watchGetUsers() {
   yield takeEvery(discoverAction.DISCOVER_GET_USERS, getUsers);
 }
 
+function* like(action) {
+  const { payload } = action;
+
+  try {
+    const res = yield call(apiService.postJson, 'api/discover/like', payload);
+    console.log('res like', res);
+  } catch (e) {
+    // wiil notify
+    console.log(e);
+    if (e.status === 401) {
+      yield put(authAction.logout());
+    }
+  }
+}
+
+function* watchLike() {
+  yield takeEvery(discoverAction.DISCOVER_LIKE, like);
+}
+
 function* discoverSaga() {
   yield all([
     watchGetUsers(),
+    watchLike(),
   ]);
 }
 

@@ -22,9 +22,6 @@ function TagsInput(props) {
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
   const dispatch = useDispatch();
-  // const [tags, setTags] = useState(data);
-  console.log('tags', tags);
-
 
   function handleChangeInput(event) {
     event.persist();
@@ -40,7 +37,6 @@ function TagsInput(props) {
         return;
       }
       const res = await apiService.getJson(`/api/tag/get?tag=${value}`);
-      console.log('res tags', res);
       setTagsList(res.map((tag) => (tag.tag_value)));
     } catch (e) {
       console.log(e);

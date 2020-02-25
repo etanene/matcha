@@ -33,10 +33,8 @@ function mappingUserData(data) {
 }
 
 const getRecommendUsers = async (params) => {
-  console.log('params', params);
   const { login, sex: userSex, orientation } = params;
   const partnerSex = getPartnerSex(userSex, orientation);
-  console.log('partnersex', partnerSex);
   const users = await userModel.getUser({ sex: partnerSex, login }, { login: true });
   const logins = users.map((user) => user.login);
   if (!logins.length) {
@@ -47,9 +45,7 @@ const getRecommendUsers = async (params) => {
 
   const mappedPhotos = mappingUserData(photos);
   const mappedTags = mappingUserData(tags);
-  console.log('users recommend', users);
-  console.log('tags', tags);
-  console.log('photos', photos);
+
   const result = users.map((user) => {
     const {
       user_id: userId,

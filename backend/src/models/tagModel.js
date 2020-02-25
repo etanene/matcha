@@ -50,7 +50,6 @@ const getTags = async (tag) => {
 };
 
 const getTagsByUser = async (users) => {
-  console.log('users', users);
   const res = await db.query(`
     SELECT
       tags.tag_id, tags.tag_value, users.user_id

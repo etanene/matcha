@@ -4,7 +4,6 @@ const userService = require('./userService');
 const saveTags = async (tags, user) => {
   await tagModel.saveTags(tags);
   const users = await userService.getUser({ login: user });
-  console.log('user', users);
   const userId = users[0] && users[0].user_id;
   await tagModel.saveTaggings(tags, userId);
 };

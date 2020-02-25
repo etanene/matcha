@@ -15,7 +15,6 @@ const discoverReducer = (state = initialState, action) => {
         loading: payload,
       };
     case discoverAction.DISCOVER_SAVE_USERS:
-      console.log('patload,', payload);
       return {
         ...state,
         users: payload,

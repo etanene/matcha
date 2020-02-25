@@ -13,7 +13,6 @@ function* submitProfile(action) {
   yield put(profileAction.setLoading(true));
   try {
     const { payload } = action;
-    console.log('payload', payload);
     yield call(apiService.postJson, '/api/profile/save', payload);
     yield put(profileAction.resetChangePhoto());
   } catch (e) {
@@ -35,7 +34,6 @@ function* getProfile(action) {
   try {
     const { payload } = action;
     const profile = yield call(apiService.getJson, `/api/profile/get?login=${payload}`);
-    console.log('getProfile', profile);
     yield put(profileAction.saveProfile(profile));
   } catch (e) {
     // will notify

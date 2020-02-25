@@ -111,20 +111,16 @@ function Profile(props) {
         isValid = false;
         errors[field] = error;
       }
-      console.log('value', value);
       return Object.assign(result, { [field]: value });
     }, {});
 
     if (isValid) {
-      console.log('data', data);
       dispatch(profileAction.submit(data));
     } else {
-      console.log('errors', errors);
       dispatch(profileAction.setError(errors));
     }
   }
 
-  console.log('profile', profile);
   return (
     <form onSubmit={handleSubmit} className={profileCss({}, [cls])}>
       <PhotoProfile photos={profile.photo.value} error={profile.photo.error} />
