@@ -22,6 +22,10 @@ function TagsInput(props) {
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
   const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+  // const [tags, setTags] = useState(data);
+>>>>>>> master
 
   function handleChangeInput(event) {
     event.persist();
@@ -57,12 +61,20 @@ function TagsInput(props) {
     };
   }
 
+  function handleRemoveTag(tag) {
+    return () => {
+      const changedTags = [...tags];
+      changedTags.splice(changedTags.indexOf(tag), 1);
+      dispatch(profileAction.setData('tags', changedTags));
+    };
+  }
+
   return (
     <div className={tagsInputCss({}, [cls])}>
       {title && <span className={tagsInputCss('title')}>{title}</span>}
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
+          <Tag onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>

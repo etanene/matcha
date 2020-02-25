@@ -97,6 +97,7 @@ function Profile(props) {
   }
 
   function handleSubmit(event) {
+    console.log('hello im profile : ', profile);
     event.preventDefault();
     let isValid = true;
     const fields = Object.keys(profile);

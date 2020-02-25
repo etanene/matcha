@@ -16,6 +16,18 @@ function addPhoto(state, photo) {
   };
 }
 
+function delPhoto(state, photo) {
+  const changedValue = { ...state.photo.value };
+  delete changedValue[photo.id];
+  return {
+    ...state,
+    photo: {
+      ...state.photo,
+      value: changedValue,
+    },
+  };
+}
+
 function resetChangePhoto(state) {
   const newValue = Object.keys(state.photo.value).reduce((result, id) => ({
     ...result,
@@ -130,6 +142,8 @@ const profileReducer = (state = initialState, action) => {
   switch (type) {
     case profileAction.PROFILE_PHOTO_ADD:
       return addPhoto(state, payload);
+    case profileAction.PROFILE_PHOTO_DEL:
+      return delPhoto(state, payload);
     case profileAction.PROFILE_RESET_CHANGE_PHOTO:
       return resetChangePhoto(state);
     case profileAction.PROFILE_SAVE:
