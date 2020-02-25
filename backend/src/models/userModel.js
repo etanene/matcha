@@ -32,8 +32,38 @@ const updateUser = async (data, condition) => {
   return (res.rows);
 };
 
+const getRecommendUsers = async (data) => {
+  const res = await db.query(`
+    SELECT
+      user_id, login, first_name, last_name, sex, info
+    FROM
+      users u
+    WHERE
+      login != $1
+    AND
+      user_id NOT IN (
+        SELECT
+          to_user_id
+        FROM
+          likes
+        WHERE
+          from_user_id = (
+            SELECT
+              user_id
+            FROM
+              users
+            WHERE
+              login = $1
+          )
+      )
+  `, [data.login]);
+  console.log(res.rows);
+  return (res.rows);
+};
+
 module.exports = {
   addUser,
   getUser,
   updateUser,
+  getRecommendUsers,
 };

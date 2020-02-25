@@ -1,4 +1,9 @@
-const { userModel, tagModel, photoModel } = require('../models');
+const {
+  userModel,
+  tagModel,
+  photoModel,
+  likeModel,
+} = require('../models');
 const { UserException } = require('../errors');
 
 function getPartnerSex(sex, orientation) {
@@ -35,7 +40,9 @@ function mappingUserData(data) {
 const getRecommendUsers = async (params) => {
   const { login, sex: userSex, orientation } = params;
   const partnerSex = getPartnerSex(userSex, orientation);
-  const users = await userModel.getUser({ sex: partnerSex, login }, { login: true });
+  // const users = await userModel.getUser({ sex: partnerSex, login }, { login: true });
+  const users = await userModel.getRecommendUsers({ login, partnerSex });
+  // console.log('users', users);
   const logins = users.map((user) => user.login);
   if (!logins.length) {
     throw new UserException('No recommend users for you');
@@ -64,9 +71,16 @@ const getRecommendUsers = async (params) => {
       tags: mappedTags[userId],
     };
   });
+  console.log('result discover', result);
   return result;
+};
+
+const likeUser = async (data) => {
+  console.log('like data', data);
+  await likeModel.likeUser(data);
 };
 
 module.exports = {
   getRecommendUsers,
+  likeUser,
 };

@@ -22,10 +22,6 @@ function TagsInput(props) {
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
   const dispatch = useDispatch();
-<<<<<<< HEAD
-=======
-  // const [tags, setTags] = useState(data);
->>>>>>> master
 
   function handleChangeInput(event) {
     event.persist();

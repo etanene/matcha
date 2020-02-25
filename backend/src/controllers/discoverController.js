@@ -21,6 +21,7 @@ const getRecommendUsers = async (req, res) => {
 const like = async (req, res) => {
   try {
     console.log('like body', req.body);
+    discoverService.likeUser(req.body);
     res.send({});
   } catch (e) {
     console.log(e);
