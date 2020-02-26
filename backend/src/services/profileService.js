@@ -47,7 +47,12 @@ const getProfile = async (params) => {
   };
 };
 
+const updateInfo = async (params, login) => {
+  await userModel.updateUser(params, { login });
+};
+
 module.exports = {
   saveProfile,
   getProfile,
+  updateInfo,
 };

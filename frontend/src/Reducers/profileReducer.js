@@ -133,6 +133,10 @@ const initialState = {
     value: [],
     error: '',
   },
+  position: {
+    value: {},
+    error: '',
+  },
   isLoading: false,
 };
 

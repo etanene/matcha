@@ -43,6 +43,11 @@ function setData(field, value) {
   return { type: PROFILE_SET_DATA, payload: { field, value } };
 }
 
+const PROFILE_SAVE_POSITION = 'PROFILE_SAVE_POSITION';
+function savePosition(position) {
+  return { type: PROFILE_SAVE_POSITION, payload: position };
+}
+
 export default {
   PROFILE_PHOTO_ADD,
   addPhoto,
@@ -62,4 +67,6 @@ export default {
   saveProfile,
   PROFILE_SET_DATA,
   setData,
+  PROFILE_SAVE_POSITION,
+  savePosition,
 };

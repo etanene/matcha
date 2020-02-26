@@ -49,10 +49,28 @@ function* watchGetProfile() {
   yield takeEvery(profileAction.PROFILE_GET, getProfile);
 }
 
+function* savePosition(action) {
+  const { payload } = action;
+
+  try {
+    yield call(apiService.postJson, '/api/profile/savePosition', payload);
+    yield call(profileAction.setData('position', payload));
+  } catch (e) {
+    if (e.status === 401) {
+      yield put(authAction.logout());
+    }
+  }
+}
+
+function* watchSavePosition() {
+  yield takeEvery(profileAction.PROFILE_SAVE_POSITION, savePosition);
+}
+
 function* profileSaga() {
   yield all([
     watchSubmitProfile(),
     watchGetProfile(),
+    watchSavePosition(),
   ]);
 }
 

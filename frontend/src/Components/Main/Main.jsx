@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
+import { useDispatch } from 'react-redux';
 
 import { ICONS } from '../../Constants';
+
+import { messageBoxAction, profileAction } from '../../Actions';
 
 import NavBar from '../NavBar/NavBar';
 import Icon from '../common/Icon/Icon';
@@ -16,6 +19,24 @@ const mainCss = cn('main');
 const navBarCss = mainCss('navbar');
 
 function Main() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log('position', position);
+        dispatch(profileAction.savePosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }));
+      }, (error) => {
+        if (error.code === 1) {
+          dispatch(messageBoxAction.open('Необходимо разрешить использование геолокации!'));
+        }
+      });
+    }
+  }, [dispatch]);
+
   return (
     <div className={mainCss()}>
       <NavBar cls={navBarCss}>
