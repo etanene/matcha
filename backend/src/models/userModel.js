@@ -35,9 +35,20 @@ const updateUser = async (data, condition) => {
 const getRecommendUsers = async (data) => {
   const res = await db.query(`
     SELECT
-      user_id, login, first_name, last_name, sex, info
+      user_id, login, first_name, last_name, sex, info, earth_distance(
+        ll_to_earth(u.latitude, u.longitude),
+        ll_to_earth(me.latitude, me.longitude)
+      ) as distance
     FROM
-      users u
+      users u,
+    LATERAL (
+      SELECT
+        latitude, longitude
+      FROM
+        users
+      WHERE
+        login = $1
+    ) as me
     WHERE
       login != $1
     AND
@@ -56,6 +67,8 @@ const getRecommendUsers = async (data) => {
               login = $1
           )
       )
+    ORDER BY
+      distance
   `, [data.login]);
   console.log(res.rows);
   return (res.rows);
