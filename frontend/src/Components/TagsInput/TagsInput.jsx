@@ -70,7 +70,7 @@ function TagsInput(props) {
       {title && <span className={tagsInputCss('title')}>{title}</span>}
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <Tag onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
+          <Tag isDeleted onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>

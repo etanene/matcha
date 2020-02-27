@@ -71,7 +71,7 @@ const getRecommendUsers = async (params) => {
       tags: mappedTags[userId],
     };
   });
-  console.log('result discover', result);
+  // console.log('result discover', result);
   return result;
 };
 

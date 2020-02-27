@@ -8,11 +8,16 @@ import './Tag.css';
 const tagCss = cn('tag');
 
 function Tag(props) {
-  const { onDelete, children, cls } = props;
+  const {
+    onDelete,
+    isDeleted,
+    children,
+    cls,
+  } = props;
 
   return (
     <div className={tagCss({}, [cls])}>
-      <CloseButton onClick={onDelete} cls={tagCss('close-button')} />
+      {isDeleted && <CloseButton onClick={onDelete} cls={tagCss('close-button')} />}
       {`#${children}`}
     </div>
   );
@@ -20,11 +25,13 @@ function Tag(props) {
 
 Tag.propTypes = {
   children: PropTypes.node.isRequired,
+  isDeleted: PropTypes.bool,
   cls: PropTypes.string,
   onDelete: PropTypes.func,
 };
 
 Tag.defaultProps = {
+  isDeleted: false,
   cls: '',
   onDelete: null,
 };

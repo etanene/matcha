@@ -9,7 +9,7 @@ const discoverReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case discoverAction.SET_LOADING:
+    case discoverAction.DISCOVER_SET_LOADING:
       return {
         ...state,
         loading: payload,
