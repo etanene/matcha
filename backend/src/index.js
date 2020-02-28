@@ -30,6 +30,10 @@ io.on('connection', (socket) => {
   });
 });
 
+io.attach(server, {
+  pingTimeout: 500000,
+});
+
 app.use('/', router);
 
 server.listen(port, () => {
