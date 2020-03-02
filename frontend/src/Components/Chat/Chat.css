@@ -1,0 +1,18 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  position: relative;
+  margin: 0 auto;
+  /* align-items: center; */
+}
+
+.chat-input {
+  margin: 5px 0;
+}
+
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
