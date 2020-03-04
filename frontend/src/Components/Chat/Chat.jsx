@@ -6,14 +6,13 @@ import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
 import './Chat.css';
 
-const socket = io('http://localhost:8000');
+const socket = io('ws://localhost:8000');
 const chatCss = cn('chat');
 const inputChatCss = chatCss('input');
 const chatFormCss = chatCss('form');
 
 socket.on('connect', () => {
   console.log('connected!');
-  socket.emit('greet', { message: 'Hello Mr.Server!' });
 });
 
 socket.on('respond', (data) => {
