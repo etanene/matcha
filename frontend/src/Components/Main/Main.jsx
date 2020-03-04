@@ -7,6 +7,8 @@ import { ICONS } from '../../Constants';
 
 import { messageBoxAction, profileAction } from '../../Actions';
 
+import { matchService } from '../../Services';
+
 import NavBar from '../NavBar/NavBar';
 import Icon from '../common/Icon/Icon';
 import Profile from '../Profile/Profile';
@@ -35,6 +37,7 @@ function Main() {
         }
       });
     }
+    matchService.connect();
   }, [dispatch]);
 
   return (
