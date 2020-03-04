@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import io from 'socket.io-client';
 import { cn } from '@bem-react/classname';
 
@@ -20,6 +20,9 @@ socket.on('respond', (data) => {
 });
 
 function Chat() {
+  const [matchList, setMatchList] = useState();
+  const [user, setUser] = useState();
+
   console.log(socket);
 
   return (
