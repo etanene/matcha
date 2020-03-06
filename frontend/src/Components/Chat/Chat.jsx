@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import io from 'socket.io-client';
 import { cn } from '@bem-react/classname';
 
 import Input from '../common/Input/Input';
+import MatchList from '../MatchList/MatchList';
 import Button from '../common/Button/Button';
 import './Chat.css';
 
@@ -20,13 +21,12 @@ socket.on('respond', (data) => {
 });
 
 function Chat() {
-  const [matchList, setMatchList] = useState();
-  const [user, setUser] = useState();
-
+  const matchList = 
   console.log(socket);
 
   return (
     <div className={chatCss({})}>
+      <MatchList list={matchList} />
       <form className={chatFormCss}>
         <Input
           type="text"
