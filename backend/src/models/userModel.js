@@ -74,9 +74,36 @@ const getRecommendUsers = async (data) => {
   return (res.rows);
 };
 
+const getMatchUsers = async (data) => {
+  const res = await db.query(`
+    SELECT
+      users.user_id, users.login, users.first_name, users.last_name
+    FROM
+      users
+    JOIN
+      likes ON users.user_id = likes.to_user_id
+    WHERE
+      login != $1
+    AND
+      match = TRUE
+    AND
+      from_user_id = (
+        SELECT
+          user_id
+        FROM
+          users
+        WHERE
+          login = $1
+      )
+  `, [data.login]);
+  console.log('match rows', res.rows);
+  return (res.rows);
+};
+
 module.exports = {
   addUser,
   getUser,
   updateUser,
   getRecommendUsers,
+  getMatchUsers,
 };

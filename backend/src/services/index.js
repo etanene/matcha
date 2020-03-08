@@ -6,6 +6,7 @@ const profileService = require('./profileService');
 const photoService = require('./photoService');
 const tagService = require('./tagService');
 const discoverService = require('./discoverService');
+const chatService = require('./chatService');
 
 module.exports = {
   authService,
@@ -16,4 +17,5 @@ module.exports = {
   photoService,
   tagService,
   discoverService,
+  chatService,
 };

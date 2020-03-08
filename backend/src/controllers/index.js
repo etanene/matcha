@@ -3,6 +3,7 @@ const userController = require('./userController');
 const profileController = require('./profileController');
 const tagController = require('./tagController');
 const discoverController = require('./discoverController');
+const chatController = require('./chatController');
 
 module.exports = {
   authController,
@@ -10,4 +11,5 @@ module.exports = {
   profileController,
   tagController,
   discoverController,
+  chatController,
 };

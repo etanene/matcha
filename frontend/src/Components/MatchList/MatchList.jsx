@@ -9,10 +9,12 @@ const matchListCss = cn('match-list');
 function MatchList(props) {
   const { onClick, list } = props;
 
+  console.log('list', list);
+
   return (
     <div className={matchListCss()}>
       <div role="button" aria-hidden className={matchListCss('user')} onClick={onClick}>
-        {list}
+        Hello
       </div>
     </div>
   );

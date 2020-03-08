@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import io from 'socket.io-client';
 import { cn } from '@bem-react/classname';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { chatAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import MatchList from '../MatchList/MatchList';
@@ -21,12 +24,24 @@ socket.on('respond', (data) => {
 });
 
 function Chat() {
-  const matchList = 
-  console.log(socket);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const findMatch = useSelector((state) => state.chat);
+  const usersMatch = findMatch.users;
+  console.log('match users', usersMatch);
+  console.log('user', user);
+  console.log('socket', socket);
+
+
+  useEffect(() => {
+    dispatch(chatAction.getUsers({
+      login: user.username,
+    }));
+  }, [dispatch, user]);
 
   return (
     <div className={chatCss({})}>
-      <MatchList list={matchList} />
+      <MatchList list={usersMatch} />
       <form className={chatFormCss}>
         <Input
           type="text"
@@ -35,7 +50,7 @@ function Chat() {
           // value={message}
           cls={inputChatCss}
         />
-        <Button type="button" onClick={console.log('messagee here')}>Send</Button>
+        <Button type="button">Send</Button>
       </form>
     </div>
   );
