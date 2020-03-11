@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { chatAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
-import MatchList from '../MatchList/MatchList';
 import Button from '../common/Button/Button';
+import RadioGroup from '../common/RadioGroup/RadioGroup';
+import RadioButton from '../common/RadioButton/RadioButton';
 import './Chat.css';
 
 const socket = io('ws://localhost:8000');
@@ -32,6 +33,10 @@ function Chat() {
   console.log('user', user);
   console.log('socket', socket);
 
+  function handleChange(field) {
+    console.log('handle change field', field);
+  }
+
 
   useEffect(() => {
     dispatch(chatAction.getUsers({
@@ -41,7 +46,18 @@ function Chat() {
 
   return (
     <div className={chatCss({})}>
-      <MatchList list={usersMatch} />
+      <RadioGroup
+        cls="matchusers"
+        title="Match Users"
+        name="matchusers"
+        // value={profile.sex.value}
+        // error={profile.sex.error}
+        onChange={handleChange()}
+      >
+        {usersMatch.map(({ userId, firstName, lastName }) => (
+          <RadioButton cls="matchuser" userId={userId} value={`${firstName} ${lastName}`} label={`${firstName} ${lastName}`} />
+        ))}
+      </RadioGroup>
       <form className={chatFormCss}>
         <Input
           type="text"
