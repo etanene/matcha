@@ -7,8 +7,8 @@ import { chatAction } from '../../Actions';
 
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
-import RadioGroup from '../common/RadioGroup/RadioGroup';
-import RadioButton from '../common/RadioButton/RadioButton';
+import MatchList from '../MatchList/MatchList';
+import MatchUser from '../common/MatchUser/MatchUser';
 import './Chat.css';
 
 const socket = io('ws://localhost:8000');
@@ -33,11 +33,6 @@ function Chat() {
   console.log('user', user);
   console.log('socket', socket);
 
-  function handleChange(field) {
-    console.log('handle change field', field);
-  }
-
-
   useEffect(() => {
     dispatch(chatAction.getUsers({
       login: user.username,
@@ -46,18 +41,13 @@ function Chat() {
 
   return (
     <div className={chatCss({})}>
-      <RadioGroup
+      <MatchList
         cls="matchusers"
-        title="Match Users"
-        name="matchusers"
-        // value={profile.sex.value}
-        // error={profile.sex.error}
-        onChange={handleChange()}
       >
         {usersMatch.map(({ userId, firstName, lastName }) => (
-          <RadioButton cls="matchuser" userId={userId} value={`${firstName} ${lastName}`} label={`${firstName} ${lastName}`} />
+          <MatchUser userId={userId} value={`${firstName} ${lastName}`} />
         ))}
-      </RadioGroup>
+      </MatchList>
       <form className={chatFormCss}>
         <Input
           type="text"

@@ -7,34 +7,26 @@ import './MatchList.css';
 const matchListCss = cn('match-list');
 
 function MatchList(props) {
-  const { onClick, list } = props;
-
-  console.log('list', list);
+  const {
+    // onClick,
+    children,
+  } = props;
 
   return (
     <div className={matchListCss()}>
-      <div role="button" aria-hidden className={matchListCss('user')} onClick={onClick}>
-        Hello
-      </div>
+      {children}
     </div>
   );
 }
 
 MatchList.propTypes = {
-  list: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    photos: PropTypes.arrayOf(PropTypes.object),
-    tags: PropTypes.arrayOf(PropTypes.object),
-    info: PropTypes.string,
-    userId: PropTypes.number,
-  }),
-  onClick: PropTypes.func,
+  children: PropTypes.node,
+  // onClick: PropTypes.func,
 };
 
 MatchList.defaultProps = {
-  list: {},
-  onClick: null,
+  children: null,
+  // onClick: null,
 };
 
 export default MatchList;

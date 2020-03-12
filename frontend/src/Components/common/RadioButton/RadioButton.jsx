@@ -8,7 +8,6 @@ const radioButtonCss = cn('radio-button');
 
 function RadioButton(props) {
   const {
-    userId,
     label,
     value,
     checked,
@@ -20,7 +19,6 @@ function RadioButton(props) {
   return (
     <label htmlFor={value} className={radioButtonCss({}, [cls])}>
       <input
-        userid={userId}
         id={value}
         value={value}
         checked={checked}
@@ -35,7 +33,6 @@ function RadioButton(props) {
 }
 
 RadioButton.propTypes = {
-  userId: PropTypes.number,
   label: PropTypes.string,
   value: PropTypes.string,
   checked: PropTypes.bool,
@@ -45,7 +42,6 @@ RadioButton.propTypes = {
 };
 
 RadioButton.defaultProps = {
-  userId: null,
   label: '',
   value: '',
   checked: false,
