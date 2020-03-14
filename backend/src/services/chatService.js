@@ -1,5 +1,20 @@
-const { userModel } = require('../models');
+const {
+  userModel,
+  photoModel,
+} = require('../models');
 const { UserException } = require('../errors');
+
+function mappingUserData(data) {
+  return data.reduce((result, item) => ({
+    ...result,
+    [item.user_id]: result[item.user_id] ? [
+      ...result[item.user_id],
+      item,
+    ] : [
+      item,
+    ],
+  }), {});
+}
 
 const getMatchUsers = async (params) => {
   console.log('hi im chat service');
@@ -9,6 +24,10 @@ const getMatchUsers = async (params) => {
   if (!logins.length) {
     throw new UserException('No match users yet');
   }
+
+  const photos = await photoModel.getPhotos(logins);
+  const mappedPhotos = mappingUserData(photos);
+
   const result = users.map((user) => {
     const {
       user_id: userId,
@@ -19,6 +38,7 @@ const getMatchUsers = async (params) => {
       userId,
       firstName,
       lastName,
+      photo: mappedPhotos[userId][0],
     };
   });
   console.log('result matchUser', result);

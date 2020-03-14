@@ -1,6 +1,6 @@
 .chat {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   max-width: 640px;
   position: relative;
   margin: 0 auto;

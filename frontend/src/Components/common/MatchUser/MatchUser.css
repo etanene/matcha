@@ -1,0 +1,22 @@
+@import url('../../../App.css');
+
+.matchuser {
+  display: flex;
+  border: 1px solid var(--matchuser-border-color);
+  border-radius: var(--matchuser-border-radius);
+  width: 180px;
+  margin-bottom: 1px;
+}
+
+.matchuser-img {
+  margin: 3px;
+  width: 30px;
+  height: 30px;
+}
+
+.matchuser-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}

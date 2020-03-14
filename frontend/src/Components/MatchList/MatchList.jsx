@@ -8,7 +8,6 @@ const matchListCss = cn('match-list');
 
 function MatchList(props) {
   const {
-    // onClick,
     children,
   } = props;
 
@@ -21,12 +20,10 @@ function MatchList(props) {
 
 MatchList.propTypes = {
   children: PropTypes.node,
-  // onClick: PropTypes.func,
 };
 
 MatchList.defaultProps = {
   children: null,
-  // onClick: null,
 };
 
 export default MatchList;

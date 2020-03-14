@@ -44,20 +44,30 @@ function Chat() {
       <MatchList
         cls="matchusers"
       >
-        {usersMatch.map(({ userId, firstName, lastName }) => (
-          <MatchUser userId={userId} value={`${firstName} ${lastName}`} />
+        {usersMatch.map(({
+          userId,
+          firstName,
+          lastName,
+          photo,
+        }) => (
+          <MatchUser photo={photo} userId={userId} value={`${firstName} ${lastName}`} />
         ))}
       </MatchList>
-      <form className={chatFormCss}>
-        <Input
-          type="text"
-          name="message"
-          placeholder="Your message"
-          // value={message}
-          cls={inputChatCss}
-        />
-        <Button type="button">Send</Button>
-      </form>
+      <div className={chatCss('zone')}>
+        <div className={chatCss('text')}>
+          CHAT ZONE
+        </div>
+        <form className={chatFormCss}>
+          <Input
+            type="text"
+            name="message"
+            placeholder="Your message"
+            // value={message}
+            cls={inputChatCss}
+          />
+          <Button type="button">Send</Button>
+        </form>
+      </div>
     </div>
   );
 }
