@@ -76,8 +76,16 @@ const getRecommendUsers = async (params) => {
 };
 
 const likeUser = async (data) => {
-  console.log('like data', data);
-  await likeModel.likeUser(data);
+  const isMatch = await likeModel.likeUser(data);
+  if (isMatch) {
+    const users = await userModel({ user_id: data.to });
+    const user = users[0];
+    return {
+      to: user.login,
+      from: data.from,
+    };
+  }
+  return null;
 };
 
 module.exports = {

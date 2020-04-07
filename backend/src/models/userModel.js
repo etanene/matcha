@@ -70,7 +70,6 @@ const getRecommendUsers = async (data) => {
     ORDER BY
       distance
   `, [data.login]);
-  console.log(res.rows);
   return (res.rows);
 };
 

@@ -31,6 +31,7 @@ const likeUser = async (data) => {
     WHERE
       login = $3
   `, [data.to, !!data.type, data.from]);
+  return (match);
 };
 
 module.exports = {

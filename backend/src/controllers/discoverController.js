@@ -1,5 +1,6 @@
 const { discoverService } = require('../services');
 const { InternalError, ValidateException } = require('../errors');
+const { matchUsers } = require('../socket');
 
 const getRecommendUsers = async (req, res) => {
   try {
@@ -20,8 +21,16 @@ const getRecommendUsers = async (req, res) => {
 
 const like = async (req, res) => {
   try {
-    console.log('like body', req.body);
-    discoverService.likeUser(req.body);
+    const match = await discoverService.likeUser(req.body);
+    if (match) {
+      const io = req.app.get('io');
+      if (matchUsers[match.to]) {
+        io.to(matchUsers[match.to].socketId).emit('match', `you have match with ${match.from}`);
+      }
+      if (matchUsers[match.from]) {
+        io.to(matchUsers[match.from].socketId).emit('match', `you have match with ${match.to}`);
+      }
+    }
     res.send({});
   } catch (e) {
     console.log(e);
@@ -33,7 +42,12 @@ const like = async (req, res) => {
   }
 };
 
+const connect = async (req) => {
+  console.log(req);
+};
+
 module.exports = {
   getRecommendUsers,
   like,
+  connect,
 };

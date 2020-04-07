@@ -31,7 +31,6 @@ const get = async (req, res) => {
 
 const savePosition = async (req, res) => {
   try {
-    console.log('body', req.body);
     await profileService.updateInfo(req.body, req.session.logged);
     res.send({ message: 'position saved!' });
   } catch (e) {

@@ -1,19 +1,15 @@
-let socket;
+import socketIo from 'socket.io-client';
+
+import userService from './userService';
 
 const connect = () => {
-  socket = new WebSocket('ws://localhost:8000');
+  const user = userService.getUser();
 
-  socket.onopen = (e) => {
-    console.log('connection opened');
-    console.log('open event', e);
-  };
-  socket.onclose = (e) => {
-    console.log('connection closed');
-    console.log('close event', e);
-  };
-  socket.onerror = (err) => {
-    console.log('error socket', err);
-  };
+  const io = socketIo.connect('http://localhost:8000/discover');
+
+  io.on('connect', () => {
+    io.emit('setUser', user.username);
+  });
 };
 
 export default {

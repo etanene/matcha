@@ -18,7 +18,6 @@ function Match(props) {
   const user = useSelector((state) => state.user.user);
   const discover = useSelector((state) => state.discover);
   const discoverUsers = discover.users;
-  console.log('discover match', discover);
 
   const [userInd, setUserInd] = useState(0);
   function handleLike(targetUserId, type) {
