@@ -25,10 +25,16 @@ const like = async (req, res) => {
     if (match) {
       const io = req.app.get('io');
       if (matchUsers[match.to]) {
-        io.to(matchUsers[match.to].socketId).emit('match', `you have match with ${match.from}`);
+        io.of('/discover').to(matchUsers[match.to].socketId).emit('match', {
+          message: `You have match with ${match.from}`,
+          user: match.from,
+        });
       }
       if (matchUsers[match.from]) {
-        io.to(matchUsers[match.from].socketId).emit('match', `you have match with ${match.to}`);
+        io.of('/discover').to(matchUsers[match.from].socketId).emit('match', {
+          message: `You have match with ${match.to}`,
+          user: match.to,
+        });
       }
     }
     res.send({});

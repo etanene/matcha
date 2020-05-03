@@ -1,24 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
 import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
+import { configureStore } from './store';
+
 import rootReducer from './Reducers';
 import rootSaga from './Sagas';
 
-const sagaMiddleware = createSagaMiddleware();
+import App from './App';
 
-/* eslint-disable no-underscore-dangle */
-const store = createStore(
-  rootReducer,
-  applyMiddleware(sagaMiddleware),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
-/* eslint-enable */
-sagaMiddleware.run(rootSaga);
+const store = configureStore(rootReducer);
+
+store.runSaga(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

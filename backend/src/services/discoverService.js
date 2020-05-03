@@ -78,7 +78,7 @@ const getRecommendUsers = async (params) => {
 const likeUser = async (data) => {
   const isMatch = await likeModel.likeUser(data);
   if (isMatch) {
-    const users = await userModel({ user_id: data.to });
+    const users = await userModel.getUser({ user_id: data.to });
     const user = users[0];
     return {
       to: user.login,
