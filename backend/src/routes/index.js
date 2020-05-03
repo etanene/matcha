@@ -4,6 +4,7 @@ const userRouter = require('./userRouter');
 const authRouter = require('./authRouter');
 const profileRouter = require('./profileRouter');
 const tagRouter = require('./tagRouter');
+const discoverRouter = require('./discoverRouter');
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/user', userRouter);
 router.use('/auth', authRouter);
 router.use('/profile', profileRouter);
 router.use('/tag', tagRouter);
+router.use('/discover', discoverRouter);
 
 module.exports = router;

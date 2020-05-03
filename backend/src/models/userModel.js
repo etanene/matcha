@@ -9,14 +9,14 @@ const addUser = async (user) => {
   `, [user.email, user.username, user.first_name, user.last_name, user.birthday, user.password, user.unique]);
 };
 
-const getUser = async (data) => {
+const getUser = async (data, without) => {
   const res = await db.query(`
     SELECT
       *
     FROM
       users
-    ${dbUtils.getCondition(data)}
-  `, Object.values(data));
+    ${dbUtils.getInCondition(data, without, 0)}
+  `, dbUtils.spreadValues(data));
 
   return (res.rows);
 };
@@ -32,8 +32,50 @@ const updateUser = async (data, condition) => {
   return (res.rows);
 };
 
+const getRecommendUsers = async (data) => {
+  const res = await db.query(`
+    SELECT
+      user_id, login, first_name, last_name, sex, info, earth_distance(
+        ll_to_earth(u.latitude, u.longitude),
+        ll_to_earth(me.latitude, me.longitude)
+      ) as distance
+    FROM
+      users u,
+    LATERAL (
+      SELECT
+        latitude, longitude
+      FROM
+        users
+      WHERE
+        login = $1
+    ) as me
+    WHERE
+      login != $1
+    AND
+      user_id NOT IN (
+        SELECT
+          to_user_id
+        FROM
+          likes
+        WHERE
+          from_user_id = (
+            SELECT
+              user_id
+            FROM
+              users
+            WHERE
+              login = $1
+          )
+      )
+    ORDER BY
+      distance
+  `, [data.login]);
+  return (res.rows);
+};
+
 module.exports = {
   addUser,
   getUser,
   updateUser,
+  getRecommendUsers,
 };

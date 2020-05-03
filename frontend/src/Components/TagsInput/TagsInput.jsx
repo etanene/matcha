@@ -22,7 +22,6 @@ function TagsInput(props) {
   const [currentTag, setCurrentTag] = useState();
   const [tagsList, setTagsList] = useState([]);
   const dispatch = useDispatch();
-  // const [tags, setTags] = useState(data);
 
   function handleChangeInput(event) {
     event.persist();
@@ -71,7 +70,7 @@ function TagsInput(props) {
       {title && <span className={tagsInputCss('title')}>{title}</span>}
       <div className={tagsInputCss('tags')}>
         {tags.map((tag) => (
-          <Tag onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
+          <Tag isDeleted onDelete={handleRemoveTag(tag)} key={tag}>{tag}</Tag>
         ))}
       </div>
       <div className={tagsInputCss('input')}>

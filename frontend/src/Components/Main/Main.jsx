@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
+import { useDispatch } from 'react-redux';
 
 import { ICONS } from '../../Constants';
+
+import { messageBoxAction, profileAction } from '../../Actions';
+
+import { matchService } from '../../Services';
 
 import NavBar from '../NavBar/NavBar';
 import Icon from '../common/Icon/Icon';
 import Profile from '../Profile/Profile';
 import Match from '../Match/Match';
 import Chat from '../Chat/Chat';
-import './Main.css';
 import UserSettings from '../UserSettings/UserSettings';
+import './Main.css';
 
 const mainCss = cn('main');
 const navBarCss = mainCss('navbar');
 
 function Main() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log('position', position);
+        dispatch(profileAction.savePosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }));
+      }, (error) => {
+        if (error.code === 1) {
+          dispatch(messageBoxAction.open('Необходимо разрешить использование геолокации!'));
+        }
+      });
+    }
+    matchService.connect();
+  }, [dispatch]);
+
   return (
     <div className={mainCss()}>
       <NavBar cls={navBarCss}>
@@ -28,7 +52,7 @@ function Main() {
           <Profile cls={mainCss('profile')} />
         </Route>
         <Route path="/match">
-          <Match />
+          <Match cls={mainCss('match')} />
         </Route>
         <Route path="/chat">
           <Chat />

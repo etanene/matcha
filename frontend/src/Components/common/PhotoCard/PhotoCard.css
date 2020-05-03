@@ -1,0 +1,27 @@
+@import url('../../../App.css');
+
+.photo-card {
+  /* max-width: 300px; */
+  width: 300px;
+}
+
+.photo-card-layer {
+  width: 100%;
+  padding: 55% 0;
+  position: relative;
+}
+
+.photo-card-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.photo-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--photo-card-border-radius);
+}

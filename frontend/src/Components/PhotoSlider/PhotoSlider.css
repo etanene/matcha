@@ -1,0 +1,10 @@
+.photo-slider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* элементы */
+.photo-slider-photo-card {
+  margin: 0 auto;
+}

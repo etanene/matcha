@@ -16,7 +16,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
-          failOnError: true,
+          // failOnError: true,
         },
       },
       {
@@ -52,5 +52,7 @@ module.exports = {
     host: '0.0.0.0',
     port: '3000',
     historyApiFallback: true,
+    contentBase: path.join(__dirname, 'public'),
+    publicPath: '/',
   },
 };

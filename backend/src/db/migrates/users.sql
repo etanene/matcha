@@ -1,4 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS cube;
+CREATE EXTENSION IF NOT EXISTS earthdistance;
 
 DO $$
 BEGIN
@@ -27,8 +29,8 @@ CREATE TABLE IF NOT EXISTS users
   orientation orientation NOT NULL DEFAULT 'bi',
   info varchar(10000),
   city varchar(255),
-  latitude varchar(255),
-  longitude varchar(255),
+  latitude float8,
+  longitude float8,
   last_connection TIMESTAMP,
   online BOOLEAN DEFAULT FALSE,
   validate BOOLEAN DEFAULT FALSE,

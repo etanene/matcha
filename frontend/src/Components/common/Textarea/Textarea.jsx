@@ -14,7 +14,6 @@ function Textarea(props) {
     cls,
     onChange,
   } = props;
-  console.log('value text', value);
 
   return (
     <div className={textareaCss({}, [cls])}>

@@ -29,7 +29,6 @@ function LoginForm(props) {
 
   function submitForm(data) {
     dispatch({ type: authAction.LOGIN_REGUEST, ...data });
-    console.log('submit loginForm');
   }
 
   const { state, handleSubmit, handleChange } = useForm(formSchema, submitForm);

@@ -10,8 +10,6 @@ const saveProfile = async (profile, user) => {
     about,
     tags,
   } = profile;
-  // console.log('save profile', profile);
-  console.log('tags', tags);
 
   await photoService.savePhotos(photo, user);
   await userModel.updateUser(
@@ -27,13 +25,9 @@ const saveProfile = async (profile, user) => {
 };
 
 const getProfile = async (params) => {
-  console.log('getProfileService', params);
   const { login } = params;
   const photos = await photoService.getPhotos(login);
   const user = await userModel.getUser({ login });
-  // const tags = await
-  console.log('user', user[0]);
-  console.log('info', user[0].info);
   const {
     sex,
     info,
@@ -42,7 +36,6 @@ const getProfile = async (params) => {
     last_name: lastName,
   } = user[0];
   const tags = await tagService.getTagsByUser({ login });
-  console.log('tags profile', tags);
   return {
     photos,
     sex,
@@ -54,7 +47,12 @@ const getProfile = async (params) => {
   };
 };
 
+const updateInfo = async (params, login) => {
+  await userModel.updateUser(params, { login });
+};
+
 module.exports = {
   saveProfile,
   getProfile,
+  updateInfo,
 };
