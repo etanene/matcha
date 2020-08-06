@@ -28,6 +28,7 @@ function PhotoInput(props) {
   const dispatch = useDispatch();
 
   function handleChange(event) {
+    const { target } = event;
     const reader = new FileReader();
     const inputFile = event.target.files[0];
 
@@ -36,9 +37,11 @@ function PhotoInput(props) {
       dispatch(profileAction.addPhoto(id, reader.result));
     };
     reader.readAsDataURL(inputFile);
+    target.value = '';
   }
 
-  function handleDelete() {
+  function handleDelete(event) {
+    event.preventDefault();
     setFile(null);
     dispatch(profileAction.delPhoto(id));
   }
