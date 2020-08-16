@@ -35,6 +35,16 @@ const changePwUser = async (password, userData) => {
   }
 };
 
+const changePwUserAfterReset = async (password, ulink) => {
+  const hashPassword = await bcrypt.hash(password, 1);
+  const res = await userModel.updateUser({ passwd: hashPassword, unique_link: null },
+    { unique_link: ulink });
+
+  if (!res) {
+    throw new UserException('Can not find user!');
+  }
+};
+
 const checkPassword = async (password, login) => {
   const users = await userModel.getUser({ login });
   const user = users[0];
@@ -59,4 +69,5 @@ module.exports = {
   changePwUser,
   checkPassword,
   changeUserEmail,
+  changePwUserAfterReset,
 };

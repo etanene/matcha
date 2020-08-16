@@ -31,7 +31,7 @@ const resetpw = async (req, res) => {
 const changepw = async (req, res) => {
   try {
     validateService.validatePasswords(req.body.password, req.body.confirm_password);
-    await userService.changePwUser(req.body.password, req.params);
+    await userService.changePwUserAfterReset(req.body.password, req.params.uuid);
 
     res.send({ message: 'Password changed' });
   } catch (e) {
